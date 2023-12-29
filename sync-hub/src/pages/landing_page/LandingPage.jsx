@@ -85,6 +85,13 @@ function LandingPage() {
     }, 5000);
   }, []);
 
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
+
   // let analytics = document.getElementById("dashboard-anaytics");
   // let rect = analytics.getBoundingClientRect();
   // if (

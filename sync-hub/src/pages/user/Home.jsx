@@ -12,7 +12,14 @@ import io from "socket.io-client";
 import ProfilePage from "./user_screens/ProfilePage";
 let dotEnv = import.meta.env;
 
-const socket = io.connect(dotEnv.VITE_DEV_URL);
+let baseURL;
+if (dotEnv.MODE === "development") {
+  baseURL = dotEnv.VITE_DEV_URL
+} else {
+  baseURL = dotEnv.VITE_PROD_URL
+}
+
+const socket = io.connect(baseURL);
 
 function Home() {
   const [user, setUser] = useState("");
@@ -24,6 +31,7 @@ function Home() {
   const [sideNavBarExtend, setSideNavBarExtend] = useState("")
   const navigate = useNavigate();
 
+
   useEffect(() => {
     setClientContent("");
     async function verifyUser() {
@@ -33,7 +41,7 @@ function Home() {
       }
       token = JSON.parse(token);
       try {
-        let url = dotEnv.VITE_DEV_URL + "/user/home";
+        let url = baseURL + "/user/home";
         let response = await getHook(url, true);
         if (response.success) {
           setUser(response.success);

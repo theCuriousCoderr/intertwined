@@ -13,10 +13,17 @@ function AllRequests({user, setClientContent, setNavItem}) {
   const [allRequests, setAllRequests] = useState("");
   const requestsCount = useRef()
 
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
+
   useEffect(() => {
     async function getAllRequests() {
       // alert(5)
-      let url = dotEnv.VITE_DEV_URL + "/get-all-requests";
+      let url = baseURL + "/get-all-requests";
       let response = await getHook(url);
       if (response.success) {
         // alert(JSON.stringify(response.success))

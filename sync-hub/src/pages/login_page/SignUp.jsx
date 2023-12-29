@@ -42,6 +42,13 @@ function SignUp() {
     window.scrollTo(0, 0);
   }, []);
 
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
+
   async function handleSignUpFormChange(e) {
     let name = e.target.name;
     let file = document.getElementById(name);
@@ -81,7 +88,7 @@ function SignUp() {
     
     setCreateAccountButtonState(false);
     e.preventDefault();
-    let url = dotEnv.VITE_DEV_URL + "/signup";
+    let url = baseURL + "/signup";
     let response = await postHook(url, signUpDetails);
     if (response.success) {
       localStorage.setItem("token", JSON.stringify(response.success));

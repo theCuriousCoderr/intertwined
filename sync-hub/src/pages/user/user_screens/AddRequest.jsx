@@ -32,11 +32,18 @@ function AddRequest({ user }) {
     setRequestDetails({ ...requestDetails, [name]: val });
   }
 
+  let baseURL;
+if (dotEnv.MODE === "development") {
+  baseURL = dotEnv.VITE_DEV_URL
+} else {
+  baseURL = dotEnv.VITE_PROD_URL
+}
+
   async function handleRequestDetailsFormSubmit(e) {
     setPostRequestButtonState(false);
     let top = document.getElementById("top");
     e.preventDefault();
-    let url = dotEnv.VITE_DEV_URL + "/user/submit-request";
+    let url = baseURL + "/user/submit-request";
     let response = await postHook(url, requestDetails);
     if (response.success) {
       setRequestDetails({

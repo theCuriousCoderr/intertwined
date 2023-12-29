@@ -28,10 +28,17 @@ function Login() {
         setLogInDetails({...logInDetails,[name]:val})
     }
 
+    let baseURL;
+    if (dotEnv.MODE === "development") {
+      baseURL = dotEnv.VITE_DEV_URL
+    } else {
+      baseURL = dotEnv.VITE_PROD_URL
+    }
+
     async function handleLogInFormSubmit(e) {
         setLogInButtonState(false)
         e.preventDefault();
-        let url = dotEnv.VITE_DEV_URL + "/login";
+        let url = baseURL + "/login";
         let response = await postHook(url, logInDetails);
         if (response.success) {
             localStorage.setItem("token", JSON.stringify(response.success))

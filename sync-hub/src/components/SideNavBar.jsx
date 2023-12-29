@@ -10,7 +10,7 @@ function SideNavBar({ user, setShowSideNavBar, setSideNavBarExtend }) {
     localStorage.removeItem("token");
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 500);
   }
   return (
     <div className="fixed z-20 top-0 bottom-0 w-full bg-red-20 flex slideInLeft ">

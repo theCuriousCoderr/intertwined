@@ -23,12 +23,19 @@ function Messages({
   });
   const [sending, setSending] = useState(false);
 
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
+
   useEffect(() => {
     async function getChats() {
       // IF USER IS ACCESSING THE MESSAGE PAGE BY CLICKING A "Message Client Now" BUTTON
       if (clientContent.reqShaker) {
         // get the user chat history
-        let url = dotEnv.VITE_DEV_URL + "/get-user-chats";
+        let url = baseURL + "/get-user-chats";
         let response = await postHook(url, {
           email: user.email,
           client: clientContent.reqShaker,
@@ -36,7 +43,7 @@ function Messages({
         // if user has no chat history
         if (response.warning) {
           // get details of the client the user wants to message
-          url = dotEnv.VITE_DEV_URL + "/get-user";
+          url = baseURL + "/get-user";
           let clientData = await postHook(url, {
             email: clientContent.reqShaker,
           });
@@ -75,7 +82,7 @@ function Messages({
           // if user doesn't have any chat history with client
           else {
             // get details of the client the user wants to message
-            url = dotEnv.VITE_DEV_URL + "/get-user";
+            url = baseURL + "/get-user";
             let clientData = await postHook(url, {
               email: clientContent.reqShaker,
             });
@@ -96,7 +103,7 @@ function Messages({
       // IF USER IS ACCESSING THE MESSAGE PAGE BY CLICKING THE "Chats Icon" ON THE FootNavBar
       else {
         // get the user chat history
-        let url = dotEnv.VITE_DEV_URL + "/get-user-chats";
+        let url = baseURL + "/get-user-chats";
         let response = await postHook(url, { email: user.email });
         // if user have a chat history
         if (response.success) {

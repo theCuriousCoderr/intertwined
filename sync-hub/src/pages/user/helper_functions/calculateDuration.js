@@ -1,20 +1,18 @@
-function calculateDuration(param, created=true) {
- 
-
+function calculateDuration(param, created = true) {
   let flag = param.indexOf("T");
   let char;
   if (created) {
-    char = param.split("")
-    let flag2 = param.indexOf(":")
-    let hr = (parseInt(param.slice(flag+1, flag2)) + 1).toString()
-    hr = hr.length === 1 ? hr.padStart(2, 0) : hr
-    char[flag+1] = hr[0]
-    char[flag2-1] = hr[1]
-    param = char.join("")
+    char = param.split("");
+    let flag2 = param.indexOf(":");
+    let hr = (parseInt(param.slice(flag + 1, flag2)) + 1).toString();
+    hr = hr.length === 1 ? hr.padStart(2, 0) : hr;
+    char[flag + 1] = hr[0];
+    char[flag2 - 1] = hr[1];
+    param = char.join("");
   }
   let today = new Date();
   let currentTime = [today.getHours(), today.getMinutes()];
-  
+
   let currentDate = [
     today.getDate(),
     today.getMonth() + 1,

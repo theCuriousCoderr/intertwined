@@ -6,6 +6,14 @@ function ProfilePage({user}) {
   const [changeDetails, setChangeDetails] = useState("")
   let firstName = user.fullName.split(" ")[0]
   let lastName = user.fullName.split(" ")[1]
+
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
+  
   return (
     <div onClick={(e)=> {e.stopPropagation()}} className={` ${changeDetails === "" ? "bg-white" : "bg-black bg-opacity-60"} h-full`}>
       { changeDetails !== "" && <div onClick={(e)=> {e.stopPropagation(); setChangeDetails("")}} className='absolute bg-red-500 w-full bottom-0 rounded-t-3xl fadeInDown'>

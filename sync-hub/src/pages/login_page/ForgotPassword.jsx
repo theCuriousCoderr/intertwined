@@ -21,13 +21,20 @@ function ForgotPassword() {
         confirmPassword: ""
     })
     const navigate = useNavigate()
-    // const signUpDetails = 
+  
 
     function handlePasswordFormChange(e) {
         setSamePassword(true)
         let name = e.target.name
         let val = e.target.value
         setChangePasswordDetails({...changePasswordDetails,[name]:val})
+    }
+
+    let baseURL;
+    if (dotEnv.MODE === "development") {
+      baseURL = dotEnv.VITE_DEV_URL
+    } else {
+      baseURL = dotEnv.VITE_PROD_URL
     }
 
     async function handlePasswordFormSubmit(e) {
@@ -38,7 +45,7 @@ function ForgotPassword() {
             setToastInfo({color: "blue", text: ["Warning!", "New Password and Confirm Password doesn't match"] })
             setSamePassword(false)
         } else {
-            let url = dotEnv.VITE_DEV_URL + "/change-password";
+            let url = baseURL + "/change-password";
             let response = await putHook(url, changePasswordDetails);
             if (response.success) {
                 // localStorage.setItem("token", JSON.stringify(response.success))
