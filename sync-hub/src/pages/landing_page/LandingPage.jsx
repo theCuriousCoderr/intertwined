@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
+let dotEnv = import.meta.env
 
 function LandingPage() {
   const [menuBarState, setMenuBarState] = useState(false);
