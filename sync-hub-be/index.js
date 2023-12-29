@@ -30,9 +30,9 @@ app.use(express.json());
 let env = process.env.NODE_ENV;
 let baseUrl, feURL;
 if (env === "development") {
-  feURL = feURL;
+  feURL = "http://localhost:5173";
 } else {
-  feURL = "https://itrack-2.vercel.app";
+  feURL = "https://intertwined-fe.vercel.app";
 }
 
 async function connectMongoDB() {
