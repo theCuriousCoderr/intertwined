@@ -1,6 +1,7 @@
 import { ArrowBack, CreateOutlined, LocationOnOutlined } from '@mui/icons-material'
 import { green } from '@mui/material/colors'
 import React, { useState } from 'react'
+let dotEnv = import.meta.env
 
 function ProfilePage({user}) {
   const [changeDetails, setChangeDetails] = useState("")
@@ -13,7 +14,7 @@ function ProfilePage({user}) {
   } else {
     baseURL = dotEnv.VITE_PROD_URL
   }
-  
+
   return (
     <div onClick={(e)=> {e.stopPropagation()}} className={` ${changeDetails === "" ? "bg-white" : "bg-black bg-opacity-60"} h-full`}>
       { changeDetails !== "" && <div onClick={(e)=> {e.stopPropagation(); setChangeDetails("")}} className='absolute bg-red-500 w-full bottom-0 rounded-t-3xl fadeInDown'>

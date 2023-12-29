@@ -19,7 +19,12 @@ if (dotEnv.MODE === "development") {
   baseURL = dotEnv.VITE_PROD_URL
 }
 
-const socket = io.connect(baseURL);
+const socket = io.connect(baseURL, {
+  withCredentials: true,
+  extraHeaders: {
+    "my-custom-header": "abcd"
+  }
+});
 
 function Home() {
   const [user, setUser] = useState("");

@@ -49,6 +49,7 @@ const io = new Server(server, {
   cors: {
     origin: feURL,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
   },
 });
 io.on("connection", (socket) => {
