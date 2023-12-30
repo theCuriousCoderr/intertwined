@@ -27,7 +27,7 @@ if (dotEnv.MODE === "development") {
 //   }
 // });
 const socket = io(baseURL, {
-  transports: ["polling", "flashsocket"],
+  transports: ["websockets", "polling", "flashsocket"],
   withCredentials: true,
   extraHeaders: {
     "Access-Control-Allow-origin": "*"
