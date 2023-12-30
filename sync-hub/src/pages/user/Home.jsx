@@ -27,7 +27,11 @@ if (dotEnv.MODE === "development") {
 //   }
 // });
 const socket = io(baseURL, {
-  transports: ["polling"]
+  transports: ["polling"],
+  withCredentials: true,
+  extraHeaders: {
+    "Access-Control-Allow-Origin": "*"
+  }
 })
 
 function Home() {
