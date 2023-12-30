@@ -3,10 +3,11 @@ export default async function putHook(url, payload, bearer = false) {
     let token = bearer && JSON.parse(localStorage.getItem("token"));
     let headers =
       bearer === false
-        ? { "Content-Type": "application/json" }
+        ? { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
         : {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "Access-Control-Allow-Origin": "*"
           };
 
     let response = await fetch(url, {

@@ -8,7 +8,7 @@ import YourRequests from "./user_screens/YourRequests";
 import AddRequest from "./user_screens/AddRequest";
 import Messages from "./user_screens/Messages";
 import Alerts from "./user_screens/Alerts";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import ProfilePage from "./user_screens/ProfilePage";
 let dotEnv = import.meta.env;
 
@@ -19,12 +19,19 @@ if (dotEnv.MODE === "development") {
   baseURL = dotEnv.VITE_PROD_URL
 }
 
-const socket = io.connect(baseURL, {
+// const socket = io(baseURL, {
+//   withCredentials: true,
+//   extraHeaders: {
+//     // "my-custom-header": "abcd",
+//     "Access-Control-Allow-Origin": "*"
+//   }
+// });
+const socket = io(baseURL, {
   withCredentials: true,
   extraHeaders: {
-    "my-custom-header": "abcd"
+    "Access-Control-Allow-origin": "*"
   }
-});
+})
 
 function Home() {
   const [user, setUser] = useState("");

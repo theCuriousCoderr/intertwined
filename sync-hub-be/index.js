@@ -10,7 +10,7 @@ import { Users } from "./models/usersModel.js";
 import { protectedRoute } from "./middleware/auth.js";
 import { Requests } from "./models/requestsModel.js";
 import { ChatHistory } from "./models/chatHistoryModel.js";
-import { INSPECT_MAX_BYTES } from "buffer";
+
 
 const PORT = 3000;
 
@@ -49,6 +49,7 @@ const io = new Server(server, {
   cors: {
     origin: feURL,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Access-Control-Allow-origin"],
     credentials: true
   },
 });

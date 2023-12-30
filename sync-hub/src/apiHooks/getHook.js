@@ -6,7 +6,8 @@ export default async function getHook(url, bearer = false) {
       response = await fetch(url, {
         mathod: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
+          "Access-Control-Allow-Origin": "*"
         },
       });
     } else {
