@@ -12,11 +12,13 @@ import { io } from "socket.io-client";
 import ProfilePage from "./user_screens/ProfilePage";
 let dotEnv = import.meta.env;
 
-let baseURL;
+let baseURL, feURL
 if (dotEnv.MODE === "development") {
   baseURL = dotEnv.VITE_DEV_URL
+  feURL = "http://localhost:5173"
 } else {
   baseURL = dotEnv.VITE_PROD_URL
+  feURL = "https://intertwined-fe.vercel.app"
 }
 
 // const socket = io(baseURL, {
@@ -30,7 +32,7 @@ const socket = io(baseURL, {
   transports: ["polling"],
   withCredentials: true,
   extraHeaders: {
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": feURL
   }
 })
 
