@@ -15,16 +15,17 @@ import { ChatHistory } from "./models/chatHistoryModel.js";
 const PORT = 3000;
 
 const app = express();
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 const server = http.createServer(app);
 
 dotenv.config();
 set("strictQuery", false);
 
-app.use(
-  cors({
-    origin: "*",
-  })
-); // Add cors middleware
+ // Add cors middleware
 app.use(express.json());
 
 let env = process.env.NODE_ENV;
@@ -47,11 +48,9 @@ connectMongoDB();
 
 const io = new Server(server, {
   cors: {
-    origin: feURL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Access-Control-Allow-origin"],
-    credentials: true
+    origin: "*"
   },
+  allowEIO3: true
 });
 io.on("connection", (socket) => {
 
