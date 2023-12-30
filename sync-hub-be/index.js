@@ -48,7 +48,7 @@ connectMongoDB();
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: feURL,
     methods: ['GET', 'POST', 'PUT'],
     credentials: true,
     allowedHeaders: "Access-Control-Allow-Origin"
