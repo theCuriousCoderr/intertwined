@@ -77,7 +77,7 @@ function AllRequests({user, setClientContent, setNavItem}) {
       { allRequests  &&
         allRequests.map((items) => {
           return (
-            <div>
+            <div key={items.requestTitle}>
               {calculateDuration(items.expiresOn, false) === "active" ? (
                 <div
                   key={items}
@@ -150,12 +150,12 @@ function AllRequests({user, setClientContent, setNavItem}) {
                       </span>
                     )}
                   </div>
-                  <p className="relative text-sm text-slate-300 font-light bg-red-30 h-10 overflow-hidden ">
+                  <div className="relative text-sm text-slate-300 font-light bg-red-30 h-10 overflow-hidden ">
                     <p className="absolute bottom-0 right-0 bg-slate-50 px-1">
                       ...
                     </p>
                     {items.requestDescription}
-                  </p>
+                  </div>
                   <div className="flex items-center text-sm -ml-1 my-1 text-slate-300">
                     <LocationOnOutlined sx={{ fontSize: 20 }} />
                     <p>{items.landmark} </p>
