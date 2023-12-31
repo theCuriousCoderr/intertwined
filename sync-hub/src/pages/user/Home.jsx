@@ -28,13 +28,7 @@ if (dotEnv.MODE === "development") {
 //     "Access-Control-Allow-Origin": "*"
 //   }
 // });
-const socket = io(baseURL, {
-  transports: ["websockets", "polling"],
-  withCredentials: true,
-  extraHeaders: {
-    "Access-Control-Allow-origin": "*"
-  }
-})
+const socket = io(baseURL)
 
 function Home() {
   const [user, setUser] = useState("");

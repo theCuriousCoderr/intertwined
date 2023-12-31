@@ -50,9 +50,10 @@ const io = new Server(server, {
   cors: {
     origin: feURL,
     methods: ['GET', 'POST'],
-    allowedHeaders: ["Access-Control-Allow-Origin"],
+    transports: ['websocket', 'polling'],
     credentials: true
-  }
+  },
+  allowEIO3: true
 }
 );
 io.on("connection", (socket) => {
