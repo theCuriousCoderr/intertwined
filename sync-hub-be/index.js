@@ -46,8 +46,12 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
-const io = new Server(server
-});
+const io = new Server(server, {
+  cors: {
+    origin: "*"
+  }
+}
+);
 io.on("connection", (socket) => {
 
   // WHEN SOMEONE SENDS A MESSAGE

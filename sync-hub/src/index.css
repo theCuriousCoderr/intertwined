@@ -61,7 +61,6 @@
     transform: translateX(100%) scaleX(0.5);
   }
 }
-
 @keyframes fadeIn {
   from {
     transform: scale(1);
