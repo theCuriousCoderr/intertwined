@@ -32,7 +32,7 @@ const socket = io(baseURL, {
   transports: ["websockets", "polling"],
   withCredentials: true,
   extraHeaders: {
-    "Access-Control-Allow-origin": feURL
+    "Access-Control-Allow-origin": "*"
   }
 })
 
