@@ -12,7 +12,7 @@ import { Requests } from "./models/requestsModel.js";
 import { ChatHistory } from "./models/chatHistoryModel.js";
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000 ;
 
 const app = express();
 app.use(
