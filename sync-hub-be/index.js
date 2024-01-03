@@ -33,7 +33,7 @@ let baseUrl, feURL;
 if (env === "development") {
   feURL = "http://localhost:5173";
 } else {
-  feURL = "https://intertwined-be.onrender.com";
+  feURL = "https://intertwined-fe.vercel.app";
 }
 
 async function connectMongoDB() {
