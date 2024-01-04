@@ -73,7 +73,7 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className={` bg-white h-full`}
+      className={` bg-red-40 fixed w-full h-full`}
     >
       {changeDetails && (
         <div className="absolute h-full w-full bg-slate-950 bg-opacity-70 z-10"></div>
@@ -139,8 +139,8 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
         </p>
       </div>
 
-      <div className="p-5 border-b border-slate-30 flex justify-start gap-3">
-        <div className="w-40 flex items-center justify-center bg-red-20">
+      <div className="p-2 border-b border-slate-30 flex justify-start gap-">
+        <div className="w-[30%] flex items-center justify-center bg-red-20">
           <div className="size-20 rounded-full relative bg-red-70">
             <div className="absolute top-0 left-0 p-1 size-5 rounded-full bg-white">
               <div className="w-full h-full rounded-full bg-green-600"></div>
@@ -166,17 +166,17 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
           </div>
         </div>
 
-        <div className="space-y-1 bg-red-40">
-          <p className="ml-6 bg-red-20 font-semibold text-lg">
+        <div className="space-y-1 bg-red-40 w-[60%]">
+          <p className=" bg-red-20 font-semibold text-lg">
             {firstName + " " + lastName[0]}.
           </p>
-          <div className="flex gap-2 items-start">
-            <div className="bg-red-30 w-10 text-sm text-slate-600">
+          <div className="flex items-start">
+            <div className="bg-red-70 text-sm text-slate-600">
               <LocationOnOutlined sx={{ fontSize: 20 }} />
             </div>
             <p className="text-sm">{user.address} </p>
           </div>
-          <p className="ml-6 bg-red-20 text-slate-500">{user.email}</p>
+          <p className="bg-red-20 text-slate-500">{user.email}</p>
         </div>
       </div>
     </div>

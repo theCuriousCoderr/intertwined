@@ -259,7 +259,7 @@ function Messages({
             <p id="last" className="bg-red-200 p-2 opacity-0">
               ola
             </p>
-            <div className="absolute bg-lime-50 bottom-0 left- flex justify-evenly p- w-full">
+            <div className="absolute bottom-0 left- flex justify-evenly p- w-full">
               <div className="w-[80%] bg-red-30">
                 <textarea
                   maxLength={1000}

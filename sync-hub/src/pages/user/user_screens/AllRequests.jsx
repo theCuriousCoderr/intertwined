@@ -149,7 +149,7 @@ function AllRequests({ user, setClientContent, setNavItem }) {
                   </p>
                   <div className="text-slate-50 text-[10px] my-2">
                     {items.charges === "" ? (
-                      <span className="px-1 py-1 text-ce bg-blue-400 rounded">
+                      <span className="px-1 py-1 text-ce bg-blue-200 rounded">
                         Free Service
                       </span>
                     ) : (
