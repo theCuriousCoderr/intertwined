@@ -73,10 +73,13 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className={` bg-red-40 fixed w-full h-full`}
+      className={` bg-red-40 fixed z-50 w-full h-dvh`}
     >
       {changeDetails && (
-        <div className="absolute h-full w-full bg-slate-950 bg-opacity-70 z-10"></div>
+        <div onClick={(e) => {
+          e.stopPropagation();
+          setChangeDetails("");
+        }} className="absolute h-full w-full bg-slate-950 bg-opacity-70 z-10"></div>
       )}
       {changeDetails !== "" && (
         <div
@@ -108,7 +111,7 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="relative mb-10 w-32 mx-auto"
+                className="relative mb-10 w-32 mx-auto bg-red-50"
               >
                 <input
                   name="photo"
@@ -117,7 +120,7 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
                   onChange={handleChangeImage}
                   className="absolute w-full h-full bg-red-30 opacity-0"
                 />
-                <button className=" p-2 bg-green-400 active:bg-greem-700 rounde rounded-md text-slate-100">
+                <button className="w-full p-2 bg-green-400 active:bg-green-700 rounde rounded-md text-slate-100">
                   Change Image
                 </button>
               </div>
