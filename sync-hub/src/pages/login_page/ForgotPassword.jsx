@@ -18,7 +18,8 @@ function ForgotPassword() {
     const [changePasswordDetails, setChangePasswordDetails] = useState({
         email: "",
         newPassword: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        tag: "password"
     })
     const navigate = useNavigate()
   
@@ -45,7 +46,7 @@ function ForgotPassword() {
             setToastInfo({color: "blue", text: ["Warning!", "New Password and Confirm Password doesn't match"] })
             setSamePassword(false)
         } else {
-            let url = baseURL + "/change-password";
+            let url = baseURL + "/change-user-details";
             let response = await putHook(url, changePasswordDetails);
             if (response.success) {
                 // localStorage.setItem("token", JSON.stringify(response.success))

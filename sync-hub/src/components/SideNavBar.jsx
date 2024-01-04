@@ -28,7 +28,7 @@ function SideNavBar({ user, setShowSideNavBar, setSideNavBarExtend }) {
           </div>
         </div>
 
-        <div onClick={()=> {setSideNavBarExtend("profile"); setShowSideNavBar(false); }} className="px-3 py-2 hover:bg-green-700">
+        <div onClick={()=> {setSideNavBarExtend("profile"); setShowSideNavBar(false); }} className="px-3 py-2 hover:bg-slate-200 rounded-md">
           <div className="flex items-center gap-5">
             <div className="size-7 flex items-center justify-center bg-red-40">
               <Person sx={{ fontSize: 25 }} />

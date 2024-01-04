@@ -21,14 +21,6 @@ if (dotEnv.MODE === "development") {
   feURL = "https://intertwined-fe.vercel.app"
 }
 
-// const socket = io(baseURL, {
-//   withCredentials: true,
-//   extraHeaders: {
-//     // "my-custom-header": "abcd",
-//     "Access-Control-Allow-Origin": "*"
-//   }
-// });
-const socket = io(baseURL)
 
 function Home() {
   const [user, setUser] = useState("");
@@ -64,21 +56,6 @@ function Home() {
     user === "" && verifyUser();
   }, [navItem, newMessage]);
 
-  socket.on("receive", (data) => {
-    let res = data.message;
-    if (
-      (res[2] === user.email && res[1] === clientContent.reqShaker) ||
-      (res[1] === user.email && res[2] === clientContent.reqShaker)
-    ) {
-      let sender = res[0].filter((item) => item.id !== user.email);
-      if (sender.length >= 1) {
-        let newList = [...sendersList];
-        newList.push(sender[0].id);
-        setSendersList(newList);
-        setNewMessage(true);
-      }
-    }
-  });
 
   function removeSender(param = "") {
     if (param !== "") {
@@ -117,7 +94,7 @@ function Home() {
         <div>
           { sideNavBarExtend !== "" && 
           <div onClick={()=> setSideNavBarExtend("")} className="absolute bg-white z-50 h-full w-full slideInLeft">
-            {sideNavBarExtend === "profile" && <ProfilePage user={user} />}
+            {sideNavBarExtend === "profile" && <ProfilePage user={user} setUser={setUser} setSideNavBarExtend={setSideNavBarExtend} />}
             </div>}
           <div className="relative h-screen w-full bg-red-20">
             <div className="fixed top-0 w-full flex flex-wrap justify-between items-center p-2 bg-white">
@@ -147,12 +124,11 @@ function Home() {
                   setNavItem={setNavItem}
                 />
               )}
-              {navItem === "yourRequests" && <YourRequests />}
+              {navItem === "yourRequests" && <YourRequests user={user} />}
               {navItem === "addRequest" && <AddRequest user={user} />}
               {navItem === "messages" && (
                 <Messages
                   clientContent={clientContent}
-                  socket={socket}
                   user={user}
                   setNewMessage={setNewMessage}
                   sendersList={sendersList}

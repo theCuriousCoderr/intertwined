@@ -1,11 +1,10 @@
 import { ArrowBack, Send } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import postHook from "../../../apiHooks/postHook";
 let dotEnv = import.meta.env;
 
 function Messages({
   clientContent,
-  socket,
   user,
   setNewMessage,
   sendersList,
@@ -22,6 +21,7 @@ function Messages({
     photo: "",
   });
   const [sending, setSending] = useState(false);
+  const chatBack = useRef("")
 
   let baseURL;
   if (dotEnv.MODE === "development") {
@@ -109,6 +109,7 @@ function Messages({
         if (response.success) {
           // update chats state with all the people details that user has chatted with or have a chat history with
           setChats(response.success);
+          chatBack.current = response.success
         }
         // if user has no chat history
         else if (response.warning) {
@@ -121,19 +122,19 @@ function Messages({
   }, []);
 
   // to receive response from back end when a message has been sent
-  socket.on("receive", (data) => {
-    let res = data.message;
-    // if response relates to this user and this client
-    if (
-      (res[2] === user.email && res[1] === client.email) ||
-      (res[1] === user.email && res[2] === client.email)
-    ) {
-      // update chats array state with the existing chat history details between the user and client
-      setChatsArray({ ...chatsArray, chats: res[0] });
-      setSending(false);
-      setNewMessage(true);
-    }
-  });
+  // socket.on("receive", (data) => {
+  //   let res = data.message;
+  //   // if response relates to this user and this client
+  //   if (
+  //     (res[2] === user.email && res[1] === client.email) ||
+  //     (res[1] === user.email && res[2] === client.email)
+  //   ) {
+  //     // update chats array state with the existing chat history details between the user and client
+  //     setChatsArray({ ...chatsArray, chats: res[0] });
+  //     setSending(false);
+  //     setNewMessage(true);
+  //   }
+  // });
 
   function handleMessageChange(e) {
     if (textArea.rows < 5 && Math.round(e.target.value.length / 50) >= 1) {
@@ -151,7 +152,7 @@ function Messages({
     }
   }
 
-  function handleSubmitMessage() {
+  async function handleSubmitMessage() {
     if (textArea.message === "") {
       return;
     }
@@ -159,11 +160,22 @@ function Messages({
     setSending(true);
 
     if (textArea.message) {
-      socket.emit("send", {
+      let messageDetails = {
         message: textArea.message,
         reqEmail: client.email,
         resEmail: user.email,
-      });
+      };
+      let url = baseURL + "/send-messages"
+      let response = await postHook(url, messageDetails )
+      if (response.success) {
+        let data = response.success
+        if ((data[2] === user.email && data[1] === client.email) || (data[1] === user.email && data[2] === client.email)) {
+          // update chats array state with the existing chat history details between the user and client
+          setChatsArray({ ...chatsArray, chats: data[0] });
+          setSending(false);
+          setNewMessage(true);
+        }
+      }
     }
     setTextArea({ message: "", rows: 1 });
   }
@@ -194,7 +206,7 @@ function Messages({
 
       {chats === "Direct Message" && (
         <div className="absolut bg-lime-5 top- bottom- w-full">
-          <div className="fixed h-16 w-full bg-white border-b top-14 z-10">
+          <div onClick={() => setChats(chatBack.current)} className="fixed h-16 w-full bg-white border-b top-14 z-10">
             <div className="flex justify-between items-center px-5">
               <ArrowBack />
               <img

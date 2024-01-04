@@ -5,89 +5,97 @@ import calculateDuration from "../helper_functions/calculateDuration";
 import { LocationOnOutlined } from "@mui/icons-material";
 let dotEnv = import.meta.env;
 
-function AllRequests({user, setClientContent, setNavItem}) {
+function AllRequests({ user, setClientContent, setNavItem }) {
   const [showRequestInfo, setShowRequestInfo] = useState({
     state: false,
-    content: ""
+    content: "",
   });
   const [allRequests, setAllRequests] = useState("");
-  const requestsCount = useRef()
+  const requestsCount = useRef();
 
   let baseURL;
   if (dotEnv.MODE === "development") {
-    baseURL = dotEnv.VITE_DEV_URL
+    baseURL = dotEnv.VITE_DEV_URL;
   } else {
-    baseURL = dotEnv.VITE_PROD_URL
+    baseURL = dotEnv.VITE_PROD_URL;
   }
 
   useEffect(() => {
     async function getAllRequests() {
-      // alert(5)
       let url = baseURL + "/get-all-requests";
       let response = await getHook(url);
-      if (response.success) {
-        // alert(JSON.stringify(response.success))
-        // alert(1)
-        response.success = response.success.reverse()
+      if (response.success.length >= 1) {
+        response.success = response.success.reverse();
         setAllRequests(response.success);
-        requestsCount.current = response.success.length
+        requestsCount.current = response.success.length;
       } else {
-        // alert(2)
         setAllRequests(false);
       }
     }
-    // alert(timeInterval("2023-12-24T03:33:45.756Z"))
-    // alert(3)
     allRequests === "" && getAllRequests();
-    // alert(4)
-    // getAllRequests()
   }, [allRequests]);
   return (
     <div className="relative">
-       <p id="top" className="text-lg font-bold varela p-2 border-b border-slate-300">
-          All Requests {requestsCount.current >=1 && <span>({requestsCount.current})</span>}
-        </p>
+      <p
+        id="top"
+        className="text-lg font-bold varela p-2 border-b border-slate-300"
+      >
+        All Requests{" "}
+        {requestsCount.current >= 1 && <span>({requestsCount.current})</span>}
+      </p>
       {showRequestInfo.state && (
         <div
-        onClick={() => setShowRequestInfo({...showRequestInfo, state: false})}
+          onClick={() =>
+            setShowRequestInfo({ ...showRequestInfo, state: false })
+          }
           className="fixed z-20 bg-slate-400 h-full w-full top-14 rounded-t-3xl fadeInDown"
         >
-          <RequestInfo user={user} content={showRequestInfo.content} calculateDuration={calculateDuration} setClientContent={setClientContent} setNavItem={setNavItem} />
+          <RequestInfo
+            user={user}
+            content={showRequestInfo.content}
+            calculateDuration={calculateDuration}
+            setClientContent={setClientContent}
+            setNavItem={setNavItem}
+          />
         </div>
       )}
       <div className=" border-b border-slate-200 my-1 p-5">
         <input className="w-full ring-red-600 outline-red-700 border-slate-400 border rounded-full px-3 py-1" />
       </div>
       <p className="text-xs text-slate-400 px-5 py-2">
-        Browse through here to see if there are any requests you could help
-        withbk or requests that match your preference
+        Browse through here to see if there are any requests you could help with
+        or requests that match your preference
       </p>
 
-      {allRequests === "" && 
-      <div className="mt-10 p-5">
-        <p className="text-lg text-blue-700 font-bold mb-5">... Fetching requests</p>
-        <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden" >
-        <div className="progress left-right  h-full rounded-full w-full bg-pink-600"></div>
-      </div>
+      {allRequests === "" && (
+        <div className="mt-10 p-5">
+          <p className="text-lg text-blue-700 font-bold mb-5">
+            ... Fetching All Requests
+          </p>
+          <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden">
+            <div className="progress left-right  h-full rounded-full w-full bg-pink-600"></div>
+          </div>
         </div>
-       
-      }
+      )}
 
-
-      { allRequests  &&
+      {allRequests &&
         allRequests.map((items) => {
           return (
             <div key={items.requestTitle}>
               {calculateDuration(items.expiresOn, false) === "active" ? (
                 <div
                   key={items}
-                  onClick={() => { setShowRequestInfo({content: items, state: true});  }}
+                  onClick={() => {
+                    setShowRequestInfo({ content: items, state: true });
+                  }}
                   className=" bg-slate-50 border border-slate-300 bg-opacity- m-2 rounded-lg p-3 space-y-"
                 >
-                   <p className="text-[11px] text-red-500">
-                    {user.email === items.reqShaker && <span>"You made this request"</span> }
+                  <p className="text-[11px] text-red-500">
+                    {user.email === items.reqShaker && (
+                      <span>"You made this request"</span>
+                    )}
                   </p>
-                  
+
                   <p className="text-[11px] text-slate-500">
                     Posted {calculateDuration(items.createdAt)}
                   </p>
@@ -176,11 +184,12 @@ function AllRequests({user, setClientContent, setNavItem}) {
             </div>
           );
         })}
-        {(allRequests === false) &&
+
+      {allRequests === false && (
         <div className="p-5 text-xl font-bold text-red-700">
           <p>No requests yet</p>
-         </div> 
-         }
+        </div>
+      )}
     </div>
   );
 }

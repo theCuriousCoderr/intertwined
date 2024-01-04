@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowForwardIos,
+  Call,
   ChatBubble,
   Message,
   NearMe,
   RemoveRedEyeOutlined,
+  StarBorderOutlined,
 } from "@mui/icons-material";
 import Header from "./Header";
 import MenuBar from "./MenuBar";
@@ -18,7 +20,10 @@ import {
 } from "@mui/icons-material";
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
+import getHook from "../../apiHooks/getHook";
 let dotEnv = import.meta.env
+
+
 
 function LandingPage() {
   const [menuBarState, setMenuBarState] = useState(false);
@@ -35,6 +40,13 @@ function LandingPage() {
     responses: 0,
   });
   const navigate = useNavigate();
+
+  let baseURL;
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL
+  }
 
   useEffect(() => {
     let title = document.querySelector("title");
@@ -84,24 +96,22 @@ function LandingPage() {
         });
       }
     }, 5000);
+
+    async function getDashboardAnalytics() {
+      let url = baseURL + "/dashboard-analytics"
+      let response = await getHook(url)
+      if (response.success) {
+        let data = response.success
+        setCount({users: data.users, requests: data.requests, responses: 0 })
+      }
+    }
+    getDashboardAnalytics()
+
+    
   }, []);
 
-  let baseURL;
-  if (dotEnv.MODE === "development") {
-    baseURL = dotEnv.VITE_DEV_URL
-  } else {
-    baseURL = dotEnv.VITE_PROD_URL
-  }
 
-  // let analytics = document.getElementById("dashboard-anaytics");
-  // let rect = analytics.getBoundingClientRect();
-  // if (
-  //   rect.top >= 0 &&
-  //   rect.left >= 0 &&
-  //   rect.bottom <=
-  //   (window.innerHeight || document.documentElement.clientHeight) &&
-  //   rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  // ) {
+
 
   return (
     <div className="relative">
@@ -152,13 +162,13 @@ function LandingPage() {
             </div>
 
             <h1 className="text-sm leading-6 text-slate-500 ">
-              Revolutionizing the way common needs and tasks are handled and
+              Revolutionizing the way your common needs and tasks are handled and
               addressed, our innovative project seamlessly bridges the gap
               between client needs and soluton offerings. By providing a
               user-friendly platform, we empower the common individuals and
               persons to effortlessly discover, engage and interact with service
               providers for any task or need at hand, thereby fostering a
-              dynamic one-way marketplace where every interaction leads to
+              dynamic marketplace where every interaction leads to
               mutual satisfaction and success.
             </h1>
             <div className="flex items-center ">
@@ -187,60 +197,36 @@ function LandingPage() {
           <div className="p-5 space-y-3">
             {[
               {
-                icon: 1,
+                icon: <AddCircleOutlineOutlined sx={{ color: orange[900], fontSize: 20 }} />,
                 title: "Add services requests",
-                text: "The platform allows you to post requests of whatever you might need help with",
+                text: "You as a user can post service requests on the platform, out to the reach of potential helpers who might be able to help you.",
               },
               {
-                icon: 2,
+                icon: <ArticleOutlined sx={{ color: orange[900], fontSize: 20 }} />,
                 title: "View all services requests",
-                text: "The platform allows you to post requests of whatever you might need help with",
+                text: "You can view through and explore all service requests posted by you and other users.",
               },
               {
-                icon: 3,
+                icon: <RemoveRedEyeOutlined sx={{ color: orange[900], fontSize: 20 }} />,
                 title: "View your services requests",
-                text: "The platform allows you to post requests of whatever you might need help with",
+                text: "You can also choose to see only the service requests that you have personally made.",
               },
               {
-                icon: 4,
+                icon: <ChatOutlined sx={{ color: orange[900], fontSize: 20 }} />,
                 title: "Have a conversation with a res-shaker",
-                text: "The platform allows you to post requests of whatever you might need help with",
+                text: "You can have an in-app conversation with a client you wish to help or assist with his/her request.",
               },
               {
-                icon: 5,
+                icon: <NotificationsNoneOutlined sx={{ color: orange[900], fontSize: 20 }} />,
                 title: "Receive alerts and notifications",
-                text: "The platform allows you to post requests of whatever you might need help with",
+                text: "You will receive real-time alerts and notifications of messages from people who wish to help or assist you with your request.",
               },
             ].map((items) => {
               return (
                 <div key={items.icon}>
                   <div className="flex gap-2 items-center">
                     <div>
-                      {items.icon === 1 && (
-                        <AddCircleOutlineOutlined
-                          sx={{ color: orange[900], fontSize: 20 }}
-                        />
-                      )}
-                      {items.icon === 2 && (
-                        <ArticleOutlined
-                          sx={{ color: orange[900], fontSize: 20 }}
-                        />
-                      )}
-                      {items.icon === 3 && (
-                        <RemoveRedEyeOutlined
-                          sx={{ color: orange[900], fontSize: 20 }}
-                        />
-                      )}
-                      {items.icon === 4 && (
-                        <ChatOutlined
-                          sx={{ color: orange[900], fontSize: 20 }}
-                        />
-                      )}
-                      {items.icon === 5 && (
-                        <NotificationsNoneOutlined
-                          sx={{ color: orange[900], fontSize: 20 }}
-                        />
-                      )}
+                     {items.icon}
                     </div>
                     <p className="borde border-orange-500 text-orange-500 ">
                       {items.title}
@@ -253,7 +239,14 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="p-5 space-y-5">
+        <div className="relative p-5 space-y-5">
+          <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-orange-100">
+          <StarBorderOutlined sx={{fontSize:400}} />
+          </div>
+          <div className="absolute rotate-12 -bottom-24 -right-36 -z-10 text-orange-100">
+          <StarBorderOutlined sx={{fontSize:400}} />
+          </div>
+          
           <p className="varela text-xl font-bold">The next big thing</p>
           <div className="text-sm text-balanc leading-6 text-slate-500 space-y-2">
             <p>
@@ -273,56 +266,67 @@ function LandingPage() {
 
           <div
             id="dashboard-anaytics"
-            className="relative h-52 w-full bg-red-40 border-l-4 border-slate-200 "
+            className="relative h-56 w-full bg-red-40 border-l-4 border-slate-200 "
           >
-            <div className="absolute -left-1 bg-red-90 space-y-5">
-              <div>
+            <div className=" absolute -left-1 bg-red-90 space-y-5">
+              <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {count.users} Users
+                  {count.users || 0}
                 </p>
                 <p className="px-4 text-xs text-slate-800">
-                  You can't do it all. You can't have it all. You can't know it
-                  all. We All Know
+                  active users on the platform
                 </p>
               </div>
-              <div>
+              <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {count.requests} Requests
+                  {count.requests || 0}
                 </p>
                 <p className="px-4 text-xs">
-                  You can't do it all. You can't have it all. You can't know it
-                  all. We All Know
+                  total service requests sent out
                 </p>
               </div>
-              <div>
+              <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {count.responses} Responses
+                  {Math.round(count.requests/count.users) || 0}
                 </p>
                 <p className="px-4 text-xs">
-                  You can't do it all. You can't have it all. You can't know it
-                  all. We All Know
+                  average service requests sent out per user
+                </p>
+              </div>
+              <div className="h-10">
+                <p className="border-l-4 border-orange-400 px-3">
+                  {count.responses || 0}
+                </p>
+                <p className="px-4 text-xs">
+                  received responses 
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <footer id="footer-cut" className="p-5 bg-slate-50 pt-20">
-          <div>
+        <footer id="footer-cut" className="p-5 bg-slate-50 pt-20 pb-5">
+          <div className="space-y-2">
             <p className="text-xl varela font-bold text-slate-950">
               intertwined
             </p>
             <div className="flex items-center gap-2">
               <div>
-                <NearMe />
+                <NearMe sx={{fontSize: 20}} />
               </div>
-              <p>Nigeria</p>
+              <p>Ibadan, Nigeria</p>
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <Chat />
+                <Chat sx={{fontSize: 20}} />
               </div>
-              <p>Nigeria</p>
+              <p>Ibadan, Nigeria</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div>
+                <Call sx={{fontSize: 20}} />
+              </div>
+              <p>070-3788-7923</p>
             </div>
           </div>
         </footer>
