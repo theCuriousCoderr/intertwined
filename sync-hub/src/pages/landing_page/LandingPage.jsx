@@ -239,7 +239,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="relative p-5 space-y-5">
+        <div className="relative p-5 space-y-5 overflow-hidden">
           <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-orange-100">
           <StarBorderOutlined sx={{fontSize:400}} />
           </div>
