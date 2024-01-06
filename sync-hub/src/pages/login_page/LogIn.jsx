@@ -25,7 +25,7 @@ function Login() {
 
   function handleLogInFormChange(e) {
     let name = e.target.name;
-    let val = e.target.value.trim();
+    let val = e.target.value;
     setLogInDetails({ ...logInDetails, [name]: val });
   }
 

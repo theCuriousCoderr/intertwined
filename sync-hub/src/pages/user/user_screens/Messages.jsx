@@ -332,7 +332,7 @@ function Messages({
                       )}
                     </div>
                     <div className="size-14 bg-gray-200 rounded-full flex items-center justify-center">
-                      {user.photo ? <img
+                      {item.photo ? <img
                         src={item.photo}
                         alt="user photo"
                         className="rounded-full w-full h-full object-cover"

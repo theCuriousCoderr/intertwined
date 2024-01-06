@@ -53,7 +53,7 @@ function SignUp() {
   async function handleSignUpFormChange(e) {
     let name = e.target.name;
     let file = document.getElementById(name);
-    let val = e.target.value.trim();
+    let val = e.target.value;
     if (name === "photo") {
       setUploadState(true);
       try {

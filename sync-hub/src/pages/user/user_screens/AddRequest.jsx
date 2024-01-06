@@ -28,7 +28,7 @@ function AddRequest({ user }) {
 
   function handleRequestDetailsFormChange(e) {
     let name = e.target.name;
-    let val = e.target.value.trim();
+    let val = e.target.value;
     setRequestDetails({ ...requestDetails, [name]: val });
   }
 
