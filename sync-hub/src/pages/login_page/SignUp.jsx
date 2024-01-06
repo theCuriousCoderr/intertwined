@@ -14,7 +14,7 @@ import ToastAlert from "../../components/ToastAlert";
 let dotEnv = import.meta.env;
 
 function SignUp() {
-  const [uite, setUite] = useState(false);
+  const [googleLogIn, setGoogleLogIn] = useState(false);
   const [uploadState, setUploadState] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [createAccountButtonState, setCreateAccountButtonState] =
@@ -36,11 +36,12 @@ function SignUp() {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    if (signUpDetails.email !== "") {
-      document.getElementById("signUpForm").submit()
+    if (googleLogIn) {
+      handleSignUpFormSubmit("")
+      setGoogleLogIn(false)
     }
     window.scrollTo(0, 0);
-  }, []);
+  }, [googleLogIn]);
 
   let baseURL;
   if (dotEnv.MODE === "development") {
@@ -52,7 +53,7 @@ function SignUp() {
   async function handleSignUpFormChange(e) {
     let name = e.target.name;
     let file = document.getElementById(name);
-    let val = e.target.value;
+    let val = e.target.value.trim();
     if (name === "photo") {
       setUploadState(true);
       try {
@@ -84,10 +85,12 @@ function SignUp() {
     setSignUpDetails({ ...signUpDetails, [name]: val });
   }
 
-  async function handleSignUpFormSubmit(e) {
-    
+  async function handleSignUpFormSubmit(param) {
     setCreateAccountButtonState(false);
-    e.preventDefault();
+    if (param !== "") {
+      param.preventDefault();
+    }
+    
     let url = baseURL + "/signup";
     let response = await postHook(url, signUpDetails);
     if (response.success) {
@@ -124,9 +127,8 @@ function SignUp() {
         }
       })
       let info = await res.json()
-      // alert(JSON.stringify(info))
-      setSignUpDetails({...signUpDetails, email: info.email, fullName: info.family_name +" " + info.given_name, photo: info.picture, password: "intertwinedSSO" });
-      
+      setSignUpDetails({...signUpDetails, email: info.email.trim(), fullName: info.family_name +" " + info.given_name, photo: info.picture, password: "intertwinedSSO" });
+      setGoogleLogIn(true)
       } catch (error) {
         console.log(error)
       }
@@ -136,13 +138,6 @@ function SignUp() {
     }
   })
 
-  function responseMessage(e) {
-    alert("Yes")
-    // alert(JSON.stringify(e))
-  }
-  function errorMessage() {
-    alert("No");
-  }
 
   return (
     <div className="relative">
@@ -166,7 +161,7 @@ function SignUp() {
         <form
         name="signUpForm"
         id="signUpForm"
-          onSubmit={handleSignUpFormSubmit}
+          onSubmit={(e)=>handleSignUpFormSubmit(e)}
           className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3"
         >
           <div className="relative p-[1px] rounded bg-orange-400 flex justify-center">
@@ -263,7 +258,7 @@ function SignUp() {
               />
             </div>
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="address" className="text-xs font-semibold">
               Location/Address<span className="text-red-500 ml-1">*</span>
             </label>
@@ -277,8 +272,8 @@ function SignUp() {
                 className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
               />
             </div>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label htmlFor="phone" className="text-xs font-semibold">
               Phone number<span className="text-red-500 ml-1">*</span>
             </label>
@@ -294,9 +289,9 @@ function SignUp() {
                 className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
               />
             </div>
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <p className="text-xs font-semibold">
               Are you a student of the University of Ibadan ?
             </p>
@@ -322,8 +317,8 @@ function SignUp() {
                 <span className="ml-2">No</span>
               </div>
             </div>
-          </div>
-          {uite && (
+          </div> */}
+          {/* {uite && (
             <div className="ml-5">
               <div>
                 <label htmlFor="dept" className="text-xs font-semibold">
@@ -381,7 +376,7 @@ function SignUp() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
           <div>
             <label htmlFor="password" className="text-xs font-semibold">
               Password<span className="text-red-500 ml-1">*</span>

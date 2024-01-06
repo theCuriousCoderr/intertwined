@@ -10,6 +10,7 @@ import Messages from "./user_screens/Messages";
 import Alerts from "./user_screens/Alerts";
 import { io } from "socket.io-client";
 import ProfilePage from "./user_screens/ProfilePage";
+import { Avatar } from "@mui/material";
 let dotEnv = import.meta.env;
 
 let baseURL, feURL
@@ -22,8 +23,8 @@ if (dotEnv.MODE === "development") {
 }
 
 
-function Home() {
-  const [user, setUser] = useState("");
+function Home({user, setUser}) {
+  
   const [navItem, setNavItem] = useState("allRequests");
   const [showSideNavBar, setShowSideNavBar] = useState(false);
   const [clientContent, setClientContent] = useState("");
@@ -102,11 +103,11 @@ function Home() {
                 onClick={() => setShowSideNavBar(true)}
                 className="size-10 flex items-center justify-center rounded-full bg-red-200"
               >
-                <img
+                {user.photo ? <img
                   src={user.photo}
                   alt="User Photo"
                   className="w-full h-full rounded-full object-cover"
-                />
+                /> : <Avatar /> }
               </div>
               <p className="text-lg varela font-semibold">intertwined</p>
               <div className="size-5 bg-yellow-200"></div>

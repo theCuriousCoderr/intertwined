@@ -8,9 +8,10 @@ import React, { useState } from "react";
 import postHook from "../../../apiHooks/postHook";
 import putHook from "../../../apiHooks/putHook";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "@mui/material";
 let dotEnv = import.meta.env;
 
-function ProfilePage({ user, setUser, setSideNavBarExtend }) {
+function ProfilePage({ user, setUser }) {
   const [changeDetails, setChangeDetails] = useState("");
   const [changeImageState, setChangeImageState] = useState(false);
   let firstName = user.fullName.split(" ")[0];
@@ -68,6 +69,10 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
     }
   }
 
+  window.addEventListener('beforeunload', () => {
+    alert('User clicked back button');
+  });
+
   return (
     <div
       onClick={(e) => {
@@ -87,7 +92,7 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
             e.stopPropagation();
             setChangeDetails("");
           }}
-          className="absolute bg-red-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown"
+          className="absolute bg-slate-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown"
         >
           {changeDetails === "photo" && (
             <div className="">
@@ -96,16 +101,16 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
                   Edit photo
                 </p>
               </div>
-              <div className="relative w-full rounded-full flex items-center justify-center my-5">
+              <div className="relative bg-gray-20 w-full rounded-full flex items-center justify-center my-5">
                 {changeImageState && (
                   <div className="absolute size-48 rounded-full bg-black flex items-center justify-center">
                     <div className="size-10 border-4 border-t-slate-50 border-l-slate-800 border-r-slate-800 border-b-slate-800 animate-spin rounded-full"></div>
                   </div>
                 )}
-                <img
+                {user.photo ? <img
                   src={user.photo}
                   className="size-48 rounded-full object-cover"
-                />
+                /> : <Avatar /> }
               </div>
               <div
                 onClick={(e) => {
@@ -129,9 +134,6 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
         </div>
       )}
       <div
-        onClick={() => {
-          setSideNavBarExtend("");
-        }}
         className="relative flex items-center justify-center py-5 border-b border-slate-300"
       >
         <div className="absolute w-full left-5">
@@ -144,7 +146,7 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
 
       <div className="p-2 border-b border-slate-30 flex justify-start gap-">
         <div className="w-[30%] flex items-center justify-center bg-red-20">
-          <div className="size-20 rounded-full relative bg-red-70">
+          <div className="size-20 rounded-full relative bg-gray-200 flex items-center justify-center ">
             <div className="absolute top-0 left-0 p-1 size-5 rounded-full bg-white">
               <div className="w-full h-full rounded-full bg-green-600"></div>
             </div>
@@ -162,10 +164,10 @@ function ProfilePage({ user, setUser, setSideNavBarExtend }) {
                 </div>
               </div>
             </div>
-            <img
+            {user.photo ? <img
               src={user.photo}
               className="w-full h-full object-cover rounded-full"
-            />
+            /> : <Avatar />}
           </div>
         </div>
 

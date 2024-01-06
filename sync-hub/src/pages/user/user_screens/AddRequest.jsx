@@ -28,16 +28,16 @@ function AddRequest({ user }) {
 
   function handleRequestDetailsFormChange(e) {
     let name = e.target.name;
-    let val = e.target.value;
+    let val = e.target.value.trim();
     setRequestDetails({ ...requestDetails, [name]: val });
   }
 
   let baseURL;
-if (dotEnv.MODE === "development") {
-  baseURL = dotEnv.VITE_DEV_URL
-} else {
-  baseURL = dotEnv.VITE_PROD_URL
-}
+  if (dotEnv.MODE === "development") {
+    baseURL = dotEnv.VITE_DEV_URL;
+  } else {
+    baseURL = dotEnv.VITE_PROD_URL;
+  }
 
   async function handleRequestDetailsFormSubmit(e) {
     setPostRequestButtonState(false);

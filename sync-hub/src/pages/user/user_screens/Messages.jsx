@@ -1,6 +1,7 @@
 import { ArrowBack, Send } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
 import postHook from "../../../apiHooks/postHook";
+import { Avatar } from "@mui/material";
 let dotEnv = import.meta.env;
 
 function Messages({
@@ -209,11 +210,11 @@ function Messages({
           <div onClick={() => setChats(chatBack.current)} className="fixed h-16 w-full bg-white border-b top-14 z-10">
             <div className="flex justify-between items-center px-5">
               <ArrowBack />
-              <img
+               {(chatsArray.photo || client.photo) ? <img
                 src={chatsArray.photo || client.photo}
                 alt="client photo."
                 className="size-12 rounded-full object-cover"
-              />
+              /> : <Avatar />}
             </div>
           </div>
 
@@ -330,12 +331,12 @@ function Messages({
                         <div className="bg-red-600 size-3 rounded-full"></div>
                       )}
                     </div>
-                    <div className="size-14 bg-red-300 rounded-full">
-                      <img
+                    <div className="size-14 bg-gray-200 rounded-full flex items-center justify-center">
+                      {user.photo ? <img
                         src={item.photo}
                         alt="user photo"
                         className="rounded-full w-full h-full object-cover"
-                      />
+                      /> : <Avatar /> }
                     </div>
                   </div>
                 );

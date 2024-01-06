@@ -226,9 +226,9 @@ app.get("/dashboard-analytics", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  // console.log(req.body)
+  console.log(req.body)
   try {
-    let user = await Users.find({ email: req.body.email });
+    let user = await Users.find({ email: req.body.email.trim() });
     // console.log(1)
     if (user.length >= 1) {
       res.status(202).send({ message: "User Already Exists" });

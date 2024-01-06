@@ -4,7 +4,7 @@ import { grey, orange } from "@mui/material/colors";
 
 function FootNavBar({navItem, setNavItem, newMessage, sendersList}) {
   return (
-    <div className="fixed z-40 bottom-0 left-0 w-full p-2 rounded-t-xl bg-slate-100 flex justify-between items-center">
+    <div className="fixed z-40 bottom-0 left-0 w-full p-2 rounded-t-xl bg-slate-900 flex justify-between items-center">
 
     <div onClick={()=> setNavItem("allRequests")} className="flex flex-col justify-center w-[15%] items-center bg-yellow-30">
       {navItem === "allRequests" ? <ArticleOutlined sx={{fontSize: 30, color: orange[500]}} /> : <ArticleOutlined sx={{fontSize: 30, color: grey[500]}} />}
@@ -16,7 +16,7 @@ function FootNavBar({navItem, setNavItem, newMessage, sendersList}) {
       {navItem === "yourRequests" ? <div className="size-2 bg-orange-500 rounded-full"></div> : <div className="size-2 bg-transparent rounded-full"></div>}
     </div>
 
-    <div onClick={()=> setNavItem("addRequest")} className="-mt-10 w-[15%] h-12  bg-slate-200 shadow shadow-slate-300 p-1 rounded-full">
+    <div onClick={()=> setNavItem("addRequest")} className="-mt-10 w-[15%] h-12  bg-slate-200 shadow shadow-slate-300 p-1 rounded-full border-2 box-border">
       <div className="flex flex-col justify-center items-center w-full h-full bg-orange-500 rounded-full">
       {navItem === "addRequest" ? <AddCircleOutlineOutlined sx={{fontSize: 30, color: orange[50]}} /> : <AddCircleOutlineOutlined sx={{fontSize: 30, color: grey[500]}} />}
        </div> 
