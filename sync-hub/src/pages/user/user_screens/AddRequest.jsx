@@ -72,7 +72,7 @@ function AddRequest({ user }) {
     }, 3000);
   }
   return (
-    <div className="bg-[rgba(81,80,91,0.3) relative mt-14">
+    <div className="bg-[rgba(81,80,91,0.3) relative mt-14 pb-20">
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
