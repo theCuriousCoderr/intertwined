@@ -7,7 +7,7 @@ function MenuBar({ menuBarState, setMenuBarState, setMenuBarExtend, setMenuBarEx
   const [ourServices, setOurServices] = useState(false);
   let navigate = useNavigate()
   return (
-    <div className="bg-white box-content border border-slate-500 h-80 overflow-scroll fixed right-3 left-3 z-20 fadeIn rounded-lg">
+    <div className="bg-white box-content border border-slate-500 overflow-scroll fixed right-3 left-3 z-20 fadeIn rounded-lg">
       <div className="px-2 py-8">
         <Header menuBarState={menuBarState} setMenuBarState={setMenuBarState} />
       </div>

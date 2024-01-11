@@ -78,7 +78,7 @@ function ProfilePage({ user, setUser }) {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className={` bg-red-40 fixed z-50 w-full h-dvh`}
+      className={` bg-white fixed z-50 w-full h-dvh`}
     >
       {changeDetails && (
         <div onClick={(e) => {
@@ -136,7 +136,7 @@ function ProfilePage({ user, setUser }) {
       <div
         className="relative flex items-center justify-center py-5 border-b border-slate-300"
       >
-        <div className="absolute w-full left-5">
+        <div onClick={()=> navigate(-1)} className="absolute w-full left-5">
           <ArrowBack />
         </div>
         <p id="top" className="text-lg font-bold varela">

@@ -263,7 +263,7 @@ app.post("/login", async (req, res) => {
       req.body.password,
       user.password
     );
-    console.log(isPasswordCorrect);
+    // console.log(isPasswordCorrect);
     if (user && isPasswordCorrect) {
       const token = jwt.sign(
         { email: req.body.email },

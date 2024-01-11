@@ -5,7 +5,7 @@ import putHook from "../../../apiHooks/putHook";
 import ToastAlert from "../../../components/ToastAlert";
 let dotEnv = import.meta.env;
 
-function YourRequests({ user }) {
+function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
   const [yourRequests, setYourRequests] = useState("");
   const [confirmRequestDelete, setConfirmRequestDelete] = useState(false);
   const [requestDeleteId, setRequestDeleteId] = useState("")
@@ -26,7 +26,6 @@ function YourRequests({ user }) {
       let url = baseURL + "/get-all-requests";
 
       let response = await getHook(url);
-      // alert(response.success.length)
       let requests = response.success
       .filter((item) => item.reqShaker === user.email)
       .reverse();
@@ -36,8 +35,18 @@ function YourRequests({ user }) {
         setYourRequests(false);
       }
     }
-    getAllRequests(), [];
-  });
+    if (allRequestsCache) {
+      let requests = allRequestsCache.filter((item) => item.reqShaker === user.email).reverse();
+      if (requests.length >= 1) {
+        setYourRequests(requests);
+      } else {
+        setYourRequests(false);
+      }
+    } else {
+      getAllRequests();
+    }
+    
+  }, []);
 
   async function deleteRequest() {
     let url = baseURL + "/delete-user-request";
@@ -55,7 +64,7 @@ function YourRequests({ user }) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative mt-14">
       {toastInfo.text !== "" && <ToastAlert color={toastInfo.color} text={toastInfo.text} />}
       <p
         id="top"
@@ -84,7 +93,7 @@ function YourRequests({ user }) {
       {yourRequests &&
         yourRequests.map((items) => {
           return (
-            <div className="relative bg-slate-50 border border-slate-300 bg-opacity- m-2 rounded-lg p-3 space-y-">
+            <div key={items._id} className="relative bg-slate-50 border border-slate-300 bg-opacity- m-2 rounded-lg p-3 space-y-">
              { confirmRequestDelete && <div onClick={()=> setConfirmRequestDelete(false) } className="fixed top-0 z-50 bg-black bg-opacity-50 left-0 h-full w-full flex items-center justify-center">
                 <div className="w-[80%] rounded-md bg-slate-100 p-5">
                   <p className="text-red-600 font-semibold text-base">
@@ -142,10 +151,7 @@ function YourRequests({ user }) {
                 </p>
                 {items.requestDescription}
               </div>
-              {/* <div className="flex items-center text-sm -ml-1 my-1">
-                    <LocationOnOutlined sx={{ fontSize: 20 }} />
-                    <p>{items.landmark} </p>
-                  </div> */}
+            
               <div className="text-sm flex gap-2">
                 Request status:{" "}
                 <div>

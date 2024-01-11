@@ -4,12 +4,15 @@ import postHook from "../../../apiHooks/postHook";
 import { Avatar } from "@mui/material";
 let dotEnv = import.meta.env;
 
+
+
 function Messages({
   clientContent,
   user,
   setNewMessage,
   sendersList,
   removeSender,
+  theme
 }) {
   const [chatsArray, setChatsArray] = useState("");
   const [textArea, setTextArea] = useState({
@@ -30,6 +33,14 @@ function Messages({
   } else {
     baseURL = dotEnv.VITE_PROD_URL
   }
+
+  setTimeout(()=> {
+    let last = document.getElementById("last")
+    if (last) {
+      last.scrollIntoView(true)
+    }
+
+  }, 1000)
 
   useEffect(() => {
     async function getChats() {
@@ -118,24 +129,13 @@ function Messages({
         }
       }
     }
-
     getChats();
+
+
+
+   
   }, []);
 
-  // to receive response from back end when a message has been sent
-  // socket.on("receive", (data) => {
-  //   let res = data.message;
-  //   // if response relates to this user and this client
-  //   if (
-  //     (res[2] === user.email && res[1] === client.email) ||
-  //     (res[1] === user.email && res[2] === client.email)
-  //   ) {
-  //     // update chats array state with the existing chat history details between the user and client
-  //     setChatsArray({ ...chatsArray, chats: res[0] });
-  //     setSending(false);
-  //     setNewMessage(true);
-  //   }
-  // });
 
   function handleMessageChange(e) {
     if (textArea.rows < 5 && Math.round(e.target.value.length / 50) >= 1) {
@@ -182,7 +182,7 @@ function Messages({
   }
 
   return (
-    <div className="">
+    <div className={`relative mt-14 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"} h-screen`}>
       {chats === "" && (
         <div className="mt-10 p-5">
           <p className="text-lg text-blue-700 font-bold mb-5">
@@ -206,8 +206,8 @@ function Messages({
       )}
 
       {chats === "Direct Message" && (
-        <div className="absolut bg-lime-5 top- bottom- w-full">
-          <div onClick={() => setChats(chatBack.current)} className="fixed h-16 w-full bg-white border-b top-14 z-10">
+        <div className="fixed w-full bg-blue-40 h-screen">
+          <div onClick={() => setChats(chatBack.current)} className="">
             <div className="flex justify-between items-center px-5">
               <ArrowBack />
                {(chatsArray.photo || client.photo) ? <img
@@ -218,8 +218,8 @@ function Messages({
             </div>
           </div>
 
-          <div className=" h- w-full bg-lime-5 bg-slate-40 absolute bottom-0 h-[70vh] flex flex-col items-end p-1 pt-10 justify-between px-1 overflow-scroll">
-            <div className=" w-full bg-lime-5 absolut bottom- overflow-scroll pb-10">
+          <div className="absolute top-14 bottom-28 w-full bg-white flex flex-col items-end p-1 justify-between px-1 overflow-scrol">
+            <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
               {chatsArray &&
                 chatsArray.chats.map((item) => {
                   return (
@@ -247,6 +247,9 @@ function Messages({
                     </div>
                   );
                 })}
+                 <p id="last" className="bg-red-200 opacity-0">
+                  
+            </p>
             </div>
             {sending && (
               <div className="flex justify-end px-5">
@@ -257,10 +260,8 @@ function Messages({
                 </div>
               </div>
             )}
-            <p id="last" className="bg-red-200 p-2 opacity-0">
-              ola
-            </p>
-            <div className="absolute bottom-0 left- flex justify-evenly p- w-full">
+           
+            <div className="flex justify-evenly w-full bg-white">
               <div className="w-[80%] bg-red-30">
                 <textarea
                   maxLength={1000}
@@ -297,10 +298,10 @@ function Messages({
       {chats.length >= 1 &&
         chats !== "Direct Message" &&
         chats !== "No chats" && (
-          <div>
+          <div className="bg-red-30">
             <p
               id="top"
-              className="text-lg font-bold varela p-2 border-b border-slate-300"
+              className={`text-lg font-bold varela p-2 border-y  ${theme === "lightMode" ? "bg-white border-slate-300" : "bg-gray-900 text-white border-slate-700"}`}
             >
               Chats History
             </p>
@@ -322,8 +323,8 @@ function Messages({
                   >
                     <div className="float-right w-[80%] bg-red-30 flex justify-between items-end">
                       <div>
-                        <p className="text-base">{item._doc.with}</p>
-                        <p className="text-xs text-slate-500">
+                        <p className={`${theme === "lightMode" ? "text-slate-400" : "text-slate-200"} text-base`}>{item._doc.with}</p>
+                        <p className={`text-xs ${theme === "lightMode" ? "text-slate-500" : "text-slate-400"}`}>
                           {item._doc.history[item._doc.history.length - 1].text}
                         </p>
                       </div>
@@ -331,7 +332,7 @@ function Messages({
                         <div className="bg-red-600 size-3 rounded-full"></div>
                       )}
                     </div>
-                    <div className="size-14 bg-gray-200 rounded-full flex items-center justify-center">
+                    <div className={`size-14 bg-gray-200 rounded-full flex items-center justify-center ${theme === "lightMode" ? "border" : "border-2 border-slate-100"}`}>
                       {item.photo ? <img
                         src={item.photo}
                         alt="user photo"

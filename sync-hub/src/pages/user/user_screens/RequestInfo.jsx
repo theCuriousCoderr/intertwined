@@ -1,11 +1,11 @@
 import React from "react";
 
-function RequestInfo({ user, content, calculateDuration, setClientContent, setNavItem }) {
+function RequestInfo({ user, content, calculateDuration, setClientContent, setNavItem, theme }) {
   return (
-    <div className="bg-slate-50 rounded-t-xl mt-3 h-full">
+    <div className={` rounded-t-xl h-full  ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
       <div className="p-5 bg-red-30">
         <div className="py-5 border-b">
-          <p className="varela text-sm">{content.requestTitle}</p>
+          <p className={`varela text-sm ${theme === "lightMode" ? "text-black" : "text-white"}`}>{content.requestTitle}</p>
           <p className="text-slate-400 text-xs">
             Posted {calculateDuration(content.createdAt)}
           </p>

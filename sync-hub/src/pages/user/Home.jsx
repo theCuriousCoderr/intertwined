@@ -23,14 +23,8 @@ if (dotEnv.MODE === "development") {
 }
 
 
-function Home({user, setUser}) {
+function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNavBar, newMessage, setSendersList, sendersList, sideNavBarExtend, setSideNavBarExtend, setClientContent }) {
   
-  const [navItem, setNavItem] = useState("allRequests");
-  const [showSideNavBar, setShowSideNavBar] = useState(false);
-  const [clientContent, setClientContent] = useState("");
-  const [newMessage, setNewMessage] = useState(false);
-  const [sendersList, setSendersList] = useState([]);
-  const [sideNavBarExtend, setSideNavBarExtend] = useState("")
   const navigate = useNavigate();
 
 
@@ -48,22 +42,19 @@ function Home({user, setUser}) {
         if (response.success) {
           setUser(response.success);
         } else {
+          alert(1)
           setUser("Error");
         }
       } catch (error) {
+        alert(2)
         console.log(error);
       }
     }
-    user === "" && verifyUser();
-  }, [navItem, newMessage]);
+    verifyUser();
+  }, []);
 
 
-  function removeSender(param = "") {
-    if (param !== "") {
-      let newList = sendersList.filter((item) => item !== param);
-      setSendersList(newList);
-    }
-  }
+ 
 
   return (
     <div>
@@ -74,6 +65,7 @@ function Home({user, setUser}) {
           </div>
         </div>
       )}
+
       {user === "Error" && (
         <div className="flex items-center justify-center flex-col h-screen">
           <p className="font-medium text-red-600">Unauthorized Access!</p>
@@ -91,7 +83,11 @@ function Home({user, setUser}) {
         </div>
       )}
 
-      {user.email && (
+      { user.email && navigate("/user/all-requests")}
+
+
+
+      {/* {user.email && (
         <div>
           { sideNavBarExtend !== "" && 
           <div onClick={()=> setSideNavBarExtend("")} className="absolute bg-white z-50 h-full w-full slideInLeft">
@@ -117,37 +113,9 @@ function Home({user, setUser}) {
               <SideNavBar user={user} setShowSideNavBar={setShowSideNavBar} setSideNavBarExtend={setSideNavBarExtend} />
             )}
 
-            <div className="absolute bg-red-40 bottom-14 w-full overflow-scroll top-14">
-              {navItem === "allRequests" && (
-                <AllRequests
-                  user={user}
-                  setClientContent={setClientContent}
-                  setNavItem={setNavItem}
-                />
-              )}
-              {navItem === "yourRequests" && <YourRequests user={user} />}
-              {navItem === "addRequest" && <AddRequest user={user} />}
-              {navItem === "messages" && (
-                <Messages
-                  clientContent={clientContent}
-                  user={user}
-                  setNewMessage={setNewMessage}
-                  sendersList={sendersList}
-                  removeSender={removeSender}
-                />
-              )}
-              {navItem === "alerts" && <Alerts />}
-            </div>
-
-            <FootNavBar
-              navItem={navItem}
-              setNavItem={setNavItem}
-              newMessage={newMessage}
-              sendersList={sendersList}
-            />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

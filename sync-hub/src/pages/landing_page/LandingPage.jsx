@@ -37,7 +37,7 @@ function LandingPage() {
   const [count, setCount] = useState({
     users: 0,
     requests: 0,
-    responses: 0,
+    responses: 10,
   });
   const navigate = useNavigate();
 
@@ -97,18 +97,27 @@ function LandingPage() {
       }
     }, 5000);
 
+    let dashboardAnalytics = localStorage.getItem("dashboard-analytics")
+    if (dashboardAnalytics) {
+      dashboardAnalytics = JSON.parse(dashboardAnalytics)
+      setCount({users: dashboardAnalytics.users, requests: dashboardAnalytics.requests, responses: dashboardAnalytics.responses })
+    }
+
     async function getDashboardAnalytics() {
       let url = baseURL + "/dashboard-analytics"
       let response = await getHook(url)
       if (response.success) {
         let data = response.success
-        setCount({users: data.users, requests: data.requests, responses: 0 })
+        setCount({users: data.users, requests: data.requests, responses: 10 })
+        localStorage.setItem("dashboard-analytics", JSON.stringify({users: data.users, requests: data.requests, responses: 10 }))
       }
     }
     getDashboardAnalytics()
-
-    
   }, []);
+
+  document.addEventListener("scroll", () => {
+    setMenuBarState(false)
+  })
 
 
 
@@ -135,7 +144,7 @@ function LandingPage() {
         </div>
       )}
 
-      <div className="bg-orange-50 bg-opacity-50">
+      <div className="bg-red-40">
         <div
           id="trapezium"
           className={`absolute top-0 w-full h-48 bg-gray-700 ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors `}
@@ -148,7 +157,7 @@ function LandingPage() {
           />
           <div className="space-y-5">
             <div>
-              <h1 className="mt-16 text-2xl font-serif font-bold">
+              <h1 className="mt-16 text-2xl font-serif font-bold text-gray-950">
                 Empowering Connections. <br />
                 Where Requests Meet Responses.
               </h1>
@@ -223,7 +232,7 @@ function LandingPage() {
               },
             ].map((items) => {
               return (
-                <div key={items.icon}>
+                <div key={items.title}>
                   <div className="flex gap-2 items-center">
                     <div>
                      {items.icon}
@@ -239,7 +248,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="relative p-5 space-y-5 overflow-hidden">
+        <div className="relative p-5 space-y-5 overflow-hidden bg-red-40">
           <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-orange-100">
           <StarBorderOutlined sx={{fontSize:400}} />
           </div>
