@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function RequestInfo({ user, content, calculateDuration, setClientContent, setNavItem, theme }) {
+
+  let navigate = useNavigate()
   return (
     <div className={` rounded-t-xl h-full  ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
       <div className="p-5 bg-red-30">
@@ -45,7 +48,7 @@ function RequestInfo({ user, content, calculateDuration, setClientContent, setNa
 
         <div className="my-3">
         {user.email === content.reqShaker && <p className="text-red-600 font-bold text-center">You made this request</p>}
-          {user.email === content.reqShaker ? <button onClick={(e)=> e.stopPropagation()} className="w-full text-center bg-orange-200 text-white varela p-1 rounded-full">Message Client Now</button> : <button onClick={()=> {setClientContent(content); setNavItem("messages") }} className="w-full text-center bg-orange-500 active:bg-green-500 text-white varela p-1 rounded-full">Message Client Now</button>}
+          {user.email === content.reqShaker ? <button onClick={(e)=> e.stopPropagation()} className="w-full text-center bg-orange-200 text-white varela p-1 rounded-full">Message Client Now</button> : <button onClick={()=> {setClientContent(content); navigate("/user/messages") }} className="w-full text-center bg-orange-500 active:bg-green-500 text-white varela p-1 rounded-full">Message Client Now</button>}
         </div>
 
 
