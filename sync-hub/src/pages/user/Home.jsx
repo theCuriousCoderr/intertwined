@@ -40,7 +40,8 @@ function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNa
         let url = baseURL + "/user/home";
         let response = await getHook(url, true);
         if (response.success) {
-          setUser(response.success);
+          let fullName = response.success.fullName.split(" ").map(items => items[0].toUpperCase()+items.slice(1)).join(" ")
+          setUser({...response.success, fullName: fullName});
         } else {
           setUser("Error");
         }

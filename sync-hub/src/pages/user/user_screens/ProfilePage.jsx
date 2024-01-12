@@ -34,7 +34,12 @@ function ProfilePage({ user, setUser, theme }) {
       navigate("/user/home")
     }
     let names = user.fullName.split(" ");
-    setUserName({ firstName: names[0], lastName: names[1] });
+    try {
+      setUserName({ firstName: names[0], lastName: names[1] });
+    } catch (error) {
+      setUserName({ firstName: names[0], lastName: "" });
+    }
+   
   }, []);
 
 
@@ -215,7 +220,10 @@ function ProfilePage({ user, setUser, theme }) {
                     className="size-48 rounded-full object-cover"
                   />
                 ) : (
-                  <Avatar />
+                  <div className="size-48 bg-slate-300 flex items-center justify-center rounded-full">
+                    <Avatar />
+                    </div>
+                  
                 )}
               </div>
               <div
