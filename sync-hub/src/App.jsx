@@ -16,7 +16,7 @@ import Alerts from "./pages/user/user_screens/Alerts";
 import FootNavBar from "./components/FootNavBar";
 import SideNavBar from "./components/SideNavBar";
 import getHook from "./apiHooks/getHook";
-import { DarkMode, LightModeOutlined } from "@mui/icons-material";
+import { DarkMode, LightModeOutlined, Avatar } from "@mui/icons-material";
 let dotEnv = import.meta.env
 
 function App() {
