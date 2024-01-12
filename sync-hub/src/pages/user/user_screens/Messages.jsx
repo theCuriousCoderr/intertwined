@@ -2,12 +2,14 @@ import { ArrowBack, Send } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
 import postHook from "../../../apiHooks/postHook";
 import { Avatar } from "@mui/material";
+import bg_whatsapp_image from '../../images/bg_whatsapp.jpg'
 let dotEnv = import.meta.env;
 
 
 
 function Messages({
   clientContent,
+  setClientContent,
   user,
   setNewMessage,
   sendersList,
@@ -161,8 +163,12 @@ function Messages({
     setSending(true);
 
     if (textArea.message) {
+      let topic = "";
+      if (clientContent) {
+        topic = clientContent.requestTitle
+      }
       let messageDetails = {
-        message: textArea.message,
+        message: `${textArea.message}|${topic}`,
         reqEmail: client.email,
         resEmail: user.email,
       };
@@ -189,7 +195,7 @@ function Messages({
             ... Fetching chats
           </p>
           <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden">
-            <div className="progress left-right  h-full rounded-full w-full bg-pink-600"></div>
+            <div className="progress left-right  h-full rounded-full w-full bg-orange-500"></div>
           </div>
         </div>
       )}
@@ -207,40 +213,47 @@ function Messages({
 
       {chats === "Direct Message" && (
         <div className="fixed w-full bg-blue-40 h-screen">
-          <div onClick={() => setChats(chatBack.current)} className="">
+          <div onClick={() => { (setChats(chatBack.current) ? setChats(chatBack.current) : setChats("No chats")); setClientContent("") }} className="">
             <div className="flex justify-between items-center px-5">
-              <ArrowBack />
+             {theme === "lightMode" ? <ArrowBack /> : <ArrowBack sx={{color: "white"}} /> }
+             <div className="flex items-center gap-2">
+              <p className={`${theme === "lightMode" ? "text-black" : "text-white"} text-xs`}>{client.email}</p>
                {(chatsArray.photo || client.photo) ? <img
                 src={chatsArray.photo || client.photo}
                 alt="client photo."
-                className="size-12 rounded-full object-cover"
-              /> : <Avatar />}
+                className={`size-10 rounded-full object-cover ${!(theme === "lightMode") && "border-2 border-slate-100"}`}
+              /> : <Avatar />} </div>
             </div>
           </div>
 
-          <div className="absolute top-14 bottom-28 w-full bg-white flex flex-col items-end p-1 justify-between px-1 overflow-scrol">
+          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-[#FFFFED] " : "bg-gray-900"} flex flex-col items-end p-1 justify-between px-1 overflow-scrol`}>
+            <img src={bg_whatsapp_image} className="absolute -z-10 w-full h-full object-cover opacity-20" />
             <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
+            {/* {clientContent.requestTitle && <p className=" p-1 bg-green-100 rounded font-semibold">Message Topic: <span className="text-green-700">{clientContent.requestTitle} </span></p> } */}
               {chatsArray &&
                 chatsArray.chats.map((item) => {
                   return (
                     <div key={item._id} className="my-1">
+                     { item.text.split("|")[1] && <p className="p-1 bg-slate-50">Message Topic: <span className="text-blue-600 font-semibold">{item.text.split("|")[1]}</span> </p> }
                       {item.id === user.email && (
                         <div className="flex justify-end px-5">
-                          <div className="relative max-w-[80%]">
+                          <div className="relative z-10 max-w-[80%] ">
                             <div className="absolute size-5 bottom-0 -right-2 bg-lime-200 -z-10 triangle-right"></div>
-                            <p className="p-2 rounded bg-lime-200 text-sm">
-                              {item.text}
+                            <p className="p-2 rounded bg-lime-200 text-sm ">
+                              {/* {item.text} */}
+                              {item.text.split("|")[0] || item.text}
                             </p>
                           </div>
                         </div>
                       )}
+                     
                       {item.id === client.email && (
                         <div className="flex justify-start px-5">
-                          <div className="relative max-w-[80%]">
+                          <div className="relative z-10 max-w-[80%]">
                             <div className="absolute size-5 bottom-0 -left-2 bg-slate-200 -z-10 triangle-left"></div>
                             <p className="p-2 rounded bg-slate-200 text-sm">
-                              {item.text}
-                            </p>
+                            {item.text.split("|")[0] || item.text}
+                            </p> 
                           </div>
                         </div>
                       )}
@@ -261,7 +274,7 @@ function Messages({
               </div>
             )}
            
-            <div className="flex justify-evenly w-full bg-white">
+            <div className="flex justify-evenly w-full bg-whit">
               <div className="w-[80%] bg-red-30">
                 <textarea
                   maxLength={1000}
@@ -323,9 +336,10 @@ function Messages({
                   >
                     <div className="float-right w-[80%] bg-red-30 flex justify-between items-end">
                       <div>
-                        <p className={`${theme === "lightMode" ? "text-slate-400" : "text-slate-200"} text-base`}>{item._doc.with}</p>
+                        <p className={`${theme === "lightMode" ? "text-slate-800" : "text-slate-200"} text-base`}>{item._doc.with}</p>
                         <p className={`text-xs ${theme === "lightMode" ? "text-slate-500" : "text-slate-400"}`}>
-                          {item._doc.history[item._doc.history.length - 1].text}
+                          {/* {item._doc.history[item._doc.history.length - 1].text} */}
+                          {item._doc.history[item._doc.history.length - 1].text.split("|")[0] || item._doc.history[item._doc.history.length - 1].text}
                         </p>
                       </div>
                       {sendersList.includes(item._doc.with) && (

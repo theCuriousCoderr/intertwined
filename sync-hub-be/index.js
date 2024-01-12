@@ -213,6 +213,23 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome! intertwined");
 });
 
+
+app.put("/user/delete-account", async (req, res) => {
+  console.log(req.body)
+  try {
+    let user = await Users.findOneAndDelete({email: req.body.email})
+    let userChatHistory = await ChatHistory.findOneAndDelete({owner: req.body.email})
+    let userRequest = await Requests.findOneAndDelete({reqShaker: req.body.email})
+    if (user) {
+      res.status(201).send({message: "Account deleted successfully!"})
+    } else {
+      res.status(202).send({message: "An error occured!"})
+    }
+  } catch (error) {
+    res.status(502).send({message: "Delete account action failed!"})
+  }
+})
+
 app.get("/dashboard-analytics", async (req, res) => {
   try {
     let users = await Users.find();
@@ -256,7 +273,7 @@ app.post("/login", async (req, res) => {
   try {
     let user = await Users.findOne({ email: req.body.email });
     if (!user) {
-      res.status(202).send({ message: "Invalid Login Details" });
+      res.status(202).send({ message: "This email is not recognised!" });
       return;
     }
     let isPasswordCorrect = await bcrypt.compare(
@@ -272,7 +289,7 @@ app.post("/login", async (req, res) => {
       );
       res.status(201).send({ message: token });
     } else {
-      res.status(202).send({ message: "Invalid Login Details" });
+      res.status(202).send({ message: "Incorrect password!" });
     }
   } catch (error) {
     res.status(502).send({ message: "Login Failed" });

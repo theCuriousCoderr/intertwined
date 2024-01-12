@@ -57,7 +57,16 @@ function ForgotPassword() {
       let url = baseURL + "/change-user-details";
       let response = await putHook(url, changePasswordDetails);
       if (response.success) {
+        setChangePasswordDetails({
+          email: "",
+          newPassword: "",
+          confirmPassword: ""
+        })
         setToastInfo({ color: "green", text: ["Success!", response.success] });
+        setTimeout(() => {
+          setToastInfo({ color: "", text: "" });
+          navigate("/login")
+        }, 3000);
       } else if (response.warning) {
         setToastInfo({ color: "blue", text: ["Warning!", response.warning] });
       } else {
@@ -220,7 +229,7 @@ function ForgotPassword() {
             ) : (
               <button
                 disabled
-                className="bg-gray-300 relative p-2 w-full text-center text-white varela rounded-md"
+                className="bg-gray-300 relative p-2 w-full text-center text-gray-300 varela rounded-md"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Change Password

@@ -21,6 +21,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
   }
 
   useEffect(() => {
+    setClientContent("")
     async function getAllRequests() {
       let url = baseURL + "/get-all-requests";
       let response = await getHook(url);
@@ -41,7 +42,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
     }
   }, []);
   return (
-    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-slate-50" : "bg-gray-900 h-full" } `}>
+    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-white" : "bg-gray-900 h-full" } `}>
       <p
         id="top"
         className={`text-lg font-bold varela p-2 border-b border-slate-300 ${theme === "lightMode" ? "text-black": "text-white" }`}
@@ -96,7 +97,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
                   onClick={() => {
                     setShowRequestInfo({ content: items, state: true });
                   }}
-                  className={` mx-2 my-5 rounded-lg p-3 ${theme === "lightMode" ? "bg-white border border-slate-50 shadow" : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"}`}
+                  className={` mx-2 my-5 rounded-lg p-3 ${theme === "lightMode" ? "bg-white border border-slate-100 shadow" : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"}`}
                 >
                   <p className="text-[11px] text-red-500">
                     {user.email === items.reqShaker && (
@@ -107,7 +108,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
                   <p className={`text-[11px] ${theme === "lightMode" ? "text-slate-400" : "text-slate-400"}`}>
                     Posted {calculateDuration(items.createdAt)}
                   </p>
-                  <p className={`capitaliz text-sm  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
+                  <p className={`text-sm  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
                     {items.requestTitle}{" "}
                   </p>
                   <div className="text-slate-50 text-[10px] my-2 absolute top-2 right-4">
@@ -128,11 +129,11 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
                     {items.requestDescription}
                   </div>
                   <div className="flex justify-between items-center flex-row-reverse">
-                  <div className={`flex items-center text-sm -ml-1 my-1  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
+                  <div className={`flex items-center text-xs -ml-1 my-1  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
                     <LocationOnOutlined sx={{ fontSize: 20 }} />
                     <p>{items.landmark} </p>
                   </div>
-                  <div className={`text-sm flex gap-2  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
+                  <div className={`text-xs flex gap-2  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
                     Request status:{" "}
                     <div>
                       {calculateDuration(items.expiresOn, false) ===
@@ -151,7 +152,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
                   key={items}
                   className="relative bg-slate-50 border border-red-40 bg-opacity- mx-2 my-5 rounded-lg p-3 space-y-"
                 >
-                  <div className={`absolute z-1 rounded-lg top-0 left-0 w-full h-full   ${theme === "lightMode" ? "bg-red-500 bg-opacity-15" : "bg-gray-600 bg-opacity-80"}`}></div>
+                  <div className={`absolute z-1 rounded-lg top-0 left-0 w-full h-full   ${theme === "lightMode" ? "bg-gray-500 bg-opacity-80" : "bg-gray-600 bg-opacity-80"}`}></div>
                   <p className="text-[11px] text-slate-300">
                     Posted {calculateDuration(items.createdAt)}
                   </p>

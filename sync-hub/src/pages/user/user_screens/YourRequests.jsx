@@ -3,9 +3,10 @@ import calculateDuration from "../helper_functions/calculateDuration";
 import getHook from "../../../apiHooks/getHook";
 import putHook from "../../../apiHooks/putHook";
 import ToastAlert from "../../../components/ToastAlert";
+import { CancelOutlined } from "@mui/icons-material";
 let dotEnv = import.meta.env;
 
-function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
+function YourRequests({ user,  allRequestsCache, setAllRequestsCache, theme }) {
   const [yourRequests, setYourRequests] = useState("");
   const [confirmRequestDelete, setConfirmRequestDelete] = useState(false);
   const [requestDeleteId, setRequestDeleteId] = useState("")
@@ -60,15 +61,17 @@ function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
     setConfirmRequestDelete(false)
     setTimeout(() => {
       setToastInfo({color: "", text: "" })
+      navigate("/user/all-requests")
   }, 3000);
+  setAllRequestsCache("")
   }
 
   return (
-    <div className="relative mt-14">
+    <div className={`relative mt-14  h-dvh ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
       {toastInfo.text !== "" && <ToastAlert color={toastInfo.color} text={toastInfo.text} />}
       <p
         id="top"
-        className="text-lg font-bold varela p-2 border-b border-slate-300"
+        className={`text-lg font-bold varela p-2 border-b border-slate-300 ${!(theme === "lightMode") && "text-white"}`}
       >
         Your Requests <span>({yourRequests.length || ""})</span>
       </p>
@@ -93,25 +96,39 @@ function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
       {yourRequests &&
         yourRequests.map((items) => {
           return (
-            <div key={items._id} className="relative bg-slate-50 border border-slate-300 bg-opacity- m-2 rounded-lg p-3 space-y-">
-             { confirmRequestDelete && <div onClick={()=> setConfirmRequestDelete(false) } className="fixed top-0 z-50 bg-black bg-opacity-50 left-0 h-full w-full flex items-center justify-center">
-                <div className="w-[80%] rounded-md bg-slate-100 p-5">
-                  <p className="text-red-600 font-semibold text-base">
-                    Are you sure you want to delete this request ?{" "}
-                  </p>
-                  <div className="flex items-center justify-evenly my-5">
-                    <div onClick={()=> setConfirmRequestDelete(false) } className="w-[30%]">
-                      <button className="text-center w-full p-1 bg-red-500 active:bg-red-700 rounded-md text-white">
-                        No
-                      </button>
-                    </div>
-                    <div className="w-[30%]">
-                      <button onClick={(e) => { e.stopPropagation(); deleteRequest()}} className="text-center w-full p-1 bg-green-500 active:bg-green-700 rounded-md text-white">
-                        Yes
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            <div key={items._id} className={`relative m-2 rounded-lg p-3 ${theme === "lightMode" ? "bg-white border border-slate-100 shadow" : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"}`}>
+             { confirmRequestDelete && <div onClick={()=> setConfirmRequestDelete(false) } className="fixed top-0 z-50 bg-black bg-opacity-50 left-0 h-full w-full flex pt-[50%] justify-center">
+             <div className="w-[80%] rounded-md bg-slate-100 h-52 p-5">
+            <div className="w-20 mx-auto flex items-center justify-center text-red-500 bg-red-40">
+              <CancelOutlined sx={{fontSize: 60}} />
+              </div>
+              <p className="text-center text-xl font-medium varela">Are you sure ?</p>
+            <p className="text-slate-500 text-center text-xs">
+              Do you really want to delete this request? This process cannot be undone.{" "}
+            </p>
+            <div className="flex items-center justify-evenly my-5">
+              <div
+                onClick={() => setConfirmRequestDelete(false)}
+                className="w-[30%]"
+              >
+                <button className="text-center w-full p-1 bg-slate-400 active:bg-slate-700 rounded-sm text-white">
+                  No
+                </button>
+              </div>
+              <div className="w-[30%]">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteRequest();
+                  }}
+                  className="text-center w-full p-1 bg-red-500 active:bg-red-700 rounded-sm text-white"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          
               </div> }
               <div className="absolute w-20 right-5">
                 <button
@@ -128,10 +145,10 @@ function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
                 )}
               </p>
 
-              <p className="text-[11px] text-slate-500">
+              <p className={`text-[11px]  ${theme === "lightMode" ? " text-slate-500" : " text-slate-400"}`}>
                 Posted {calculateDuration(items.createdAt)}
               </p>
-              <p className="capitaliz text-sm text-black">
+              <p className={`text-sm  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
                 {items.requestTitle}{" "}
               </p>
               <div className="text-slate-50 text-[10px] my-2">
@@ -145,14 +162,14 @@ function YourRequests({ user,  allRequestsCache, setAllRequestsCache }) {
                   </span>
                 )}
               </div>
-              <div className="relative text-sm text-slate-400 font-light bg-red-30 h-10 overflow-hidden ">
-                <p className="absolute bottom-0 right-0 bg-slate-50 px-1">
+              <div className={`relative text-sm font-light bg-red-30 h-10 overflow-hidden  ${theme === "lightMode" ? "text-slate-500" : "text-slate-300"} `}>
+              <p className={`absolute bottom-0 right-0 px-1  ${theme === "lightMode" ? "bg-slate-50": "bg-gray-800"}`}>
                   ...
                 </p>
                 {items.requestDescription}
               </div>
             
-              <div className="text-sm flex gap-2">
+              <div className={`my-1 text-xs flex gap-2  ${theme === "lightMode" ? "text-black" : "text-slate-100"}`}>
                 Request status:{" "}
                 <div>
                   {calculateDuration(items.expiresOn, false) === "active" ? (

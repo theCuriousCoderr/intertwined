@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LandingPage from "./pages/landing_page/LandingPage";
 import ForgotPassword from "./pages/login_page/ForgotPassword";
@@ -17,6 +16,7 @@ import FootNavBar from "./components/FootNavBar";
 import SideNavBar from "./components/SideNavBar";
 import getHook from "./apiHooks/getHook";
 import { DarkMode, LightModeOutlined } from "@mui/icons-material";
+import { Avatar } from "@mui/material";
 let dotEnv = import.meta.env
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
     async function verifyUser() {
       let token = localStorage.getItem("token");
       if (!token) {
-        navigate("/login");
+        navigate("/");
       }
       token = JSON.parse(token);
       try {
@@ -62,7 +62,7 @@ function App() {
       }
     }
     user === "" && verifyUser();
-  }, [navItem, newMessage]);
+  }, []);
 
   function removeSender(param = "") {
     if (param !== "") {
@@ -72,9 +72,6 @@ function App() {
   }
 
   return (
-
-    
-  
     <div className="bg-red-30 h-scree">
       {user.email && (
         <div className="bg-red-40 absolute z-10">
@@ -93,6 +90,7 @@ function App() {
                   alt="User Photo"
                   className="w-full h-full rounded-full object-cover"
                 /> : <Avatar /> }
+                
               </div>
               <p className={`text-lg varela font-semibold ${theme === "lightMode" ? "text-black" : "text-white"}`}>intertwined</p>
               {theme === "lightMode"? 
@@ -113,7 +111,7 @@ function App() {
       )}
 
 
-      { !([ "/", "/signup", "/login", "/forgot-password" ].includes(window.location.pathname)) && <FootNavBar
+      { !([ "/", "/signup", "/login", "/forgot-password" ].includes(window.location.pathname) || (showSideNavBar)) && <FootNavBar
               navItem={navItem}
               setNavItem={setNavItem}
               newMessage={newMessage}
@@ -127,12 +125,12 @@ function App() {
       <Route path="/login" element={<LogIn />} />
       <Route path="/user/home" element={<Home user={user} setUser={setUser} navItem={navItem} setNavItem={setNavItem} showSideNavBar={showSideNavBar} setShowSideNavBar={setShowSideNavBar} newMessage={newMessage} sendersList={sendersList} setSendersList={setSendersList} sideNavBarExtend={sideNavBarExtend} setSideNavBarExtend={setSideNavBarExtend} setClientContent={setClientContent}  />} />
       <Route path="/user/all-requests" element={<AllRequests  user={user} allRequestsCache={allRequestsCache} setAllRequestsCache={setAllRequestsCache} setClientContent={setClientContent} setNavItem={setNavItem} theme={theme} />} />
-      <Route path="/user/your-requests" element={<YourRequests user={user} allRequestsCache={allRequestsCache} setAllRequestsCache={setAllRequestsCache} />} />
-      <Route path="/user/add-request" element={<AddRequest user={user} />} />
-      <Route path="/user/messages" element={<Messages clientContent={clientContent} user={user} setNewMessage={setNewMessage} sendersList={sendersList} removeSender={removeSender} theme={theme}/>} />
+      <Route path="/user/your-requests" element={<YourRequests user={user} allRequestsCache={allRequestsCache} setAllRequestsCache={setAllRequestsCache} theme={theme} />} />
+      <Route path="/user/add-request" element={<AddRequest user={user} theme={theme} setAllRequestsCache={setAllRequestsCache} />} />
+      <Route path="/user/messages" element={<Messages clientContent={clientContent} setClientContent={setClientContent} user={user} setNewMessage={setNewMessage} sendersList={sendersList} removeSender={removeSender} theme={theme}/>} />
       <Route path="/user/alerts" element={<Alerts />} />
       <Route path="/test" element={<Test />} />
-      <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} />} />
+      <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} theme={theme} />} />
     </Routes>
 
     </div>

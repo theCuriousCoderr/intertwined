@@ -9,7 +9,8 @@ const requestSchema = new mongoose.Schema({
     city: String,
     landmark: String,
     phone: String,
-    expiresOn: String
-}, {timestamps: true})
+    expiresOn: String,
+    createdAt: String
+})
 
 export const Requests = mongoose.model("Requests", requestSchema)

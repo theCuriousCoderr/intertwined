@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import postHook from "../../../apiHooks/postHook.js";
 import ToastAlert from "../../../components/ToastAlert.jsx";
+import { useNavigate } from "react-router-dom";
 let dotEnv = import.meta.env;
 
-function AddRequest({ user }) {
+function AddRequest({ user, theme, setAllRequestsCache }) {
   const [postRequestButtonState, setPostRequestButtonState] = useState(true);
   const [serviceCharges, setServiceCharges] = useState(true);
   const [requestDetails, setRequestDetails] = useState({
@@ -16,14 +17,16 @@ function AddRequest({ user }) {
     landmark: "",
     phone: "",
     expiresOn: "",
+    createdAt: ""
   });
   const [toastInfo, setToastInfo] = useState({
     color: "",
     text: "",
   });
+  const navigate = useNavigate()
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, []);
 
   function handleRequestDetailsFormChange(e) {
@@ -44,7 +47,7 @@ function AddRequest({ user }) {
     let top = document.getElementById("top");
     e.preventDefault();
     let url = baseURL + "/user/submit-request";
-    let response = await postHook(url, requestDetails);
+    let response = await postHook(url, {...requestDetails, createdAt: new Date().toISOString() });
     if (response.success) {
       setRequestDetails({
         requestTitle: "",
@@ -58,6 +61,13 @@ function AddRequest({ user }) {
       });
       top.scrollIntoView(true);
       setToastInfo({ color: "green", text: ["Success!", response.success] });
+      setPostRequestButtonState(true);
+      setTimeout(() => {
+        setToastInfo({ color: "", text: "" });
+        navigate("/user/all-requests")
+      }, 3000);
+      setAllRequestsCache("")
+      
     } else if (response.warning) {
       alert(1);
       setToastInfo({ color: "blue", text: ["Warning!", response.warning] });
@@ -72,14 +82,14 @@ function AddRequest({ user }) {
     }, 3000);
   }
   return (
-    <div className="bg-[rgba(81,80,91,0.3) relative mt-14 pb-20">
+    <div className={`${theme === "lightMode" ? " bg-[rgba(81,80,91,0.3)" : "bg-gray-900"} bg-[rgba(81,80,91,0.3) relative mt-14 pb-20`}>
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
       <div>
         <p
           id="top"
-          className="text-lg font-bold varela p-2 border-b border-slate-300"
+          className={`text-lg font-bold varela p-2 border-b  ${theme === "lightMode" ? "border-slate-300 " : "border-slate-500 text-white" }`}
         >
           Post a request
         </p>
@@ -90,10 +100,10 @@ function AddRequest({ user }) {
           className="p-5 space-y-5"
         >
           <div>
-            <label htmlFor="requestTitle" className="text-sm font-semibold">
+            <label htmlFor="requestTitle" className={`text-sm font-semibold ${!(theme === "lightMode") && "text-slate-100"  }`}>
               Short Request Title
             </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+            <div className={`group p-1 focus-within:bg-opacity-50 rounded-lg ${theme === "lightMode" ? "focus-within:bg-orange-500" : "focus-within:bg-slate-100"}`}>
               <input
                 maxLength={30}
                 required
@@ -102,7 +112,7 @@ function AddRequest({ user }) {
                 id="requestTitle"
                 name="requestTitle"
                 placeholder="I want to collect movies"
-                className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
@@ -110,11 +120,11 @@ function AddRequest({ user }) {
           <div>
             <label
               htmlFor="requestDescription"
-              className="text-sm font-semibold"
+              className={`text-sm font-semibold ${!(theme === "lightMode") && "text-slate-100"  }`}
             >
               Request Description
             </label>
-            <div className="group p- focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+            <div className={`group p-1 h-20 focus-within:bg-opacity-50 rounded-lg ${theme === "lightMode" ? "focus-within:bg-orange-500" : "focus-within:bg-slate-100"}`}>
               <textarea
                 required
                 value={requestDetails.requestDescription}
@@ -122,19 +132,19 @@ function AddRequest({ user }) {
                 id="requestDescription"
                 name="requestDescription"
                 placeholder="I need the complete seasons of Game of Thrones. Anyone who has should please reach out to me "
-                className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full h-20 rounded-md p-2 text-sm"
+                className={`placeholder:text-xs h-full outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
 
           <div className="border border-slate-300 p-2 rounded-md">
-            <label htmlFor="requestTitle" className="text-sm font-semibold">
+            <label htmlFor="requestTitle" className={`text-sm font-semibold ${!(theme === "lightMode") && "text-slate-100"  }`}>
               Do you need it to be a free service or not ?
               <span className="text-red-500 ml-1 text-[10px] block leading-3 mb-2">
                 # A paid service can attract more people than a free service
               </span>
             </label>
-            <div className="flex flex-wrap gap-5 text-xs px-5">
+            <div className={`flex flex-wrap gap-5 text-xs px-5 ${theme === "lightMode" ? "text-black" : "text-white"}`}>
               <div className="flex items-center gap-1">
                 <input
                   checked={serviceCharges}
@@ -165,14 +175,14 @@ function AddRequest({ user }) {
                     id="charges"
                     name="charges"
                     placeholder="500"
-                    className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                    className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                   />
                 </div>
               )}
             </div>
           </div>
 
-          <div className="border border-slate-300 p-2 rounded-md">
+          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-black" : "text-white"}`}>
             <label htmlFor="requestTitle" className="text-sm font-semibold">
               Your Location
             </label>
@@ -186,7 +196,7 @@ function AddRequest({ user }) {
                   id="country"
                   name="country"
                   placeholder="Nigeria"
-                  className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
               <div className="w-[40%] space-y-1 group p-1 focus-within:bg-orange-300 focus-within:bg-opacity-50 rounded-lg">
@@ -198,7 +208,7 @@ function AddRequest({ user }) {
                   id="city"
                   name="city"
                   placeholder="Ibadan"
-                  className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
               <div className="w-full space-y-1 group p-1 focus-within:bg-orange-300 focus-within:bg-opacity-50 rounded-lg">
@@ -213,13 +223,13 @@ function AddRequest({ user }) {
                   id="landmark"
                   name="landmark"
                   placeholder="Agbowo"
-                  className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
             </div>
           </div>
 
-          <div className="border border-slate-300 p-2 rounded-md">
+          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-black" : "text-white"}`}>
             <label htmlFor="phone" className="text-sm font-semibold">
               Phone Number
             </label>
@@ -233,12 +243,12 @@ function AddRequest({ user }) {
                 id="phone"
                 name="phone"
                 placeholder="07037887923"
-                className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
 
-          <div className="border border-slate-300 p-2 rounded-md">
+          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-black" : "text-white"}`}>
             <label htmlFor="expiresOn" className="text-sm font-semibold">
               When will this request expire
               <span className="text-red-500 ml-1 text-[10px] block leading-3 mb-2">
@@ -254,7 +264,7 @@ function AddRequest({ user }) {
                 id="expiresOn"
                 name="expiresOn"
                 placeholder="I want to buy something in Agbowo"
-                className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>

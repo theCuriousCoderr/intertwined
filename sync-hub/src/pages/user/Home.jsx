@@ -42,12 +42,11 @@ function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNa
         if (response.success) {
           setUser(response.success);
         } else {
-          alert(1)
           setUser("Error");
         }
       } catch (error) {
-        alert(2)
         console.log(error);
+        setUser("Error");
       }
     }
     verifyUser();

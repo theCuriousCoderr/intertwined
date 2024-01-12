@@ -193,7 +193,7 @@ function Login() {
                 Login
               </button>
             )}
-            <p className="text-black text-xs text-center my-5">
+            <p className="text-black text-sm text-center my-5">
               Don't have an account?{" "}
               <button
                 type="button"

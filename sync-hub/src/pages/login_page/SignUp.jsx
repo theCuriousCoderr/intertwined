@@ -168,8 +168,8 @@ function SignUp() {
             <div className="absolute left-2 top-2 size-6">
               <img src={google_logo} />
             </div>
-            <div className="w-full">
-            <button type="button" onClick={()=> {alert("Sign in with Google will automatically fill in your details for you and set your login password to \"intertwinedSSO\".\n\nYou can change this password once you are logged in."); login()}} className="p-2 bg-slate-50 border w-full text-slate-600 font-medium">Sign in with Google</button>
+            <div className="w-full h-full">
+            <button type="button" onClick={()=> {alert(`Sign in with Google will automatically fill in your details for you and set your login password to \"${dotEnv.VITE_DEFAULT_LOGIN_PASSWORD}\".\n\nYou can change this password once you are logged in.`); login()}} className="p-2 bg-slate-50 border w-full h-full text-slate-600 font-medium">Sign in with Google</button>
             </div>
             
             
@@ -438,7 +438,7 @@ function SignUp() {
                 Create account
               </button>
             )}
-            <p className="text-black text-xs text-center my-5">
+            <p className="text-black text-sm text-center my-5">
               Have an account?{" "}
               <button
                 className="text-orange-500 active:text-green-500"

@@ -16,7 +16,7 @@ function SideNavBar({ user, setUser, setShowSideNavBar, setSideNavBarExtend, the
     }, 200);
   }
   return (
-    <div className="fixed z-20 top-0 bottom-0 w-full bg-red-20 flex slideInLeft ">
+    <div className="fixed z-50 top-0 bottom-0 w-full bg-red-20 flex slideInLeft ">
       <div className={`p-2 w-[80%] space-y-4 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
         <div className="flex items-center gap-3">
           <div className="size-10 flex items-center justify-center rounded-full bg-gray-200">
