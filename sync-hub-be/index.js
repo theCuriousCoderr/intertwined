@@ -213,22 +213,25 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome! intertwined");
 });
 
-
 app.put("/user/delete-account", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
-    let user = await Users.findOneAndDelete({email: req.body.email})
-    let userChatHistory = await ChatHistory.findOneAndDelete({owner: req.body.email})
-    let userRequest = await Requests.findOneAndDelete({reqShaker: req.body.email})
+    let user = await Users.findOneAndDelete({ email: req.body.email });
+    let userChatHistory = await ChatHistory.findOneAndDelete({
+      owner: req.body.email,
+    });
+    let userRequest = await Requests.findOneAndDelete({
+      reqShaker: req.body.email,
+    });
     if (user) {
-      res.status(201).send({message: "Account deleted successfully!"})
+      res.status(201).send({ message: "Account deleted successfully!" });
     } else {
-      res.status(202).send({message: "An error occured!"})
+      res.status(202).send({ message: "An error occured!" });
     }
   } catch (error) {
-    res.status(502).send({message: "Delete account action failed!"})
+    res.status(502).send({ message: "Delete account action failed!" });
   }
-})
+});
 
 app.get("/dashboard-analytics", async (req, res) => {
   try {
@@ -243,7 +246,7 @@ app.get("/dashboard-analytics", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     let user = await Users.find({ email: req.body.email.trim() });
     // console.log(1)
@@ -314,10 +317,14 @@ app.put("/change-user-details", async (req, res) => {
       }
     }
     if (req.body.tag === "photo") {
-      
-        user.photo = req.body.photo;
-        user.save();
-        res.status(201).send({ message: user });
+      user.photo = req.body.photo;
+      user.save();
+      res.status(201).send({ message: user });
+    }
+    if (req.body.tag === "fullName") {
+      user.fullName = req.body.fullName;
+      user.save();
+      res.status(201).send({ message: user });
     }
   } catch (error) {
     res.status(502).send({ message: "Password Change Failed" });
@@ -325,20 +332,19 @@ app.put("/change-user-details", async (req, res) => {
 });
 
 app.put("/delete-user-request", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
-    let request = await Requests.findByIdAndDelete(req.body.requestId)
+    let request = await Requests.findByIdAndDelete(req.body.requestId);
     if (request) {
-      res.status(201).send({message: "Request Deleted Successfully"})
+      res.status(201).send({ message: "Request Deleted Successfully" });
     } else {
-      res.status(202).send({message: "Request Delete Failed"})
+      res.status(202).send({ message: "Request Delete Failed" });
     }
-    
   } catch (error) {
-    console.log("Error")
-    res.status(502).send({message: "Request Delete Failed"})
+    console.log("Error");
+    res.status(502).send({ message: "Request Delete Failed" });
   }
-})
+});
 
 app.post("/get-user", async (req, res) => {
   try {

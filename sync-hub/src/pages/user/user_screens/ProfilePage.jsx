@@ -11,6 +11,9 @@ import putHook from "../../../apiHooks/putHook";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import ToastAlert from "../../../components/ToastAlert";
+import EditUserPhoto from "../../../components/EditUserPhoto";
+import EditUserFullName from "../../../components/EditUserFullName";
+import EditUserAddress from "../../../components/EditUserAddress";
 let dotEnv = import.meta.env;
 
 function ProfilePage({ user, setUser, theme }) {
@@ -27,21 +30,21 @@ function ProfilePage({ user, setUser, theme }) {
     lastName: "",
   });
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   useEffect(() => {
+    // alert(JSON.stringify(user))
     if (!user) {
-      navigate("/user/home")
+      navigate("/profile");
+    } else {
+      let names = user.fullName.split(" ");
+      try {
+        setUserName({ firstName: names[0], lastName: names[1] });
+      } catch (error) {
+        setUserName({ firstName: names[0], lastName: "" });
+      }
     }
-    let names = user.fullName.split(" ");
-    try {
-      setUserName({ firstName: names[0], lastName: names[1] });
-    } catch (error) {
-      setUserName({ firstName: names[0], lastName: "" });
-    }
-   
   }, []);
-
 
   let baseURL;
   if (dotEnv.MODE === "development") {
@@ -50,7 +53,7 @@ function ProfilePage({ user, setUser, theme }) {
     baseURL = dotEnv.VITE_PROD_URL;
   }
 
-  async function handleChangeImage(e) {
+  async function handleUserDetailsEdit(e) {
     setChangeImageState(true);
     let name = e.target.name;
     let file = document.getElementById(name);
@@ -141,11 +144,14 @@ function ProfilePage({ user, setUser, theme }) {
         >
           <div className="w-[80%] rounded-md bg-slate-100 h-52 p-5">
             <div className="w-20 mx-auto flex items-center justify-center text-red-500 bg-red-40">
-              <CancelOutlined sx={{fontSize: 60}} />
-              </div>
-              <p className="text-center text-xl font-medium varela">Are you sure ?</p>
+              <CancelOutlined sx={{ fontSize: 60 }} />
+            </div>
+            <p className="text-center text-xl font-medium varela">
+              Are you sure ?
+            </p>
             <p className="text-slate-500 text-center text-xs">
-              Do you really want to delete this account? This process cannot be undone.{" "}
+              Do you really want to delete this account? This process cannot be
+              undone.{" "}
             </p>
             <div className="flex items-center justify-evenly my-5">
               <div
@@ -201,50 +207,9 @@ function ProfilePage({ user, setUser, theme }) {
           }}
           className="absolute bg-slate-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown"
         >
-          {changeDetails === "photo" && (
-            <div className="">
-              <div className="p-5">
-                <p id="top" className="text-2xl font-bold varela">
-                  Edit photo
-                </p>
-              </div>
-              <div className="relative bg-gray-20 w-full rounded-full flex items-center justify-center my-5">
-                {changeImageState && (
-                  <div className="absolute size-48 rounded-full bg-black flex items-center justify-center">
-                    <div className="size-10 border-4 border-t-slate-50 border-l-slate-800 border-r-slate-800 border-b-slate-800 animate-spin rounded-full"></div>
-                  </div>
-                )}
-                {user.photo ? (
-                  <img
-                    src={user.photo}
-                    className="size-48 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="size-48 bg-slate-300 flex items-center justify-center rounded-full">
-                    <Avatar />
-                    </div>
-                  
-                )}
-              </div>
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-                className="relative mb-10 w-32 mx-auto bg-red-50"
-              >
-                <input
-                  name="photo"
-                  id="photo"
-                  type="file"
-                  onChange={handleChangeImage}
-                  className="absolute w-full h-full bg-red-30 opacity-0"
-                />
-                <button className="w-full p-2 bg-green-400 active:bg-green-700 rounde rounded-md text-slate-100">
-                  Change Image
-                </button>
-              </div>
-            </div>
-          )}
+          {changeDetails === "photo" && <EditUserPhoto user={user} changeImageState={changeImageState} handleUserDetailsEdit={handleUserDetailsEdit} /> }
+          {changeDetails === "fullName" && <EditUserFullName user={user} setUser={setUser} /> }
+          {changeDetails === "address" && <EditUserAddress user={user} setUser={setUser} /> }
         </div>
       )}
       <div
@@ -302,18 +267,36 @@ function ProfilePage({ user, setUser, theme }) {
             !(theme === "lightMode") && "text-slate-100"
           }`}
         >
-          {userName.firstName && <p className=" bg-red-20 font-semibold text-lg">
-            {userName.firstName[0].toUpperCase() +
-              userName.firstName.slice(1) +
-              " " +
-              userName.lastName[0].toUpperCase()}
-            .
-          </p>}
-          <div className="flex items-start">
+          {userName.firstName && (
+            <div className="flex items-center bg-red-40 gap-5">
+              <p className=" bg-red-20 font-semibold text-lg">
+                {userName.firstName[0].toUpperCase() +
+                  userName.firstName.slice(1) +
+                  " " +
+                  userName.lastName[0].toUpperCase()}
+                .
+              </p>
+              <div onClick={(e) => { e.stopPropagation(); setChangeDetails("fullName");}} className="size-6 rounded-full bg-green-600 flex items-center justify-center">
+                <div className="size-5 rounded-full bg-white">
+                  <div className="flex items-center justify-center w-full h-full pl-[1px pt-[1px">
+                    <CreateOutlined sx={{ fontSize: 15, color: green[800] }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="flex items-center">
             <div className="bg-red-70 text-sm text-slate-600">
               <LocationOnOutlined sx={{ fontSize: 20 }} />
             </div>
             <p className="text-sm">{user.address || "---"} </p>
+            <div onClick={(e) => { e.stopPropagation(); setChangeDetails("address");}} className="ml-5 size-6 rounded-full bg-green-600 flex items-center justify-center">
+              <div className="size-5 rounded-full bg-white">
+                <div className="flex items-center justify-center w-full h-full pl-[1px pt-[1px">
+                  <CreateOutlined sx={{ fontSize: 15, color: green[800] }} />
+                </div>
+              </div>
+            </div>
           </div>
           <p className="bg-red-20 text-slate-500">{user.email}</p>
         </div>

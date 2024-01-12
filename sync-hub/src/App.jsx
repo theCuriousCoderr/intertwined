@@ -62,7 +62,7 @@ function App() {
       }
     }
     user === "" && verifyUser();
-  }, []);
+  }, [user]);
 
   function removeSender(param = "") {
     if (param !== "") {
