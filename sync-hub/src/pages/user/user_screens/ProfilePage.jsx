@@ -304,7 +304,7 @@ function ProfilePage({ user, setUser, theme }) {
       <div className="m-2">
         <button
           onClick={() => setConfirmDeleteAccount(true)}
-          className={`p-1 w-full rounded-md border ${
+          className={`p-1 w-full rounded-md border h-10 ${
             theme === "lightMode"
               ? "bg-white border-red-400 text-red-500"
               : "bg-gray-700 border-gray-900 text-red-500"

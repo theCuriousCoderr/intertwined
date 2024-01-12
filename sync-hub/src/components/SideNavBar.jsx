@@ -42,7 +42,7 @@ function SideNavBar({ user, setUser, setShowSideNavBar, setSideNavBarExtend, the
 
         <div
           onClick={logOut}
-          className="px-3 py-1 rounded-lg bg-red-500 active:bg-red-400"
+          className="px-3 py-1 rounded-lg h-10 bg-red-500 active:bg-red-400"
         >
           <div className="flex items-center justify-center gap-2">
             <div className="size-7 flex items-center justify-center bg-red-40">

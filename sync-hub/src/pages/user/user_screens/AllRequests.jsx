@@ -42,7 +42,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
     }
   }, []);
   return (
-    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-white" : "bg-gray-900 h-full" } `}>
+    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-stone-50" : "bg-gray-900 h-full" } `}>
       <p
         id="top"
         className={`text-lg font-bold varela p-2 border-b border-slate-300 ${theme === "lightMode" ? "text-black": "text-white" }`}
