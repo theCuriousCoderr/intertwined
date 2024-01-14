@@ -227,7 +227,7 @@ function Messages({
             </div>
           </div>
 
-          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-slate-200 " : "bg-gray-900"} flex flex-col items-end p-1 justify-between px-1 overflow-scrol`}>
+          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-slate-50 " : "bg-gray-900"} flex flex-col items-end p- justify-between px- overflow-scrol`}>
             <img src={user.chatWallPaper || bg_whatsapp_image} className="absolute -z-10 w-full h-full object-cover opacity-80" />
             <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
             {/* {clientContent.requestTitle && <p className=" p-1 bg-green-100 rounded font-semibold">Message Topic: <span className="text-green-700">{clientContent.requestTitle} </span></p> } */}
@@ -275,7 +275,7 @@ function Messages({
               </div>
             )}
            
-            <div className="flex justify-evenly w-full bg-white">
+            <div className="flex justify-evenly items-end w-full bg-white">
               <div className="w-[80%] bg-red-30">
                 <textarea
                   
@@ -284,17 +284,17 @@ function Messages({
                   value={textArea.message}
                   onChange={handleMessageChange}
                   type="text"
-                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-sm bg-slate-20 border border-white text-black outline-none resize-none"
+                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-base bg-slate-20 border border-white text-black outline-none resize-none"
                   placeholder="Message"
                 />
               </div>
               <div
                 onClick={handleSubmitMessage}
-                className={`pl-1 w-[12%] h-full ${
+                className={` w-[12%] h-ful ${
                   textArea.message
                     ? "bg-orange-40 active:bg-green-500"
                     : "bg-orange-30 text-slate-300"
-                } rounded-full flex items-center justify-center`}
+                } rounded-full flex items-center justify-center mb-2`}
               >
                 <div>
                   {textArea.message ? (
