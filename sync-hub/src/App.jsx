@@ -17,6 +17,8 @@ import SideNavBar from "./components/SideNavBar";
 import getHook from "./apiHooks/getHook";
 import { DarkMode, LightModeOutlined } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
+import SettingsPage from "./pages/user/user_screens/SettingsPage";
+import ComplaintsPage from "./pages/user/user_screens/ComplaintsPage";
 let dotEnv = import.meta.env
 
 function App() {
@@ -131,6 +133,8 @@ function App() {
       <Route path="/user/alerts" element={<Alerts />} />
       <Route path="/test" element={<Test />} />
       <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} theme={theme} />} />
+      <Route path="/settings" element={<SettingsPage user={user} setUser={setUser} theme={theme} />} />
+      <Route path="/complaints" element={<ComplaintsPage user={user} setUser={setUser} theme={theme} />} />
     </Routes>
 
     </div>

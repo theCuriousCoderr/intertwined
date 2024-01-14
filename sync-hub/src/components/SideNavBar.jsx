@@ -1,5 +1,5 @@
 import React from "react";
-import { LogoutOutlined, Person } from "@mui/icons-material";
+import { Help, LogoutOutlined, Person, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 
@@ -17,7 +17,7 @@ function SideNavBar({ user, setUser, setShowSideNavBar, setSideNavBarExtend, the
   }
   return (
     <div className="fixed z-50 top-0 bottom-0 w-full bg-red-20 flex slideInLeft ">
-      <div className={`p-2 w-[80%] space-y-4 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
+      <div className={`p-2 w-[80%] ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
         <div className="flex items-center gap-3">
           <div className="size-10 flex items-center justify-center rounded-full bg-gray-200">
             {user.photo ? <img
@@ -31,7 +31,8 @@ function SideNavBar({ user, setUser, setShowSideNavBar, setSideNavBarExtend, the
           </div>
         </div>
 
-        <div onClick={()=> { navigate("/profile") }} className="px-3 py-2 hover:bg-slate-200 rounded-md">
+        <div className="my-3">
+        <div onClick={()=> { navigate("/profile") }} className="px-3 py-2 h-10 hover:bg-slate-200 rounded-md">
           <div className={`flex items-center gap-5 ${!(theme === "lightMode") && "text-slate-200"}`}>
             <div className="size-7 flex items-center justify-center bg-red-40">
               <Person sx={{ fontSize: 25 }} />
@@ -39,6 +40,28 @@ function SideNavBar({ user, setUser, setShowSideNavBar, setSideNavBarExtend, the
             <p className="font-normal text-sm">Profile</p>
           </div>
         </div>
+
+        <div onClick={()=> { navigate("/settings") }} className="px-3 py-2 h-10 hover:bg-slate-200 rounded-md">
+          <div className={`flex items-center gap-5 ${!(theme === "lightMode") && "text-slate-200"}`}>
+            <div className="size-7 flex items-center justify-center bg-red-40">
+              <Settings sx={{ fontSize: 25 }} />
+            </div>
+            <p className="font-normal text-sm">Settings</p>
+          </div>
+        </div>
+
+        <div onClick={()=> { navigate("/complaints") }} className="px-3 py-2 h-10 hover:bg-slate-200 rounded-md">
+          <div className={`flex items-center gap-5 ${!(theme === "lightMode") && "text-slate-200"}`}>
+            <div className="size-7 flex items-center justify-center bg-red-40">
+              <Help sx={{ fontSize: 25 }} />
+            </div>
+            <p className="font-normal text-sm">Suggestions / Complaints</p>
+          </div>
+        </div>
+
+        </div>
+
+       
 
         <div
           onClick={logOut}

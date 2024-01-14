@@ -179,7 +179,7 @@ function Login() {
             {logInButtonState ? (
               <button
                 type="submit"
-                className="bg-orange-500 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md"
+                className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md"
               >
                 Login
               </button>
@@ -187,7 +187,7 @@ function Login() {
               <button
                 type="submit"
                 disabled
-                className="bg-gray-300 text-gray-300 relative p-2 w-full text-center varela rounded-md h-"
+                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md h-"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Login

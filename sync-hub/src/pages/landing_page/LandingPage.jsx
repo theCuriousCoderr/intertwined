@@ -21,9 +21,7 @@ import {
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
-let dotEnv = import.meta.env
-
-
+let dotEnv = import.meta.env;
 
 function LandingPage() {
   const [menuBarState, setMenuBarState] = useState(false);
@@ -43,9 +41,9 @@ function LandingPage() {
 
   let baseURL;
   if (dotEnv.MODE === "development") {
-    baseURL = dotEnv.VITE_DEV_URL
+    baseURL = dotEnv.VITE_DEV_URL;
   } else {
-    baseURL = dotEnv.VITE_PROD_URL
+    baseURL = dotEnv.VITE_PROD_URL;
   }
 
   useEffect(() => {
@@ -97,30 +95,38 @@ function LandingPage() {
       }
     }, 5000);
 
-    let dashboardAnalytics = localStorage.getItem("dashboard-analytics")
+    let dashboardAnalytics = localStorage.getItem("dashboard-analytics");
     if (dashboardAnalytics) {
-      dashboardAnalytics = JSON.parse(dashboardAnalytics)
-      setCount({users: dashboardAnalytics.users, requests: dashboardAnalytics.requests, responses: dashboardAnalytics.responses })
+      dashboardAnalytics = JSON.parse(dashboardAnalytics);
+      setCount({
+        users: dashboardAnalytics.users,
+        requests: dashboardAnalytics.requests,
+        responses: dashboardAnalytics.responses,
+      });
     }
 
     async function getDashboardAnalytics() {
-      let url = baseURL + "/dashboard-analytics"
-      let response = await getHook(url)
+      let url = baseURL + "/dashboard-analytics";
+      let response = await getHook(url);
       if (response.success) {
-        let data = response.success
-        setCount({users: data.users, requests: data.requests, responses: 10 })
-        localStorage.setItem("dashboard-analytics", JSON.stringify({users: data.users, requests: data.requests, responses: 10 }))
+        let data = response.success;
+        setCount({ users: data.users, requests: data.requests, responses: 10 });
+        localStorage.setItem(
+          "dashboard-analytics",
+          JSON.stringify({
+            users: data.users,
+            requests: data.requests,
+            responses: 10,
+          })
+        );
       }
     }
-    getDashboardAnalytics()
+    getDashboardAnalytics();
   }, []);
 
   document.addEventListener("scroll", () => {
-    setMenuBarState(false)
-  })
-
-
-
+    setMenuBarState(false);
+  });
 
   return (
     <div className="relative">
@@ -171,14 +177,14 @@ function LandingPage() {
             </div>
 
             <h1 className="text-sm leading-6 text-slate-500 ">
-              Revolutionizing the way your common needs and tasks are handled and
-              addressed, our innovative project seamlessly bridges the gap
+              Revolutionizing the way your common needs and tasks are handled
+              and addressed, our innovative project seamlessly bridges the gap
               between client needs and soluton offerings. By providing a
               user-friendly platform, we empower the common individuals and
               persons to effortlessly discover, engage and interact with service
               providers for any task or need at hand, thereby fostering a
-              dynamic marketplace where every interaction leads to
-              mutual satisfaction and success.
+              dynamic marketplace where every interaction leads to mutual
+              satisfaction and success.
             </h1>
             <div className="flex items-center ">
               <button
@@ -206,27 +212,43 @@ function LandingPage() {
           <div className="p-5 space-y-3">
             {[
               {
-                icon: <AddCircleOutlineOutlined sx={{ color: orange[900], fontSize: 20 }} />,
+                icon: (
+                  <AddCircleOutlineOutlined
+                    sx={{ color: orange[900], fontSize: 20 }}
+                  />
+                ),
                 title: "Add services requests",
                 text: "You as a user can post service requests on the platform, out to the reach of potential helpers who might be able to help you.",
               },
               {
-                icon: <ArticleOutlined sx={{ color: orange[900], fontSize: 20 }} />,
+                icon: (
+                  <ArticleOutlined sx={{ color: orange[900], fontSize: 20 }} />
+                ),
                 title: "View all services requests",
                 text: "You can view through and explore all service requests posted by you and other users.",
               },
               {
-                icon: <RemoveRedEyeOutlined sx={{ color: orange[900], fontSize: 20 }} />,
+                icon: (
+                  <RemoveRedEyeOutlined
+                    sx={{ color: orange[900], fontSize: 20 }}
+                  />
+                ),
                 title: "View your services requests",
                 text: "You can also choose to see only the service requests that you have personally made.",
               },
               {
-                icon: <ChatOutlined sx={{ color: orange[900], fontSize: 20 }} />,
+                icon: (
+                  <ChatOutlined sx={{ color: orange[900], fontSize: 20 }} />
+                ),
                 title: "Have a conversation with a res-shaker",
                 text: "You can have an in-app conversation with a client you wish to help or assist with his/her request.",
               },
               {
-                icon: <NotificationsNoneOutlined sx={{ color: orange[900], fontSize: 20 }} />,
+                icon: (
+                  <NotificationsNoneOutlined
+                    sx={{ color: orange[900], fontSize: 20 }}
+                  />
+                ),
                 title: "Receive alerts and notifications",
                 text: "You will receive real-time alerts and notifications of messages from people who wish to help or assist you with your request.",
               },
@@ -234,9 +256,7 @@ function LandingPage() {
               return (
                 <div key={items.title}>
                   <div className="flex gap-2 items-center">
-                    <div>
-                     {items.icon}
-                    </div>
+                    <div>{items.icon}</div>
                     <p className="borde border-orange-500 text-orange-500 ">
                       {items.title}
                     </p>
@@ -249,13 +269,13 @@ function LandingPage() {
         </div>
 
         <div className="relative p-5 space-y-5 overflow-hidden bg-red-40">
-          <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-slate-100 opacity-70">
-          <StarBorderOutlined sx={{fontSize:400}} />
+          <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-slate-100 opacity-50">
+            <StarBorderOutlined sx={{ fontSize: 400 }} />
           </div>
-          <div className="absolute rotate-12 -bottom-24 -right-36 -z-10 text-slate-100 opacity-70">
-          <StarBorderOutlined sx={{fontSize:400}} />
+          <div className="absolute rotate-12 -bottom-24 -right-36 -z-10 text-slate-100 opacity-50">
+            <StarBorderOutlined sx={{ fontSize: 400 }} />
           </div>
-          
+
           <p className="varela text-xl font-bold">The next big thing</p>
           <div className="text-sm text-balanc leading-6 text-slate-500 space-y-2">
             <p>
@@ -290,13 +310,11 @@ function LandingPage() {
                 <p className="border-l-4 border-orange-400 px-3">
                   {count.requests || 0}
                 </p>
-                <p className="px-4 text-xs">
-                  total service requests sent out
-                </p>
+                <p className="px-4 text-xs">total service requests sent out</p>
               </div>
               <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {Math.round(count.requests/count.users) || 0}
+                  {Math.round(count.requests / count.users) || 0}
                 </p>
                 <p className="px-4 text-xs">
                   average service requests sent out per user
@@ -306,9 +324,7 @@ function LandingPage() {
                 <p className="border-l-4 border-orange-400 px-3">
                   {count.responses || 0}
                 </p>
-                <p className="px-4 text-xs">
-                  received responses 
-                </p>
+                <p className="px-4 text-xs">received responses</p>
               </div>
             </div>
           </div>
@@ -321,19 +337,19 @@ function LandingPage() {
             </p>
             <div className="flex items-center gap-2">
               <div>
-                <NearMe sx={{fontSize: 20}} />
+                <NearMe sx={{ fontSize: 20 }} />
               </div>
               <p>Ibadan, Nigeria</p>
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <Chat sx={{fontSize: 20}} />
+                <Chat sx={{ fontSize: 20 }} />
               </div>
               <p>Ibadan, Nigeria</p>
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <Call sx={{fontSize: 20}} />
+                <Call sx={{ fontSize: 20 }} />
               </div>
               <p>070-3788-7923</p>
             </div>

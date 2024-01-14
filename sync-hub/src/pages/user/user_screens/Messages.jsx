@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import postHook from "../../../apiHooks/postHook";
 import { Avatar } from "@mui/material";
 import bg_whatsapp_image from '../../images/bg_whatsapp.jpg'
+import { orange } from "@mui/material/colors";
 let dotEnv = import.meta.env;
 
 
@@ -213,7 +214,7 @@ function Messages({
 
       {chats === "Direct Message" && (
         <div className="fixed w-full bg-blue-40 h-screen">
-          <div onClick={() => { (setChats(chatBack.current) ? setChats(chatBack.current) : setChats("No chats")); setClientContent("") }} className="">
+          <div onClick={() => { (chatBack.current ? setChats(chatBack.current) : setChats("No chats")); setClientContent("") }} className="">
             <div className="flex justify-between items-center px-5">
              {theme === "lightMode" ? <ArrowBack /> : <ArrowBack sx={{color: "white"}} /> }
              <div className="flex items-center gap-2">
@@ -226,8 +227,8 @@ function Messages({
             </div>
           </div>
 
-          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-[#FFFFED] " : "bg-gray-900"} flex flex-col items-end p-1 justify-between px-1 overflow-scrol`}>
-            <img src={bg_whatsapp_image} className="absolute -z-10 w-full h-full object-cover opacity-20" />
+          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-slate-200 " : "bg-gray-900"} flex flex-col items-end p-1 justify-between px-1 overflow-scrol`}>
+            <img src={user.chatWallPaper || bg_whatsapp_image} className="absolute -z-10 w-full h-full object-cover opacity-80" />
             <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
             {/* {clientContent.requestTitle && <p className=" p-1 bg-green-100 rounded font-semibold">Message Topic: <span className="text-green-700">{clientContent.requestTitle} </span></p> } */}
               {chatsArray &&
@@ -274,32 +275,32 @@ function Messages({
               </div>
             )}
            
-            <div className="flex justify-evenly w-full bg-whit">
+            <div className="flex justify-evenly w-full bg-white">
               <div className="w-[80%] bg-red-30">
                 <textarea
-                  maxLength={1000}
+                  
                   rows={textArea.rows}
                   name="message"
                   value={textArea.message}
                   onChange={handleMessageChange}
                   type="text"
-                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-sm resize-y bg-slate-200 border border-slate-500"
+                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-sm bg-slate-20 border border-white text-black outline-none resize-none"
                   placeholder="Message"
                 />
               </div>
               <div
                 onClick={handleSubmitMessage}
-                className={`pl-2 w-[12%] ${
+                className={`pl-1 w-[12%] h-full ${
                   textArea.message
-                    ? "bg-orange-500 active:bg-green-500"
-                    : "bg-orange-300"
+                    ? "bg-orange-40 active:bg-green-500"
+                    : "bg-orange-30 text-slate-300"
                 } rounded-full flex items-center justify-center`}
               >
                 <div>
                   {textArea.message ? (
-                    <Send sx={{ fontSize: 30 }} />
+                    <Send sx={{ fontSize:26, color: orange[700] }} />
                   ) : (
-                    <Send sx={{ fontSize: 30, color: "gray" }} />
+                    <Send sx={{ fontSize:26 }} />
                   )}
                 </div>
               </div>{" "}
@@ -332,7 +333,7 @@ function Messages({
                       setChats("Direct Message");
                     }}
                     key={item._doc.with}
-                    className="fle items-center gap-5 p-3 border-y- bg-red-30"
+                    className="fle items-center gap-5 p-3 hover:bg-orange-100 m-2 rounded-lg"
                   >
                     <div className="float-right w-[80%] bg-red-30 flex justify-between items-end">
                       <div>

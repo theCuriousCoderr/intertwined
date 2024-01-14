@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import google_logo from "../images/google_logo.png"
+import google_logo from "../images/google_logo.png";
 import { Avatar } from "@mui/material";
 import postHook from "../../apiHooks/postHook";
 import {
@@ -37,17 +37,17 @@ function SignUp() {
   const navigate = useNavigate();
   useEffect(() => {
     if (googleLogIn) {
-      handleSignUpFormSubmit("")
-      setGoogleLogIn(false)
+      handleSignUpFormSubmit("");
+      setGoogleLogIn(false);
     }
     window.scrollTo(0, 0);
   }, [googleLogIn]);
 
   let baseURL;
   if (dotEnv.MODE === "development") {
-    baseURL = dotEnv.VITE_DEV_URL
+    baseURL = dotEnv.VITE_DEV_URL;
   } else {
-    baseURL = dotEnv.VITE_PROD_URL
+    baseURL = dotEnv.VITE_PROD_URL;
   }
 
   async function handleSignUpFormChange(e) {
@@ -90,7 +90,7 @@ function SignUp() {
     if (param !== "") {
       param.preventDefault();
     }
-    
+
     let url = baseURL + "/signup";
     let response = await postHook(url, signUpDetails);
     if (response.success) {
@@ -118,26 +118,31 @@ function SignUp() {
   const login = useGoogleLogin({
     onSuccess: async (data) => {
       try {
-        let url = `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
-      let res = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${data.access_token}`
-        }
-      })
-      let info = await res.json()
-      setSignUpDetails({...signUpDetails, email: info.email.trim(), fullName: info.family_name +" " + info.given_name, photo: info.picture, password: "intertwinedSSO" });
-      setGoogleLogIn(true)
+        let url = `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`;
+        let res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.access_token}`,
+          },
+        });
+        let info = await res.json();
+        setSignUpDetails({
+          ...signUpDetails,
+          email: info.email.trim(),
+          fullName: info.family_name + " " + info.given_name,
+          photo: info.picture,
+          password: "intertwinedSSO",
+        });
+        setGoogleLogIn(true);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }, 
+    },
     onError: (error) => {
-      alert("error")
-    }
-  })
-
+      alert("error");
+    },
+  });
 
   return (
     <div className="relative">
@@ -159,20 +164,29 @@ function SignUp() {
         </NavLink>
 
         <form
-        name="signUpForm"
-        id="signUpForm"
-          onSubmit={(e)=>handleSignUpFormSubmit(e)}
+          name="signUpForm"
+          id="signUpForm"
+          onSubmit={(e) => handleSignUpFormSubmit(e)}
           className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3"
         >
-          <div className="relative p-[1px] rounded bg-orange-400 flex justify-center">
+          <div className="relative p-[1px] rounded flex justify-center bg-red-40">
             <div className="absolute left-2 top-2 size-6">
               <img src={google_logo} />
             </div>
             <div className="w-full h-full">
-            <button type="button" onClick={()=> {alert(`Sign in with Google will automatically fill in your details for you and set your login password to \"${dotEnv.VITE_DEFAULT_LOGIN_PASSWORD}\".\n\nYou can change this password once you are logged in.`); login()}} className="p-2 bg-slate-50 border w-full h-full text-slate-600 font-medium">Sign in with Google</button>
+              <button
+                type="button"
+                onClick={() => {
+                  alert(
+                    `Sign in with Google will automatically fill in your details for you and set your login password to \"${dotEnv.VITE_DEFAULT_LOGIN_PASSWORD}\".\n\nYou can change this password once you are logged in.`
+                  );
+                  login();
+                }}
+                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm"
+              >
+                Sign in with Google
+              </button>
             </div>
-            
-            
           </div>
 
           <div className="relative">
@@ -235,7 +249,6 @@ function SignUp() {
                 required
                 id="fullName"
                 name="fullName"
-                
                 value={signUpDetails.fullName}
                 onChange={handleSignUpFormChange}
                 className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
@@ -426,13 +439,13 @@ function SignUp() {
 
           <div className="my-5">
             {createAccountButtonState ? (
-              <button className="bg-orange-500 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md">
+              <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md">
                 Create account
               </button>
             ) : (
               <button
                 disabled
-                className="bg-gray-300 text-gray-300 relative p-2 w-full text-center varela rounded-md"
+                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Create account

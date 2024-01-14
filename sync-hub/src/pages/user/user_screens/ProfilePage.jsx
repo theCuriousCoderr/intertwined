@@ -35,7 +35,7 @@ function ProfilePage({ user, setUser, theme }) {
   useEffect(() => {
     // alert(JSON.stringify(user))
     if (!user) {
-      navigate("/profile");
+      navigate("/user/home");
     } else {
       let names = user.fullName.split(" ");
       try {
@@ -131,7 +131,7 @@ function ProfilePage({ user, setUser, theme }) {
       }}
       className={`relative ${
         theme === "lightMode" ? "bg-white" : "bg-gray-900"
-      } fixed z-50 w-full h-dvh`}
+      } fixed z-50 w-full h-dvh overflow-hidden`}
     >
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
@@ -207,9 +207,19 @@ function ProfilePage({ user, setUser, theme }) {
           }}
           className="absolute bg-slate-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown"
         >
-          {changeDetails === "photo" && <EditUserPhoto user={user} changeImageState={changeImageState} handleUserDetailsEdit={handleUserDetailsEdit} /> }
-          {changeDetails === "fullName" && <EditUserFullName user={user} setUser={setUser} /> }
-          {changeDetails === "address" && <EditUserAddress user={user} setUser={setUser} /> }
+          {changeDetails === "photo" && (
+            <EditUserPhoto
+              user={user}
+              changeImageState={changeImageState}
+              handleUserDetailsEdit={handleUserDetailsEdit}
+            />
+          )}
+          {changeDetails === "fullName" && (
+            <EditUserFullName user={user} setUser={setUser} />
+          )}
+          {changeDetails === "address" && (
+            <EditUserAddress user={user} setUser={setUser} />
+          )}
         </div>
       )}
       <div
@@ -217,7 +227,7 @@ function ProfilePage({ user, setUser, theme }) {
           !(theme === "lightMode") && "text-white"
         }`}
       >
-        <div onClick={() => navigate(-1)} className="absolute w-full left-5">
+        <div onClick={() => navigate("/user/all-requests")} className="absolute w-full left-5">
           <ArrowBack />
         </div>
         <p id="top" className="text-lg font-bold varela">
@@ -276,7 +286,13 @@ function ProfilePage({ user, setUser, theme }) {
                   userName.lastName[0].toUpperCase()}
                 .
               </p>
-              <div onClick={(e) => { e.stopPropagation(); setChangeDetails("fullName");}} className="size-6 rounded-full bg-green-600 flex items-center justify-center">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setChangeDetails("fullName");
+                }}
+                className="size-6 rounded-full bg-green-600 flex items-center justify-center"
+              >
                 <div className="size-5 rounded-full bg-white">
                   <div className="flex items-center justify-center w-full h-full pl-[1px pt-[1px">
                     <CreateOutlined sx={{ fontSize: 15, color: green[800] }} />
@@ -290,7 +306,13 @@ function ProfilePage({ user, setUser, theme }) {
               <LocationOnOutlined sx={{ fontSize: 20 }} />
             </div>
             <p className="text-sm">{user.address || "---"} </p>
-            <div onClick={(e) => { e.stopPropagation(); setChangeDetails("address");}} className="ml-5 size-6 rounded-full bg-green-600 flex items-center justify-center">
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setChangeDetails("address");
+              }}
+              className="ml-5 size-6 rounded-full bg-green-600 flex items-center justify-center"
+            >
               <div className="size-5 rounded-full bg-white">
                 <div className="flex items-center justify-center w-full h-full pl-[1px pt-[1px">
                   <CreateOutlined sx={{ fontSize: 15, color: green[800] }} />

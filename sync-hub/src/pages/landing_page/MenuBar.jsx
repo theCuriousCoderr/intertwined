@@ -1,31 +1,41 @@
-import { ArrowForwardIos, ExpandLess, ExpandMore, LoginOutlined } from "@mui/icons-material";
+import {
+  ArrowForwardIos,
+  ExpandLess,
+  ExpandMore,
+  LoginOutlined,
+} from "@mui/icons-material";
 import Header from "./Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function MenuBar({ menuBarState, setMenuBarState, setMenuBarExtend, setMenuBarExtendOption }) {
+function MenuBar({
+  menuBarState,
+  setMenuBarState,
+  setMenuBarExtend,
+  setMenuBarExtendOption,
+}) {
   const [ourServices, setOurServices] = useState(false);
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   return (
     <div className="bg-white box-content border border-slate-500 overflow-scroll fixed right-3 left-3 z-20 fadeIn rounded-lg">
       <div className="px-2 py-8">
         <Header menuBarState={menuBarState} setMenuBarState={setMenuBarState} />
       </div>
       <hr className="-mt-6 border" />
-      <div className="p-3 space-y-1">
+      <div className="p-3 space-y-">
         <div
           onClick={(e) => {
             e.stopPropagation();
             setOurServices(!ourServices);
           }}
           className={`bg-red-20 p-1 rounded ${
-            ourServices ? "h-42 bg-slate-200" : "h-7"
+            ourServices ? "h-42 bg-slate-200" : "h-8"
           } fadeI overflow-hidden`}
         >
           <div className="flex items-center bg-red-20 justify-between">
             <p
               className={`${
-                ourServices ? "text-slate-700" : "text-slate-800"
+                ourServices ? "text-slate-700" : "text-black"
               } text-base varela font-semibold`}
             >
               Our services
@@ -45,25 +55,42 @@ function MenuBar({ menuBarState, setMenuBarState, setMenuBarExtend, setMenuBarEx
             </div>
           </div>
         </div>
-        <div onClick={(e)=>{e.stopPropagation(); setMenuBarExtend(true); setMenuBarExtendOption("aboutUs")}} className="flex items-center bg-red-20 justify-between p-1">
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuBarExtend(true);
+            setMenuBarExtendOption("aboutUs");
+          }}
+          className="flex items-center bg-red-20 justify-between p-1"
+        >
           <p className={` text-base varela font-semibold`}>About Us</p>
           <div className="-rotate-90">
             <ExpandMore />
           </div>
         </div>
-        <div onClick={(e)=>{e.stopPropagation(); setMenuBarExtend(true); setMenuBarExtendOption("mission")}} className="flex items-center bg-red-20 justify-between p-1">
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuBarExtend(true);
+            setMenuBarExtendOption("mission");
+          }}
+          className="flex items-center bg-red-20 justify-between p-1"
+        >
           <p className={` text-base varela font-semibold`}>Mission & Vision</p>
           <div className="-rotate-90">
             <ExpandMore />
           </div>
         </div>
-      
-        <div onClick={()=> navigate("/signup")}  className="px-3 py-1 rounded-lg bg-green-500 active:bg-green-400">
+
+        <div
+          onClick={() => navigate("/signup")}
+          className="px-3 py-1 h-10 rounded-lg bg-green-500 active:bg-green-400"
+        >
           <div className="flex items-center justify-center gap-2">
             <div className="size-7 flex items-center justify-center bg-red-40">
-              <LoginOutlined sx={{color: "white"}} />
+              <LoginOutlined sx={{ color: "white" }} />
             </div>
-            <p className="font-bold text-slate-50 text-sm">Log In</p>
+            <p className="font-bold text-slate-50 text-sm">Sign Up</p>
           </div>
         </div>
       </div>

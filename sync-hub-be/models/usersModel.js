@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
     dept: String,
     level: String,
     matricNo: String,
-    password: String
+    password: String,
+    chatWallPaper: { type: String, default: '' }
 })
 export const Users = mongoose.model("Users", userSchema)
 

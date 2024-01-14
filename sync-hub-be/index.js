@@ -325,7 +325,17 @@ app.put("/change-user-details", async (req, res) => {
       user.fullName = req.body.fullName;
       user.save();
       res.status(201).send({ message: user });
-    }
+    }  
+    if (req.body.tag === "chatWallPaper") {
+      user.chatWallPaper = req.body.chatWallPaper;
+      user.save();
+      res.status(201).send({ message: user });
+    } 
+    if (req.body.tag === "address") {
+      user.address = req.body.address;
+      user.save();
+      res.status(201).send({ message: user });
+    } 
   } catch (error) {
     res.status(502).send({ message: "Password Change Failed" });
   }
