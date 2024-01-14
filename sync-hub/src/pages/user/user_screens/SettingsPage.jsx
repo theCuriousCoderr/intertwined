@@ -130,6 +130,7 @@ function SettingsPage({ theme, user, setUser }) {
                 <LoadingSpinner />
               </div>
             )}
+            
           </div>
         </div>
       )}
@@ -150,7 +151,7 @@ function SettingsPage({ theme, user, setUser }) {
       </div>
       <div
         className={`p-5 border-t ${
-          theme === "lightMode" ? " border-slate-30" : "border-slate-500"
+          theme === "lightMode" ? " border-slate-30" : "border-slate-500 text-slate-100"
         } border-slate-30 space-y-5`}
       >
         <div onClick={() => setSettings("wallPaper")} className="flex gap-4">

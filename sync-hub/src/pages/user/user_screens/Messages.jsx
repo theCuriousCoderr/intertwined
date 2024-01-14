@@ -182,6 +182,7 @@ function Messages({
           setChatsArray({ ...chatsArray, chats: data[0] });
           setSending(false);
           setNewMessage(true);
+          setClientContent("")
         }
       }
     }
@@ -227,7 +228,7 @@ function Messages({
             </div>
           </div>
 
-          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-slate-50 " : "bg-gray-900"} flex flex-col items-end p- justify-between px- overflow-scrol`}>
+          <div className={`absolute z-10 top-14 bottom-28 w-full ${theme === "lightMode" ? "bg-slate-500 " : "bg-gray-900"} flex flex-col items-end p- justify-between px- overflow-scrol`}>
             <img src={user.chatWallPaper || bg_whatsapp_image} className="absolute -z-10 w-full h-full object-cover opacity-80" />
             <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
             {/* {clientContent.requestTitle && <p className=" p-1 bg-green-100 rounded font-semibold">Message Topic: <span className="text-green-700">{clientContent.requestTitle} </span></p> } */}
@@ -333,7 +334,7 @@ function Messages({
                       setChats("Direct Message");
                     }}
                     key={item._doc.with}
-                    className="fle items-center gap-5 p-3 hover:bg-orange-100 m-2 rounded-lg"
+                    className={`fle items-center gap-5 p-3 ${theme === "lightMode" ? "hover:bg-slate-200" : "hover:bg-slate-800"}  m-2 rounded-lg`}
                   >
                     <div className="float-right w-[80%] bg-red-30 flex justify-between items-end">
                       <div>

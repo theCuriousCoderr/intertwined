@@ -17,6 +17,7 @@ import EditUserAddress from "../../../components/EditUserAddress";
 let dotEnv = import.meta.env;
 
 function ProfilePage({ user, setUser, theme }) {
+  const [uite, setUite] = useState(false)
   const [changeDetails, setChangeDetails] = useState("");
   const [changeImageState, setChangeImageState] = useState(false);
   const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
@@ -33,7 +34,6 @@ function ProfilePage({ user, setUser, theme }) {
   let navigate = useNavigate();
 
   useEffect(() => {
-    // alert(JSON.stringify(user))
     if (!user) {
       navigate("/user/home");
     } else {
@@ -72,7 +72,6 @@ function ProfilePage({ user, setUser, theme }) {
         });
 
         let data = await response.json();
-        // alert(data.url);
         if (data.url) {
           val = data.url;
           let url = baseURL + "/change-user-details";
@@ -93,7 +92,6 @@ function ProfilePage({ user, setUser, theme }) {
       } catch (error) {
         val = "";
         console.log(error);
-        // alert(error)
       }
     }
   }
@@ -227,7 +225,10 @@ function ProfilePage({ user, setUser, theme }) {
           !(theme === "lightMode") && "text-white"
         }`}
       >
-        <div onClick={() => navigate("/user/all-requests")} className="absolute w-full left-5">
+        <div
+          onClick={() => navigate("/user/all-requests")}
+          className="absolute w-full left-5"
+        >
           <ArrowBack />
         </div>
         <p id="top" className="text-lg font-bold varela">
@@ -323,6 +324,100 @@ function ProfilePage({ user, setUser, theme }) {
           <p className="bg-red-20 text-slate-500">{user.email}</p>
         </div>
       </div>
+
+      <div className="p-5">
+        <p className="varela font-semibold text-lg">Other Details</p>
+        <div>
+                    <div>
+            <p className="text-sm font-semibold">
+              Are you a student of the University of Ibadan ?
+            </p>
+            <div className="flex gap-10">
+              <div>
+                <input
+                  name="school"
+                  type="radio"
+                  checked={uite}
+                  onChange={() => setUite(!uite)}
+                  className="accent-orange-400"
+                />
+                <span className="ml-2">Yes</span>
+              </div>
+              <div>
+                <input
+                  name="school"
+                  type="radio"
+                  checked={!uite}
+                  onChange={() => setUite(!uite)}
+                  className="accent-orange-400"
+                />
+                <span className="ml-2">No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       {uite && (
+            <div className="p-5 -mt-5 bg-red-40">
+              <div>
+                <label htmlFor="dept" className="text-xs font-semibold">
+                  Your Department / Faculty{" "}
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+                  <input
+                    
+                    id="dept"
+                    name="dept"
+                    // value={signUpDetails.dept}
+                    // onChange={handleSignUpFormChange}
+                    placeholder="Department / Faculty"
+                    className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  />
+                </div>
+              </div>
+              <div className="flex">
+                <div>
+                  <label htmlFor="level" className="text-xs font-semibold">
+                    Your Level<span className="text-red-500 ml-1">*</span>
+                  </label>
+                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+                    <input
+                      minLength={3}
+                      maxLength={3}
+                    
+                      id="level"
+                      name="level"
+                      // value={signUpDetails.level}
+                      // onChange={handleSignUpFormChange}
+                      placeholder="300"
+                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="matricNo" className="text-xs font-semibold">
+                    Your Matric No<span className="text-red-500 ml-1">*</span>
+                  </label>
+                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+                    <input
+                      minLength={6}
+                      maxLength={6}
+                      
+                      id="matricNo"
+                      name="matricNo"
+                      // value={signUpDetails.matricNo}
+                      // onChange={handleSignUpFormChange}
+                      placeholder="123456"
+                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
       <div className="m-2">
         <button
           onClick={() => setConfirmDeleteAccount(true)}
