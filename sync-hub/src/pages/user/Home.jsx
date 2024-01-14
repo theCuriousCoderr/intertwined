@@ -79,6 +79,7 @@ function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNa
             >
               Log In
             </button>
+             or try refreshing the page again.
           </p>
         </div>
       )}
