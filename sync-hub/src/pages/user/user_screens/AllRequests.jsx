@@ -42,7 +42,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
     }
   }, []);
   return (
-    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-stone-50" : "bg-gray-900 h-full" } `}>
+    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-white" : "bg-gray-900 h-full" } `}>
       <p
         id="top"
         className={`text-lg font-bold varela p-2 border-b border-slate-300 ${theme === "lightMode" ? "text-black": "text-white" }`}
@@ -97,7 +97,7 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
                   onClick={() => {
                     setShowRequestInfo({ content: items, state: true });
                   }}
-                  className={` mx-2 my-5 rounded-lg p-3 ${theme === "lightMode" ? "bg-white border border-slate-100 shadow" : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"}`}
+                  className={` mx-2 my-5 rounded-lg p-3 ${theme === "lightMode" ? "bg-purple-50 border border-slate-100 shadow" : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"}`}
                 >
                   <p className="text-[11px] text-red-500">
                     {user.email === items.reqShaker && (

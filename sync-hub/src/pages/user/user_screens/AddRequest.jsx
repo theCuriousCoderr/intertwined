@@ -112,7 +112,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="requestTitle"
                 name="requestTitle"
                 placeholder="I want to collect movies"
-                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
@@ -175,7 +175,8 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                     id="charges"
                     name="charges"
                     placeholder="500"
-                    className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                    type="number"
+                    className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                   />
                 </div>
               )}
@@ -196,7 +197,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="country"
                   name="country"
                   placeholder="Nigeria"
-                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
               <div className="w-[40%] space-y-1 group p-1 focus-within:bg-orange-300 focus-within:bg-opacity-50 rounded-lg">
@@ -208,7 +209,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="city"
                   name="city"
                   placeholder="Ibadan"
-                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
               <div className="w-full space-y-1 group p-1 focus-within:bg-orange-300 focus-within:bg-opacity-50 rounded-lg">
@@ -223,7 +224,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="landmark"
                   name="landmark"
                   placeholder="Agbowo"
-                  className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
                 />
               </div>
             </div>
@@ -243,7 +244,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="phone"
                 name="phone"
                 placeholder="07037887923"
-                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10 outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
@@ -264,20 +265,20 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="expiresOn"
                 name="expiresOn"
                 placeholder="I want to buy something in Agbowo"
-                className={`placeholder:text-xs  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
               />
             </div>
           </div>
 
           <div>
             {postRequestButtonState ? (
-              <button className="bg-orange-500 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md">
+              <button className="bg-orange-500 h-10 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md">
                 Submit request
               </button>
             ) : (
               <button
                 disabled
-                className="bg-gray-300 relative p-2 w-full text-center text-gray-300 varela rounded-md"
+                className="bg-gray-300 relative p-2 w-full h-10 text-center text-gray-300 varela rounded-md"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Submit request

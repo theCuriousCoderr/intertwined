@@ -21,6 +21,7 @@ import {
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
+import image_1 from '../images/image_1.jpg'
 let dotEnv = import.meta.env;
 
 function LandingPage() {
@@ -163,7 +164,7 @@ function LandingPage() {
           />
           <div className="space-y-5">
             <div>
-              <h1 className="mt-16 text-2xl font-serif font-bold text-gray-950">
+              <h1 className="mt-16 text-2xl font-bold font-serif text-gray-950">
                 Empowering Connections. <br />
                 Where Requests Meet Responses.
               </h1>
@@ -176,7 +177,11 @@ function LandingPage() {
               </div>
             </div>
 
-            <h1 className="text-sm leading-6 text-slate-500 ">
+            <div>
+          <img src={image_1} className="w-full" />
+        </div>
+
+            <h1 className="text-base leading-6 text-slate-600 font-[Rubik]">
               Revolutionizing the way your common needs and tasks are handled
               and addressed, our innovative project seamlessly bridges the gap
               between client needs and soluton offerings. By providing a
@@ -199,6 +204,8 @@ function LandingPage() {
             </div>
           </div>
         </div>
+
+       
 
         <div className="bg-gray-950 relative overflow-hidden my-10 py-3">
           <div className="absolute size-40 rounded-full -top-10 -right-10 bg-orange-500">
