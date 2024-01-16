@@ -82,7 +82,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
     }, 3000);
   }
   return (
-    <div className={`${theme === "lightMode" ? " bg-[rgba(81,80,91,0.3)" : "bg-gray-900"} bg-[rgba(81,80,91,0.3) relative mt-14 pb-20`}>
+    <div className={`${theme === "lightMode" ? " bg-[rgba(81,80,91,0.3)" : "bg-gray-900"} bg-[rgba(81,80,91,0.3) relative pt-14 pb-20`}>
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}

@@ -76,13 +76,13 @@ function App() {
   return (
     <div className="bg-red-30 h-scree">
       {user.email && (
-        <div className="bg-red-40 absolute z-10">
+        <div className="bg-red-40 absolute z-20">
           { sideNavBarExtend !== "" && 
           <div onClick={()=> setSideNavBarExtend("")} className="absolute bg-white z-50 h-full w-full slideInLeft">
             {sideNavBarExtend === "profile" && <ProfilePage user={user} setUser={setUser} setSideNavBarExtend={setSideNavBarExtend} />}
             </div>}
           <div className="relative h-scree w-full">
-            <div className={`fixed top-0 w-full flex flex-wrap justify-between items-center p-2 ${theme === "lightMode" ? "bg-white bg-opacity-90" : "bg-gray-900"} `}>
+            <div className={`fixed top-0 w-full flex flex-wrap justify-between items-center p-2 ${theme === "lightMode" ? "bg-gray-500 bg-opacity-40" : "bg-gray-500 bg-opacity-40"} `}>
               <div
                 onClick={() => setShowSideNavBar(true)}
                 className="size-10 flex items-center justify-center rounded-full bg-red-200"
@@ -90,13 +90,13 @@ function App() {
                 {user.photo ? <img
                   src={user.photo}
                   alt="User Photo"
-                  className="w-full h-full rounded-full object-cover"
+                  className="border-2 border-slate-100 w-full h-full rounded-full object-cover"
                 /> : <Avatar /> }
                 
               </div>
-              <p className={`text-lg varela font-semibold ${theme === "lightMode" ? "text-black" : "text-white"}`}>intertwined</p>
+              <p className={`text-lg varela font-semibold ${theme === "lightMode" ? "text-white" : "text-white"}`}>intertwined</p>
               {theme === "lightMode"? 
-              <div onClick={()=> setTheme("darkMode")} className="mr-1 size-5 bg-yellow-20 flex items-center justify-center">
+              <div onClick={()=> setTheme("darkMode")} className="mr-1 size-5 rounded-full flex items-center justify-center">
                 <DarkMode />
               </div> : <div onClick={()=> setTheme("lightMode")} className="mr-1 size-5 bg-yellow-20 flex items-center justify-center text-yellow-500">
               <LightModeOutlined />
@@ -130,7 +130,7 @@ function App() {
       <Route path="/user/your-requests" element={<YourRequests user={user} allRequestsCache={allRequestsCache} setAllRequestsCache={setAllRequestsCache} theme={theme} />} />
       <Route path="/user/add-request" element={<AddRequest user={user} theme={theme} setAllRequestsCache={setAllRequestsCache} />} />
       <Route path="/user/messages" element={<Messages clientContent={clientContent} setClientContent={setClientContent} user={user} setNewMessage={setNewMessage} sendersList={sendersList} removeSender={removeSender} theme={theme}/>} />
-      <Route path="/user/alerts" element={<Alerts />} />
+      <Route path="/user/alerts" element={<Alerts theme={theme} />} />
       <Route path="/test" element={<Test />} />
       <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} theme={theme} />} />
       <Route path="/settings" element={<SettingsPage user={user} setUser={setUser} theme={theme} />} />

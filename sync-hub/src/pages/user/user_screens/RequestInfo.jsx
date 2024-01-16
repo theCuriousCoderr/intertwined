@@ -156,7 +156,7 @@ function RequestInfo({
           {user.email === content.reqShaker ? (
             <button
               onClick={(e) => e.stopPropagation()}
-              className="w-full text-center bg-orange-200 text-white varela p-1 rounded-full"
+              className="w-full h-10 text-center bg-orange-200 text-white varela p-1 rounded-full"
             >
               Message Client Now
             </button>
@@ -166,7 +166,7 @@ function RequestInfo({
                 setClientContent(content);
                 navigate("/user/messages");
               }}
-              className="w-full text-center bg-orange-500 active:bg-green-500 text-white varela p-1 rounded-full"
+              className="w-full h-10 text-center bg-orange-500 active:bg-green-500 text-white varela p-1 rounded-full"
             >
               Message Client Now
             </button>

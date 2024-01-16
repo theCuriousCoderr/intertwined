@@ -190,7 +190,7 @@ function Messages({
   }
 
   return (
-    <div className={`relative mt-14 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"} h-screen`}>
+    <div className={`relative pt-14 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"} h-screen`}>
       {chats === "" && (
         <div className="mt-10 p-5">
           <p className="text-lg text-blue-700 font-bold mb-5">
@@ -297,9 +297,9 @@ function Messages({
                     : "bg-orange-30 text-slate-300"
                 } rounded-full flex items-center justify-center mb-2`}
               >
-                <div>
+                <div className="-rotate-12">
                   {textArea.message ? (
-                    <Send sx={{ fontSize:26, color: orange[700] }} />
+                    <Send sx={{ fontSize:26, color: "black" }} />
                   ) : (
                     <Send sx={{ fontSize:26 }} />
                   )}

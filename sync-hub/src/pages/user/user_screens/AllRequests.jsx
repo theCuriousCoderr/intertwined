@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RequestInfo from "./RequestInfo";
 import getHook from "../../../apiHooks/getHook";
 import calculateDuration from "../helper_functions/calculateDuration";
-import { LocationOnOutlined } from "@mui/icons-material";
+import { LocationOnOutlined, Tune } from "@mui/icons-material";
 let dotEnv = import.meta.env;
 
 function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientContent, setNavItem, theme }) {
@@ -42,10 +42,17 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
     }
   }, []);
   return (
-    <div className={`relative mt-14 pb-20 ${theme === "lightMode" ? "bg-white" : "bg-gray-900 h-full" } `}>
+    <div className={`relative z-10 isolation-auto pt-14 pb-20 ${theme === "lightMode" ? "bg-gradient-to-br from-purple-800 to-blue-600" : "bg-gray-900 h-full" } `}>
+      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
+      <div className={`absolute size-[50rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[40rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[30rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[20rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+
+      </div>
       <p
         id="top"
-        className={`text-lg font-bold varela p-2 border-b border-slate-300 ${theme === "lightMode" ? "text-black": "text-white" }`}
+        className={`text-lg font-bold varela p-2 border-slate-300 ${theme === "lightMode" ? "text-slate-100": "text-white" }`}
       >
         All Requests{" "}
         {allRequests.length >= 1 && <span>({allRequests.length })</span>}
@@ -68,10 +75,18 @@ function AllRequests({ user, allRequestsCache, setAllRequestsCache, setClientCon
           />
         </div>
       )}
-      <div className=" border-b border-slate-200 my-1 p-5">
-        <input className="w-full ring-red-600 outline-red-700 border-slate-400 border rounded-full px-3 py-1" />
+
+      <div className="flex justify-between border-b border-slate-400 my-1 p-5 ">
+      <div className="w-[80%]  ">
+        <input placeholder="Search Requests" className={`w-full bg-slate-200 bg-opacity-20 ring-slate-600 h-10 outline-slate-700 border-slate-400 border rounded-md px-3 py-1 ${theme === "lightMode" ? "text-white" :  "text-slate-50"}`} />
       </div>
-      <p className="text-xs text-slate-400 px-5 py-2">
+      <div className="w-[15%]">
+        <button className="h-10 bg-slate-200 bg-opacity-20 w-full text-slate-200 rounded-md"><Tune /></button>
+      </div>
+
+      </div>
+      
+      <p className="text-sm text-slate-300 px-5 py-2 varela">
         Browse through here to see if there are any requests you could help with
         or requests that match your preference
       </p>

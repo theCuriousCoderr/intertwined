@@ -67,7 +67,7 @@ function YourRequests({ user,  allRequestsCache, setAllRequestsCache, theme }) {
   }
 
   return (
-    <div className={`relative mt-14  h-dvh ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
+    <div className={`relative pt-14  h-dvh ${theme === "lightMode" ? "bg-white" : "bg-gray-900"}`}>
       {toastInfo.text !== "" && <ToastAlert color={toastInfo.color} text={toastInfo.text} />}
       <p
         id="top"
