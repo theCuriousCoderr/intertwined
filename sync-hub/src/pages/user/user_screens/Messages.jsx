@@ -190,21 +190,28 @@ function Messages({
   }
 
   return (
-    <div className={`relative pt-14 ${theme === "lightMode" ? "bg-white" : "bg-gray-900"} h-screen`}>
+    <div className={`relative z-10 isolation-auto pt-14 pb-20 ${theme === "lightMode" ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen" : "bg-gray-900 h-screen" } `}>
+        <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
+      <div className={`absolute size-[50rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[40rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[30rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+      <div className={`absolute size-[20rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
+
+      </div>
       {chats === "" && (
         <div className="mt-10 p-5">
-          <p className="text-lg text-blue-700 font-bold mb-5">
+          <p className="text-lg text-slate-200 font-bold mb-5">
             ... Fetching chats
           </p>
           <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden">
-            <div className="progress left-right  h-full rounded-full w-full bg-orange-500"></div>
+            <div className="progress left-right  h-full rounded-full w-full bg-orange-600"></div>
           </div>
         </div>
       )}
 
       {chats === "No chats" && (
         <div className="mt-10 p-5">
-          <p className="text-base text-red-500 font-bold mb-5">
+          <p className="text-base text-slate-200 font-bold mb-5">
             You have no chat history available.
             <br />
             <br />
