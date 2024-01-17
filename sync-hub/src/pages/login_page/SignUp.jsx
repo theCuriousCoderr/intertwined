@@ -246,14 +246,14 @@ function SignUp() {
             <label htmlFor="fullName" className="text-xs font-semibold">
               Full name<span className="text-red-500 ml-1">*</span>{" "}
             </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+            <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
               <input
                 required
                 id="fullName"
                 name="fullName"
                 value={signUpDetails.fullName}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
               />
             </div>
           </div>
@@ -261,7 +261,7 @@ function SignUp() {
             <label htmlFor="email" className="text-xs font-semibold">
               Email<span className="text-red-500 ml-1">*</span>
             </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+            <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
               <input
                 required
                 id="email"
@@ -269,7 +269,7 @@ function SignUp() {
                 type="email"
                 value={signUpDetails.email}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
               />
             </div>
           </div>
@@ -397,7 +397,7 @@ function SignUp() {
               Password<span className="text-red-500 ml-1">*</span>
             </label>
             {showPassword ? (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
                 <button
                   type="button"
                   onClick={() => setShowPassword(false)}
@@ -413,11 +413,11 @@ function SignUp() {
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
                 />
               </div>
             ) : (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
                 <button
                   type="button"
                   onClick={() => setShowPassword(true)}
@@ -433,7 +433,7 @@ function SignUp() {
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
                 />
               </div>
             )}

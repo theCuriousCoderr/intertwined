@@ -40,7 +40,7 @@ function RequestInfo({
   return (
     <div
     onScroll={(e)=> e.stopPropagation()}
-      className={`relative rounded-t-xl h-full overflow-hidden  ${
+      className={`relative rounded-t-xl h-full overflow-scroll  ${
         theme === "lightMode" ? "bg-white" : "bg-gray-900"
       }`}
     >

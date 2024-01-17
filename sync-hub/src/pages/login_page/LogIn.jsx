@@ -96,7 +96,7 @@ function Login() {
             <label htmlFor="email" className="text-xs font-semibold">
               Email
             </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+            <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
               <input
                 disabled={!logInButtonState}
                 required
@@ -105,7 +105,7 @@ function Login() {
                 type="email"
                 value={logInDetails.email}
                 onChange={handleLogInFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm disabled:text-slate-400 disabled:bg-slate-200"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
               />
             </div>
           </div>
@@ -124,12 +124,12 @@ function Login() {
               </button>
             </div>
             {showPassword ? (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <button
                   disabled={!logInButtonState}
                   type="button"
                   onClick={() => setShowPassword(false)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   {!logInButtonState ? (
                     <VisibilityOffOutlined
@@ -147,16 +147,16 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm disabled:text-slate-400 disabled:bg-slate-200"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             ) : (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <button
                   disabled={!logInButtonState}
                   type="button"
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   {!logInButtonState ? (
                     <RemoveRedEyeOutlined
@@ -175,7 +175,7 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm disabled:text-slate-400 disabled:bg-slate-200"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             )}

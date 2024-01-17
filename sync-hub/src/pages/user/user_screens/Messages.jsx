@@ -188,7 +188,7 @@ function Messages({
 
   return (
     <div
-      className={`relative z-10 isolation-auto pt-14 pb-20 ${
+      className={`relative z-10 isolation-auto pt-14 pb-20 overflow-scroll ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen"
           : "bg-gray-900 h-screen"
@@ -385,7 +385,7 @@ function Messages({
             >
               Chats History
             </p>
-            <div>
+            <div className="overflow-scroll">
               {chats.map((item) => {
                 return (
                   <div

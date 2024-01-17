@@ -75,7 +75,7 @@ function Home({user, setUser, theme, navItem, setNavItem, showSideNavBar, setSho
           <p className="font-medium text-red-600">Unauthorized Access!</p>
           <div className="bg-gray-400 w-36 h-5"></div>
           <div className=""></div>
-          <div className="text-lg text-center font-medium">
+          <div className="text-lg text-white text-center font-medium">
             <p>Back to{" "}</p>
             <button
               onClick={() => navigate("/login")}

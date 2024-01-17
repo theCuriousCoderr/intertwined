@@ -74,7 +74,7 @@ function ComplaintsPage({ theme, user, setUser }) {
 
       <form onSubmit={handleSuggestionFormSubmit} className="p-5">
         <div>
-          <label htmlFor="name" className="text-xs font-semibold">
+          <label htmlFor="name" className={`text-xs font-semibold ${theme === "lightMode" ? "text-black": "text-white"}`}>
             Name
           </label>
           <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -89,7 +89,7 @@ function ComplaintsPage({ theme, user, setUser }) {
           </div>
         </div>
         <div>
-          <label htmlFor="message" className="text-xs font-semibold">
+          <label htmlFor="message" className={`text-xs font-semibold ${theme === "lightMode" ? "text-black": "text-white"}`}>
             Message
           </label>
           <div className="group p-1 h-20 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -103,10 +103,19 @@ function ComplaintsPage({ theme, user, setUser }) {
             />
           </div>
         </div>
+        
         <div>
           {!sendMessageState ? <button className="h-10 w-40 text-center rounded bg-orange-500 text-white my-5">Send Messsage</button> : <button disabled className="h-10 w-40 text-center rounded bg-slate-300 text-white my-5">Send Messsage</button> }
         </div>
       </form>
+
+      <div className={`text- font-semibold ${theme === "lightMode" ? "text-black": "text-white"}`}>
+        <p>Contact Developer in other ways</p>
+        <p className="text-green-600">Logout - Open Menu bar - Open About Us </p>
+
+        
+
+      </div>
     </div>
   );
 }

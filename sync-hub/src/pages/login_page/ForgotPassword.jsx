@@ -120,7 +120,7 @@ function ForgotPassword() {
                 type="email"
                 value={changePasswordDetails.email}
                 onChange={handlePasswordFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm h-10"
               />
             </div>
           </div>
@@ -132,10 +132,10 @@ function ForgotPassword() {
               </label>
             </div>
             {showPassword ? (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <div
                   onClick={() => setShowPassword(false)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
                 </div>
@@ -146,14 +146,14 @@ function ForgotPassword() {
                   name="newPassword"
                   value={changePasswordDetails.newPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             ) : (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <div
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </div>
@@ -165,7 +165,7 @@ function ForgotPassword() {
                   name="newPassword"
                   value={changePasswordDetails.newPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             )}
@@ -181,10 +181,10 @@ function ForgotPassword() {
               </label>
             </div>
             {showPassword ? (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <div
                   onClick={() => setShowPassword(false)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
                 </div>
@@ -195,14 +195,14 @@ function ForgotPassword() {
                   name="confirmPassword"
                   value={changePasswordDetails.confirmPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             ) : (
-              <div className="relative group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
                 <div
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
                 >
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </div>
@@ -214,7 +214,7 @@ function ForgotPassword() {
                   name="confirmPassword"
                   value={changePasswordDetails.confirmPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
                 />
               </div>
             )}
@@ -228,13 +228,13 @@ function ForgotPassword() {
 
           <div className="my-5">
             {logInButtonState ? (
-              <button className="bg-orange-500 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md">
+              <button className="bg-orange-500 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md h-10">
                 Change Password
               </button>
             ) : (
               <button
                 disabled
-                className="bg-gray-300 relative p-2 w-full text-center text-gray-300 varela rounded-md"
+                className="bg-gray-300 relative p-2 w-full text-center text-gray-300 varela rounded-md h-10"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Change Password

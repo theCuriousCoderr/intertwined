@@ -328,7 +328,7 @@ function ProfilePage({ user, setUser, theme }) {
           <p className="bg-red-20 text-slate-500">{user.email}</p>
         </div>
       </div>
-
+{/* 
       <div className="p-5">
         <p className="varela font-semibold text-lg">Other Details</p>
         <div>
@@ -360,7 +360,7 @@ function ProfilePage({ user, setUser, theme }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {uite && (
         <div className="p-5 -mt-5 bg-red-40">
