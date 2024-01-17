@@ -56,7 +56,7 @@ function AllRequests({
     if (val.length < 1 ) {
       setAllRequests(allRequestsCache);
     } else {
-      let requestFilter = allRequests.filter(items => items.requestTitle.includes(val))
+      let requestFilter = allRequests.filter(items => items.requestTitle.toLowerCase().includes(val.toLowerCase()))
       setAllRequests(requestFilter)
     }
 
