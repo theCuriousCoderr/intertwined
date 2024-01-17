@@ -251,14 +251,14 @@ function Messages({
           >
             <div className="flex justify-between items-center px-5">
               {theme === "lightMode" ? (
-                <ArrowBack />
+                <ArrowBack sx={{ color: "white" }} />
               ) : (
                 <ArrowBack sx={{ color: "white" }} />
               )}
               <div className="flex items-center gap-2">
                 <p
                   className={`${
-                    theme === "lightMode" ? "text-black" : "text-white"
+                    theme === "lightMode" ? "text-white" : "text-white"
                   } text-xs`}
                 >
                   {client.email}
@@ -379,7 +379,7 @@ function Messages({
               id="top"
               className={`text-lg font-bold varela p-2 border-y  ${
                 theme === "lightMode"
-                  ? "bg-white border-slate-300"
+                  ? "bg-transparent border-slate-700 text-white"
                   : "bg-gray-900 text-white border-slate-700"
               }`}
             >
@@ -401,8 +401,8 @@ function Messages({
                     key={item._doc.with}
                     className={`fle items-center gap-5 p-3 ${
                       theme === "lightMode"
-                        ? "hover:bg-slate-200"
-                        : "hover:bg-slate-800"
+                        ? "hover:bg-gray-800 hover:bg-opacity-40 border-b"
+                        : "hover:bg-slate-800 border-b"
                     }  m-2 rounded-lg`}
                   >
                     <div className="float-right w-[80%] bg-red-30 flex justify-between items-end">
@@ -410,7 +410,7 @@ function Messages({
                         <p
                           className={`${
                             theme === "lightMode"
-                              ? "text-slate-800"
+                              ? "text-slate-100"
                               : "text-slate-200"
                           } text-base`}
                         >
@@ -419,7 +419,7 @@ function Messages({
                         <p
                           className={`text-xs ${
                             theme === "lightMode"
-                              ? "text-slate-500"
+                              ? "text-slate-300"
                               : "text-slate-400"
                           }`}
                         >
@@ -446,7 +446,7 @@ function Messages({
                         <img
                           src={item.photo}
                           alt="user photo"
-                          className="rounded-full w-full h-full object-cover"
+                          className="border-2 border-slate-900 rounded-full w-full h-full object-cover"
                         />
                       ) : (
                         <Avatar />

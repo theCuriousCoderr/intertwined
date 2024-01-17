@@ -50,9 +50,20 @@ function AllRequests({
       getAllRequests();
     }
   }, []);
+
+  function handleRequestSearch(e) {
+    let val = e.target.value
+    if (val.length < 1 ) {
+      setAllRequests(allRequestsCache);
+    } else {
+      let requestFilter = allRequests.filter(items => items.requestTitle.includes(val))
+      setAllRequests(requestFilter)
+    }
+
+  }
   return (
     <div
-      className={`relative z-10 h-full isolation-aut pt-14 pb-20 ${
+      className={`relative z-10 pt-14 pb-20 overflow-scroll ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full"
           : "bg-gray-900 h-full"
@@ -117,6 +128,8 @@ function AllRequests({
       <div className="flex justify-between border-b border-slate-400 my-1 p-5 ">
         <div className="w-[80%]  ">
           <input
+          name="search"
+          onChange={handleRequestSearch}
             placeholder="Search Requests"
             className={`w-full bg-slate-200 bg-opacity-20 ring-slate-600 h-10 outline-slate-700 border-slate-400 border rounded-md px-3 py-1 ${
               theme === "lightMode" ? "text-white" : "text-slate-50"

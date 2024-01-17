@@ -23,7 +23,7 @@ if (dotEnv.MODE === "development") {
 }
 
 
-function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNavBar, newMessage, setSendersList, sendersList, sideNavBarExtend, setSideNavBarExtend, setClientContent }) {
+function Home({user, setUser, theme, navItem, setNavItem, showSideNavBar, setShowSideNavBar, newMessage, setSendersList, sendersList, sideNavBarExtend, setSideNavBarExtend, setClientContent }) {
   
   const navigate = useNavigate();
 
@@ -57,7 +57,11 @@ function Home({user, setUser, navItem, setNavItem, showSideNavBar, setShowSideNa
  
 
   return (
-    <div>
+    <div className={`relative ${
+      theme === "lightMode"
+        ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full"
+        : "bg-gray-900 h-full"
+    }`}>
       {user === "" && (
         <div className="h-full w-full bg-red-5 absolute flex items-center p-3">
           <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden">

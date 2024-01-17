@@ -39,6 +39,7 @@ function RequestInfo({
   let navigate = useNavigate();
   return (
     <div
+    onScroll={(e)=> e.stopPropagation()}
       className={`relative rounded-t-xl h-full overflow-hidden  ${
         theme === "lightMode" ? "bg-white" : "bg-gray-900"
       }`}
