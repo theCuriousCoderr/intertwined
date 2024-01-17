@@ -1,5 +1,5 @@
 import { ArrowBack } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import putHook from "../../../apiHooks/putHook";
 let dotEnv = import.meta.env
@@ -11,6 +11,12 @@ function ComplaintsPage({ theme, user, setUser }) {
     message: ""
   })
   let navigate = useNavigate();
+
+  useEffect(()=> {
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Complaints";
+
+  }, [])
 
   function handleSuggestionDetailsFormChange(e) {
     setSuggestionDetails({...suggestionDetails, [e.target.name]: e.target.value})

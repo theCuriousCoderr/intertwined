@@ -44,7 +44,58 @@ async function connectMongoDB() {
 }
 connectMongoDB();
 
-// WHEN SOMEONE SENDS A MESSAGE
+
+
+// GET METHODS
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome! intertwined");
+});
+
+app.get("/dashboard-analytics", async (req, res) => {
+  try {
+    let users = await Users.find();
+    let requests = await Requests.find();
+    res
+      .status(201)
+      .send({ message: { users: users.length, requests: requests.length } });
+  } catch (eror) {
+    res.status(502).send({ message: { users: 0, requests: 0 } });
+  }
+});
+
+app.get("/get-all-requests", async (req, res) => {
+  try {
+    let requests = await Requests.find();
+    res.status(201).send({ message: requests });
+  } catch (error) {
+    res.status(502).send({ message: "Request Failed" });
+  }
+});
+
+app.get("/user/home", protectedRoute, async (req, res) => {
+  if (req.user) {
+    res.status(201).send({ message: req.user });
+    return;
+  }
+  res.status(502).send({ message: "Request Failed" });
+});
+
+
+
+// POST METHODS
+app.post("/get-user", async (req, res) => {
+  try {
+    let user = await Users.findOne({ email: req.body.email });
+    if (user) {
+      res.status(201).send({ message: user });
+    } else {
+      res.status(202).send({ message: "No such user" });
+    }
+  } catch (error) {
+    res.status(502).send({ message: "Request Failed" });
+  }
+});
+
 app.post("/send-messages", async (req, res) => {
   const { message, reqEmail, resEmail } = req.body;
   // message is from: resEmail(sender) => to: reqEmail(receiver)
@@ -209,42 +260,6 @@ app.post("/get-user-chats", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.status(200).send("Welcome! intertwined");
-});
-
-app.put("/user/delete-account", async (req, res) => {
-  console.log(req.body);
-  try {
-    let user = await Users.findOneAndDelete({ email: req.body.email });
-    let userChatHistory = await ChatHistory.findOneAndDelete({
-      owner: req.body.email,
-    });
-    let userRequest = await Requests.findOneAndDelete({
-      reqShaker: req.body.email,
-    });
-    if (user) {
-      res.status(201).send({ message: "Account deleted successfully!" });
-    } else {
-      res.status(202).send({ message: "An error occured!" });
-    }
-  } catch (error) {
-    res.status(502).send({ message: "Delete account action failed!" });
-  }
-});
-
-app.get("/dashboard-analytics", async (req, res) => {
-  try {
-    let users = await Users.find();
-    let requests = await Requests.find();
-    res
-      .status(201)
-      .send({ message: { users: users.length, requests: requests.length } });
-  } catch (eror) {
-    res.status(502).send({ message: { users: 0, requests: 0 } });
-  }
-});
-
 app.post("/signup", async (req, res) => {
   console.log(req.body);
   try {
@@ -299,6 +314,23 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/user/submit-request", async (req, res) => {
+  // console.log(req.body)
+  try {
+    let request = await Requests.create({ ...req.body });
+    if (request) {
+      res.status(201).send({ message: "Request Submit Successful" });
+    } else {
+      res.status(502).send({ message: "Request Submit Failed" });
+    }
+  } catch (error) {
+    res.status(502).send({ message: "Request Submit Failed" });
+  }
+});
+
+
+
+// PUT METHODS
 app.put("/change-user-details", async (req, res) => {
   // console.log(req.body)
 
@@ -341,7 +373,32 @@ app.put("/change-user-details", async (req, res) => {
   }
 });
 
-app.put("/delete-user-request", async (req, res) => {
+
+
+// DELETE METHODS
+app.delete("/user/delete-account", async (req, res) => {
+  // console.log(req.body);
+  try {
+    let user = await Users.findOneAndDelete({ email: req.body.email });
+    await ChatHistory.findOneAndDelete({
+      owner: req.body.email,
+    });
+    await Requests.findOneAndDelete({
+      reqShaker: req.body.email,
+    });
+    if (user) {
+      res.status(201).send({ message: "Account deleted successfully!" });
+    } else {
+      res.status(202).send({ message: "An error occured!" });
+    }
+  } catch (error) {
+    res.status(502).send({ message: "Delete account action failed!" });
+  }
+});
+
+
+
+app.delete("/delete-user-request", async (req, res) => {
   console.log(req.body);
   try {
     let request = await Requests.findByIdAndDelete(req.body.requestId);
@@ -356,49 +413,7 @@ app.put("/delete-user-request", async (req, res) => {
   }
 });
 
-app.post("/get-user", async (req, res) => {
-  try {
-    let user = await Users.findOne({ email: req.body.email });
-    if (user) {
-      res.status(201).send({ message: user });
-    } else {
-      res.status(202).send({ message: "No such user" });
-    }
-  } catch (error) {
-    res.status(502).send({ message: "Request Failed" });
-  }
-});
 
-app.get("/user/home", protectedRoute, async (req, res) => {
-  if (req.user) {
-    res.status(201).send({ message: req.user });
-    return;
-  }
-  res.status(502).send({ message: "Request Failed" });
-});
-
-app.post("/user/submit-request", async (req, res) => {
-  // console.log(req.body)
-  try {
-    let request = await Requests.create({ ...req.body });
-    if (request) {
-      res.status(201).send({ message: "Request Submit Successful" });
-    } else {
-      res.status(502).send({ message: "Request Submit Failed" });
-    }
-  } catch (error) {
-    res.status(502).send({ message: "Request Submit Failed" });
-  }
-});
-
-app.get("/get-all-requests", async (req, res) => {
-  try {
-    let requests = await Requests.find();
-    res.status(201).send({ message: requests });
-  } catch (error) {
-    res.status(502).send({ message: "Request Failed" });
-  }
-});
 
 server.listen(PORT, (req, res) => {
   console.log(`Server is running on PORT ${PORT}`);

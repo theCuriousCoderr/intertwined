@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Header from "../landing_page/Header";
 import logo from "../images/logo.png";
@@ -22,6 +22,12 @@ function Login() {
     password: "",
   });
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Log In";
+
+  }, [])
 
   function handleLogInFormChange(e) {
     let name = e.target.name;

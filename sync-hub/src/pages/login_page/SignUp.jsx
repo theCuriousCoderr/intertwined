@@ -36,6 +36,8 @@ function SignUp() {
   });
   const navigate = useNavigate();
   useEffect(() => {
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Sign Up";
     if (googleLogIn) {
       handleSignUpFormSubmit("");
       setGoogleLogIn(false);

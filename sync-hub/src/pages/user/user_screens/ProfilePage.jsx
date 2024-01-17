@@ -8,16 +8,18 @@ import { green } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
 import postHook from "../../../apiHooks/postHook";
 import putHook from "../../../apiHooks/putHook";
+import deleteHook from "../../../apiHooks/deleteHook";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import ToastAlert from "../../../components/ToastAlert";
 import EditUserPhoto from "../../../components/EditUserPhoto";
 import EditUserFullName from "../../../components/EditUserFullName";
 import EditUserAddress from "../../../components/EditUserAddress";
+
 let dotEnv = import.meta.env;
 
 function ProfilePage({ user, setUser, theme }) {
-  const [uite, setUite] = useState(false)
+  const [uite, setUite] = useState(false);
   const [changeDetails, setChangeDetails] = useState("");
   const [changeImageState, setChangeImageState] = useState(false);
   const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
@@ -34,6 +36,8 @@ function ProfilePage({ user, setUser, theme }) {
   let navigate = useNavigate();
 
   useEffect(() => {
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Profile";
     if (!user) {
       navigate("/user/home");
     } else {
@@ -100,7 +104,7 @@ function ProfilePage({ user, setUser, theme }) {
     setConfirmDeleteAccount(false);
     setDeleteAccountState(true);
     let url = baseURL + "/user/delete-account";
-    let response = await putHook(url, { email: user.email });
+    let response = await deleteHook(url, { email: user.email });
     if (response.success) {
       setDeleteAccountState(false);
       localStorage.removeItem("token");
@@ -328,7 +332,7 @@ function ProfilePage({ user, setUser, theme }) {
       <div className="p-5">
         <p className="varela font-semibold text-lg">Other Details</p>
         <div>
-                    <div>
+          <div>
             <p className="text-sm font-semibold">
               Are you a student of the University of Ibadan ?
             </p>
@@ -358,65 +362,62 @@ function ProfilePage({ user, setUser, theme }) {
         </div>
       </div>
 
-       {uite && (
-            <div className="p-5 -mt-5 bg-red-40">
-              <div>
-                <label htmlFor="dept" className="text-xs font-semibold">
-                  Your Department / Faculty{" "}
-                  <span className="text-red-500 ml-1">*</span>
-                </label>
-                <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                  <input
-                    
-                    id="dept"
-                    name="dept"
-                    // value={signUpDetails.dept}
-                    // onChange={handleSignUpFormChange}
-                    placeholder="Department / Faculty"
-                    className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                  />
-                </div>
-              </div>
-              <div className="flex">
-                <div>
-                  <label htmlFor="level" className="text-xs font-semibold">
-                    Your Level<span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                    <input
-                      minLength={3}
-                      maxLength={3}
-                    
-                      id="level"
-                      name="level"
-                      // value={signUpDetails.level}
-                      // onChange={handleSignUpFormChange}
-                      placeholder="300"
-                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="matricNo" className="text-xs font-semibold">
-                    Your Matric No<span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                    <input
-                      minLength={6}
-                      maxLength={6}
-                      
-                      id="matricNo"
-                      name="matricNo"
-                      // value={signUpDetails.matricNo}
-                      // onChange={handleSignUpFormChange}
-                      placeholder="123456"
-                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                    />
-                  </div>
-                </div>
+      {uite && (
+        <div className="p-5 -mt-5 bg-red-40">
+          <div>
+            <label htmlFor="dept" className="text-xs font-semibold">
+              Your Department / Faculty{" "}
+              <span className="text-red-500 ml-1">*</span>
+            </label>
+            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+              <input
+                id="dept"
+                name="dept"
+                // value={signUpDetails.dept}
+                // onChange={handleSignUpFormChange}
+                placeholder="Department / Faculty"
+                className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+              />
+            </div>
+          </div>
+          <div className="flex">
+            <div>
+              <label htmlFor="level" className="text-xs font-semibold">
+                Your Level<span className="text-red-500 ml-1">*</span>
+              </label>
+              <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+                <input
+                  minLength={3}
+                  maxLength={3}
+                  id="level"
+                  name="level"
+                  // value={signUpDetails.level}
+                  // onChange={handleSignUpFormChange}
+                  placeholder="300"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                />
               </div>
             </div>
-          )}
+            <div>
+              <label htmlFor="matricNo" className="text-xs font-semibold">
+                Your Matric No<span className="text-red-500 ml-1">*</span>
+              </label>
+              <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
+                <input
+                  minLength={6}
+                  maxLength={6}
+                  id="matricNo"
+                  name="matricNo"
+                  // value={signUpDetails.matricNo}
+                  // onChange={handleSignUpFormChange}
+                  placeholder="123456"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="m-2">
         <button

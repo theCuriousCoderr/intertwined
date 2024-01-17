@@ -17,16 +17,18 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
     landmark: "",
     phone: "",
     expiresOn: "",
-    createdAt: ""
+    createdAt: "",
   });
   const [toastInfo, setToastInfo] = useState({
     color: "",
     text: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // window.scrollTo(0, 0);
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Add Request";
+    window.scrollTo(0, 0);
   }, []);
 
   function handleRequestDetailsFormChange(e) {
@@ -47,7 +49,10 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
     let top = document.getElementById("top");
     e.preventDefault();
     let url = baseURL + "/user/submit-request";
-    let response = await postHook(url, {...requestDetails, createdAt: new Date().toISOString() });
+    let response = await postHook(url, {
+      ...requestDetails,
+      createdAt: new Date().toISOString(),
+    });
     if (response.success) {
       setRequestDetails({
         requestTitle: "",
@@ -64,10 +69,9 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
       setPostRequestButtonState(true);
       setTimeout(() => {
         setToastInfo({ color: "", text: "" });
-        navigate("/user/all-requests")
+        navigate("/user/all-requests");
       }, 3000);
-      setAllRequestsCache("")
-      
+      setAllRequestsCache("");
     } else if (response.warning) {
       alert(1);
       setToastInfo({ color: "blue", text: ["Warning!", response.warning] });
@@ -82,13 +86,34 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
     }, 3000);
   }
   return (
-    <div className={`relative z-10 isolation-auto pt-14 pb-20 ${theme === "lightMode" ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full" : "bg-gray-900 h-full" } `}>
-       <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
-      <div className={`absolute size-[50rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
-      <div className={`absolute size-[40rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
-      <div className={`absolute size-[30rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
-      <div className={`absolute size-[20rem] border ${theme === "lightMode" ? "border-slate-500" : "border-slate-700" } border-slate-500 rounded-full`}></div>
-
+    <div
+      className={`relative z-10 isolation-auto pt-14 pb-20 ${
+        theme === "lightMode"
+          ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full"
+          : "bg-gray-900 h-full"
+      } `}
+    >
+      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
+        <div
+          className={`absolute size-[50rem] border ${
+            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
+          } border-slate-500 rounded-full`}
+        ></div>
+        <div
+          className={`absolute size-[40rem] border ${
+            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
+          } border-slate-500 rounded-full`}
+        ></div>
+        <div
+          className={`absolute size-[30rem] border ${
+            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
+          } border-slate-500 rounded-full`}
+        ></div>
+        <div
+          className={`absolute size-[20rem] border ${
+            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
+          } border-slate-500 rounded-full`}
+        ></div>
       </div>
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
@@ -96,7 +121,11 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
       <div>
         <p
           id="top"
-          className={`text-lg font-bold varela p-2 border-b  ${theme === "lightMode" ? "border-slate-300 text-white " : "border-slate-500 text-white" }`}
+          className={`text-lg font-bold varela p-2 border-b  ${
+            theme === "lightMode"
+              ? "border-slate-300 text-white "
+              : "border-slate-500 text-white"
+          }`}
         >
           Post a request
         </p>
@@ -107,10 +136,21 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
           className="p-5 space-y-5"
         >
           <div>
-            <label htmlFor="requestTitle" className={`text-sm font-semibold ${!(theme === "lightMode") ? "text-slate-100" : "text-slate-100"  }`}>
+            <label
+              htmlFor="requestTitle"
+              className={`text-sm font-semibold ${
+                !(theme === "lightMode") ? "text-slate-100" : "text-slate-100"
+              }`}
+            >
               Short Request Title
             </label>
-            <div className={`group p-1 focus-within:bg-opacity-20 rounded-lg ${theme === "lightMode" ? "focus-within:bg-orange-100" : "focus-within:bg-slate-100"}`}>
+            <div
+              className={`group p-1 focus-within:bg-opacity-20 rounded-lg ${
+                theme === "lightMode"
+                  ? "focus-within:bg-orange-100"
+                  : "focus-within:bg-slate-100"
+              }`}
+            >
               <input
                 maxLength={30}
                 required
@@ -119,7 +159,11 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="requestTitle"
                 name="requestTitle"
                 placeholder="I want to collect movies"
-                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-white" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                  theme === "lightMode"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-white"
+                    : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                }`}
               />
             </div>
           </div>
@@ -127,11 +171,19 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
           <div>
             <label
               htmlFor="requestDescription"
-              className={`text-sm font-semibold ${!(theme === "lightMode") ?  "text-slate-100" : "text-slate-100"  }`}
+              className={`text-sm font-semibold ${
+                !(theme === "lightMode") ? "text-slate-100" : "text-slate-100"
+              }`}
             >
               Request Description
             </label>
-            <div className={`group p-1 h-20 focus-within:bg-opacity-20 rounded-lg ${theme === "lightMode" ? "focus-within:bg-orange-100 text-slate-100" : "focus-within:bg-slate-100"}`}>
+            <div
+              className={`group p-1 h-20 focus-within:bg-opacity-20 rounded-lg ${
+                theme === "lightMode"
+                  ? "focus-within:bg-orange-100 text-slate-100"
+                  : "focus-within:bg-slate-100"
+              }`}
+            >
               <textarea
                 required
                 value={requestDetails.requestDescription}
@@ -139,19 +191,36 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="requestDescription"
                 name="requestDescription"
                 placeholder="I need the complete seasons of Game of Thrones. Anyone who has should please reach out to me "
-                className={`placeholder:text-xs h-full outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-full outline-none ring-1 w-full rounded-md p-1 resize-none text-sm ${
+                  theme === "lightMode"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                    : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                }`}
               />
             </div>
           </div>
 
           <div className="border border-slate-300 p-2 rounded-md">
-            <label htmlFor="requestTitle" className={`text-sm font-semibold ${!(theme === "lightMode") ? "text-slate-100" : "text-slate-100" }`}>
+            <label
+              htmlFor="requestTitle"
+              className={`text-sm font-semibold ${
+                !(theme === "lightMode") ? "text-slate-100" : "text-slate-100"
+              }`}
+            >
               Do you need it to be a free service or not ?
-              <span className={` ${theme === "lightMode" ? "text-slate-300" : "text-teal-400"} ml-1 text-[10px] block leading-3 mb-2`}>
+              <span
+                className={` ${
+                  theme === "lightMode" ? "text-slate-300" : "text-teal-400"
+                } ml-1 text-[10px] block leading-3 mb-2`}
+              >
                 # A paid service can attract more people than a free service
               </span>
             </label>
-            <div className={`flex flex-wrap gap-5 text-xs px-5 ${theme === "lightMode" ? "text-white" : "text-white"}`}>
+            <div
+              className={`flex flex-wrap gap-5 text-xs px-5 ${
+                theme === "lightMode" ? "text-white" : "text-white"
+              }`}
+            >
               <div className="flex items-center gap-1">
                 <input
                   checked={serviceCharges}
@@ -183,14 +252,22 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                     name="charges"
                     placeholder="500"
                     type="number"
-                    className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-white" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                    className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                      theme === "lightMode"
+                        ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-white"
+                        : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                    }`}
                   />
                 </div>
               )}
             </div>
           </div>
 
-          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-white" : "text-white"}`}>
+          <div
+            className={`border border-slate-300 p-2 rounded-md ${
+              theme === "lightMode" ? "text-white" : "text-white"
+            }`}
+          >
             <label htmlFor="requestTitle" className="text-sm font-semibold">
               Your Location
             </label>
@@ -204,7 +281,11 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="country"
                   name="country"
                   placeholder="Nigeria"
-                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                    theme === "lightMode"
+                      ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                      : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                  }`}
                 />
               </div>
               <div className="w-[40%] space-y-1 group p-1 focus-within:bg-orange-200 focus-within:bg-opacity-20 rounded-lg">
@@ -216,7 +297,11 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="city"
                   name="city"
                   placeholder="Ibadan"
-                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                    theme === "lightMode"
+                      ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                      : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                  }`}
                 />
               </div>
               <div className="w-full space-y-1 group p-1 focus-within:bg-orange-200 focus-within:bg-opacity-20 rounded-lg">
@@ -231,13 +316,21 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   id="landmark"
                   name="landmark"
                   placeholder="Agbowo"
-                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                  className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                    theme === "lightMode"
+                      ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                      : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                  }`}
                 />
               </div>
             </div>
           </div>
 
-          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-white" : "text-white"}`}>
+          <div
+            className={`border border-slate-300 p-2 rounded-md ${
+              theme === "lightMode" ? "text-white" : "text-white"
+            }`}
+          >
             <label htmlFor="phone" className="text-sm font-semibold">
               Phone Number
             </label>
@@ -251,15 +344,27 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="phone"
                 name="phone"
                 placeholder="07037887923"
-                className={`placeholder:text-xs h-10 outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10 outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                  theme === "lightMode"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                    : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                }`}
               />
             </div>
           </div>
 
-          <div className={`border border-slate-300 p-2 rounded-md ${theme === "lightMode" ? "text-white" : "text-white"}`}>
+          <div
+            className={`border border-slate-300 p-2 rounded-md ${
+              theme === "lightMode" ? "text-white" : "text-white"
+            }`}
+          >
             <label htmlFor="expiresOn" className="text-sm font-semibold">
               When will this request expire
-              <span className={` ${theme === "lightMode" ? "text-slate-300" : "text-teal-400"} ml-1 text-[10px] block leading-3 mb-2`}>
+              <span
+                className={` ${
+                  theme === "lightMode" ? "text-slate-300" : "text-teal-400"
+                } ml-1 text-[10px] block leading-3 mb-2`}
+              >
                 (When will you no longer require/need this service)
               </span>
             </label>
@@ -272,14 +377,22 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="expiresOn"
                 name="expiresOn"
                 placeholder="I want to buy something in Agbowo"
-                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${theme === "lightMode" ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20" : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600" }`}
+                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                  theme === "lightMode"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                    : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
+                }`}
               />
             </div>
           </div>
 
           <div>
             {postRequestButtonState ? (
-              <button className={` ${theme === "lightMode" ? "bg-blue-950" : "bg-blue-500"} h-10 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md`}>
+              <button
+                className={` ${
+                  theme === "lightMode" ? "bg-blue-950" : "bg-blue-500"
+                } h-10 active:bg-green-500 p-2 w-full text-center text-white varela rounded-md`}
+              >
                 Submit request
               </button>
             ) : (

@@ -66,16 +66,16 @@ function RequestInfo({
                 <Avatar />
               )}
             </div>
-            <p>Name: {clientDetails.fullName}</p>
-            <p>Email: <span className="text-xs">{clientDetails.email}</span></p>
-            <p>Phone: {clientDetails.phone}</p>
-            <p>Verified Status: Unverified</p>
-            <p>Student of UI: No</p>
+            <p className="font-bold">Name: <span className="font-normal">{clientDetails.fullName}</span> </p>
+            <p className="font-bold">Email: <span className="font-normal">{clientDetails.email}</span> </p>
+            <p className="font-bold">Phone: <span className="font-normal">{clientDetails.phone}</span> </p>
+            <p className="font-bold">Verified Status: <span className="font-normal">Unverified </span> </p>
+            <p className="font-bold">Student of UI: <span className="font-normal">No</span> </p>
           </div>
         </>
       )}
       <div className="p-5 bg-red-30">
-        <div className="py-5 border-b">
+        <div className="py-5">
           <p
             className={`varela text-sm ${
               theme === "lightMode" ? "text-black" : "text-white"
@@ -88,13 +88,13 @@ function RequestInfo({
           </p>
         </div>
 
-        <div className="py-5 border-b">
-          <p className="text-slate-500 text-sm">
+        <div className={`py-5 border-y ${theme === "lightMode" ? "border-slate-500" : "border-slate-700"}`}>
+          <p className={` text-sm ${theme === "lightMode" ? "text-slate-950" : "text-slate-200"}`}>
             {content.requestDescription}{" "}
           </p>
         </div>
 
-        <div className="text-slate-50 text-xs my-2 py-5 border-b space-y-2">
+        <div className="text-slate-50 text-xs my-2 py-5 space-y-2">
           {content.charges === "" ? (
             <span className="px-1 py-1 text-ce bg-blue-500 rounded">
               Free Service
@@ -105,17 +105,17 @@ function RequestInfo({
             </span>
           )}
           {content.charges && (
-            <p className="bg-red-30 text-slate-700 text-base">
+            <p className={`bg-red-30 text-base ${theme === "lightMode" ? "text-slate-950" : "text-slate-200"}`}>
               {content.charges} Naira
             </p>
           )}
         </div>
 
-        <div className="py-5 border-b">
-          <p className="text-slate-500 text-sm">
+        <div className={`py-5 border-y ${theme === "lightMode" ? "border-slate-500" : "border-slate-700"} `}>
+          <p className={` text-s ${theme === "lightMode" ? "text-slate-500" : "text-slate-400"}`}>
             Request is valid and available until:{" "}
           </p>
-          <p className="text-base text-slate-700">
+          <p className={`text-base ${theme === "lightMode" ? "text-black" : "text-slate-200"}`}>
             {content.expiresOn.slice(0, 10).split("-").reverse().join("-")}{" "}
           </p>
         </div>
@@ -133,14 +133,14 @@ function RequestInfo({
               {!clientDetails ? "---" : "More Info" }
             </button>
           </div>
-          <p>About the client</p>
+          <p className={`text- ${theme === "lightMode" ? "text-slate-500" : "text-slate-400"}`}>About the client</p>
           <div className="">
             <p className="text-slate-500 text-sm">
-              Contact: <span className="text-slate-800">{content.phone}</span>
+              Contact: <span className={` ${theme === "lightMode" ? "text-black" : "text-slate-200"}`}>{content.phone}</span>
             </p>
             <p className="text-sm text-slate-500">
               Location:{" "}
-              <span className="text-slate-800">
+              <span className={`${theme === "lightMode" ? "text-black" : "text-slate-200"}`}>
                 {content.landmark}, {content.city}, {content.country}
               </span>{" "}
             </p>

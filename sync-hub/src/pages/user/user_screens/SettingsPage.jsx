@@ -13,6 +13,8 @@ function SettingsPage({ theme, user, setUser }) {
   let navigate = useNavigate();
 
   useEffect(() => {
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Settings";
     if (!user) {
       navigate("/user/home");
     }

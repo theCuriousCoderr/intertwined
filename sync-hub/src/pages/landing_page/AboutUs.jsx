@@ -4,10 +4,15 @@ import {
   Twitter,
   WhatsApp,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 function AboutUs() {
+
+  useEffect(()=>{
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | About Us";
+  }, [])
   const socialMediaLinks = [
     {
       link: "https://www.facebook.com/profile.php?id=100060733820016",
@@ -58,9 +63,17 @@ function AboutUs() {
           </div>
           <p className="text-base font-normal">odeJs</p>
         </div>
-        <p>* Styling was done with <em className="font-medium underline-offset-2 underline text-green-700">TailwindCSS</em></p>
+        <p>
+          * Styling was done with{" "}
+          <em className="font-medium underline-offset-2 underline text-green-700">
+            TailwindCSS
+          </em>
+        </p>
       </div>
-      <p className="my-5 text-lg font-semibold varela border-b border-slate-300"> -  Contact the developer - </p>
+      <p className="my-5 text-lg font-semibold varela border-b border-slate-300">
+        {" "}
+        - Contact the developer -{" "}
+      </p>
       <div className="flex justify-evenly items-center ">
         {socialMediaLinks.map((items) => {
           return (

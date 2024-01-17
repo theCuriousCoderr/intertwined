@@ -92,7 +92,7 @@ function EditUserFullName({ user, setUser }) {
         <div className="">
           <button
             type="submit"
-            className="w-full p-2 bg-green-400 active:bg-green-700 rounde rounded-md text-slate-100"
+            className="w-full p-2 bg-green-500 active:bg-green-700 rounde rounded-md text-slate-100"
           >
             Change Full Name
           </button>

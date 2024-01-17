@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Mission() {
+  useEffect(()=>{
+    let title = document.querySelector("title");
+    title.innerHTML = "intertwined | Mission & Vision";
+
+  }, [])
   return (
     <div className="mt-5 bg-red-40 py-5">
       <p

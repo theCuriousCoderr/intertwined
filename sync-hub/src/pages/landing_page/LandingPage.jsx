@@ -21,7 +21,7 @@ import {
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
-import image_1 from '../images/image_1.jpg'
+import request from '../images/request.png'
 let dotEnv = import.meta.env;
 
 function LandingPage() {
@@ -177,8 +177,8 @@ function LandingPage() {
               </div>
             </div>
 
-            <div>
-          <img src={image_1} className="w-full" />
+            <div className="w-60 mx-auto">
+          <img src={request} className="w-full" />
         </div>
 
             <h1 className="text-base leading-6 text-slate-600 font-[Rubik]">
@@ -321,7 +321,8 @@ function LandingPage() {
               </div>
               <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {Math.round(count.requests / count.users) || 0}
+                  {/* {Math.round(count.requests / count.users) || 0} */}
+                  ---
                 </p>
                 <p className="px-4 text-xs">
                   average service requests sent out per user
@@ -329,7 +330,8 @@ function LandingPage() {
               </div>
               <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
-                  {count.responses || 0}
+                  {/* {count.responses || 0} */}
+                  ---
                 </p>
                 <p className="px-4 text-xs">received responses</p>
               </div>
