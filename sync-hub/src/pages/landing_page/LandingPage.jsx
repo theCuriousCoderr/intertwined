@@ -168,7 +168,7 @@ function LandingPage() {
                 Empowering Connections. <br />
                 Where Requests Meet Responses.
               </h1>
-              <div className="flex items-center gap-2 justify-start text-xs text-slate-800 mt-2">
+              <div className="flex items-center gap-2 justify-start text-xs md:text-base text-slate-800 mt-2">
                 <div className="size-1 bg-slate-700 rounded-full"></div>
                 <p>Send a request</p>
                 <div className="size-1 bg-slate-700 rounded-full"></div>
@@ -181,7 +181,7 @@ function LandingPage() {
           <img src={request} className="w-full" />
         </div>
 
-            <h1 className="text-base leading-6 text-slate-600 font-[Rubik]">
+            <h1 className="text-base md:text-lg leading-6 text-slate-600 font-[Rubik]">
               Revolutionizing the way your common needs and tasks are handled
               and addressed, our innovative project seamlessly bridges the gap
               between client needs and soluton offerings. By providing a
@@ -264,11 +264,11 @@ function LandingPage() {
                 <div key={items.title}>
                   <div className="flex gap-2 items-center">
                     <div>{items.icon}</div>
-                    <p className="borde border-orange-500 text-orange-500 ">
+                    <p className="borde border-orange-500 text-orange-500 md:text-lg">
                       {items.title}
                     </p>
                   </div>
-                  <p className="text-slate-300 text-sm">{items.text}</p>
+                  <p className="text-slate-300 text-sm md:text-lg">{items.text}</p>
                 </div>
               );
             })}
@@ -283,8 +283,8 @@ function LandingPage() {
             <StarBorderOutlined sx={{ fontSize: 400 }} />
           </div>
 
-          <p className="varela text-xl font-bold">The next big thing</p>
-          <div className="text-sm text-balanc leading-6 text-slate-500 space-y-2">
+          <p className="varela text-xl md:text-2xl font-bold">The next big thing</p>
+          <div className="text-sm md:text-xl text-balanc leading-6 text-slate-500 space-y-2">
             <p>
               By starting small and focusing on answering and solving the
               "incapability" questions of individuals, we hope to serve our
@@ -304,7 +304,7 @@ function LandingPage() {
             id="dashboard-anaytics"
             className="relative h-56 w-full bg-red-40 border-l-4 border-slate-200 "
           >
-            <div className=" absolute -left-1 bg-red-90 space-y-5">
+            <div className=" absolute -left-1 bg-red-90 space-y-5 md:text-xl">
               <div className="h-10">
                 <p className="border-l-4 border-orange-400 px-3">
                   {count.users || 0}

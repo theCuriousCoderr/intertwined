@@ -26,7 +26,7 @@ function AboutUs() {
     },
   ];
   return (
-    <div className="mt-5">
+    <div className="mt-5 lg:w-2/3 bg-red-40">
       <p
         id="top"
         className="text-lg font-bold varela p-2 border-b border-slate-300"
@@ -74,7 +74,7 @@ function AboutUs() {
         {" "}
         - Contact the developer -{" "}
       </p>
-      <div className="flex justify-evenly items-center ">
+      <div className="flex justify-evenly lg:justify-start lg:gap-10 items-center ">
         {socialMediaLinks.map((items) => {
           return (
             <div

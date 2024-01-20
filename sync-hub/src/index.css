@@ -87,3 +87,38 @@
     opacity: 1;
   }
 }
+
+.showAddOn{
+  animation: showAddOn .4s ;
+}
+
+.hideAddOn {
+  animation: hideAddOn .4s ;
+}
+
+@keyframes showAddOn {
+  0% {
+    transform: rotate(-90deg);
+    opacity: 1;
+    /* background-color: red; */
+  }
+  90% {
+    /* transform: rotate(-0deg); */
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes hideAddOn {
+
+
+  100% {
+    transform: rotate(-120deg);
+    /* transform: scale(1); */
+    opacity: 0;
+    display:none;
+    /* background-color: blue; */
+  }
+}

@@ -147,20 +147,20 @@ function SignUp() {
   });
 
   return (
-    <div className="relative">
+    <div className="relative bg-red-40">
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
 
-      <div className="fixed -z-10 bg-orange-500 h-40 w-full">
+      <div className="fixed -z-10 bg-orange-500 h-40 w-full lg:w-2/3">
         <div className="absolute left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
       </div>
       <div className="px-5 py-9 bg-red-40">
         <NavLink to="/" className="flex items-center gap-1 w-40">
-          <div className="w-6">
+          <div className="w-6 md:w-8">
             <img src={logo} />
           </div>
-          <p className={`text-lg text-slate-100 varela font-bold`}>
+          <p className={`text-lg text-slate-100 varela font-bold md:text-xl`}>
             intertwined
           </p>
         </NavLink>
@@ -169,10 +169,10 @@ function SignUp() {
           name="signUpForm"
           id="signUpForm"
           onSubmit={(e) => handleSignUpFormSubmit(e)}
-          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3"
+          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 md:mx-auto"
         >
           <div className="relative p-[1px] rounded flex justify-center bg-red-40">
-            <div className="absolute left-2 top-2 size-6">
+            <div className="absolute left-2 top-2 size-6 md:top-3">
               <img src={google_logo} />
             </div>
             <div className="w-full h-full">
@@ -184,7 +184,7 @@ function SignUp() {
                   );
                   login();
                 }}
-                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm"
+                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm md:text-lg"
               >
                 Sign in with Google
               </button>
@@ -198,7 +198,7 @@ function SignUp() {
             </p>
           </div>
 
-          <p className="font-semibold text-sm">
+          <p className="font-semibold text-sm md:text-base">
             Create your{" "}
             <span className="varela font-bold underline underline-offset-2 italic text-orange-400">
               intertwined
@@ -207,7 +207,7 @@ function SignUp() {
           </p>
 
           <div className="flex gap-3 items-center">
-            <div className="relative size-12 rounded-full flex items-center justify-center overflow-hidden bg-orange-400">
+            <div className="relative size-12 rounded-full flex items-center justify-center overflow-hidden bg-orange-400 md:size-16">
               {uploadState && (
                 <div className="absolute z-10 w-full h-full bg-gray-950 bg-opacity-100 flex items-center justify-center">
                   <div className="border-2 border-t-white border-b-gray-950 border-l-gray-950 border-r-gray-950 size-5 rounded-full animate-spin"></div>
@@ -224,12 +224,12 @@ function SignUp() {
               )}
             </div>
             <div>
-              <label htmlFor="photo" className="text-sm font-semibold">
+              <label htmlFor="photo" className="text-sm md:text-lg font-semibold">
                 Upload a picture
               </label>
               <button
                 type="button"
-                className="block relative w-16 bg-orange-500 rounded text-white h-6 text-center text-sm"
+                className="block relative w-16 bg-orange-500 rounded text-white h-6 text-center text-sm md:text-base md:h-8"
               >
                 Upload
                 <input
@@ -243,7 +243,7 @@ function SignUp() {
             </div>
           </div>
           <div>
-            <label htmlFor="fullName" className="text-xs font-semibold">
+            <label htmlFor="fullName" className="text-xs md:text-base font-semibold">
               Full name<span className="text-red-500 ml-1">*</span>{" "}
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -253,12 +253,12 @@ function SignUp() {
                 name="fullName"
                 value={signUpDetails.fullName}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="text-xs font-semibold">
+            <label htmlFor="email" className="text-xs md:text-base font-semibold">
               Email<span className="text-red-500 ml-1">*</span>
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -269,7 +269,7 @@ function SignUp() {
                 type="email"
                 value={signUpDetails.email}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
               />
             </div>
           </div>
@@ -393,7 +393,7 @@ function SignUp() {
             </div>
           )} */}
           <div>
-            <label htmlFor="password" className="text-xs font-semibold">
+            <label htmlFor="password" className="text-xs font-semibold md:text-base">
               Password<span className="text-red-500 ml-1">*</span>
             </label>
             {showPassword ? (
@@ -413,7 +413,7 @@ function SignUp() {
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm  md:text-base"
                 />
               </div>
             ) : (
@@ -433,7 +433,7 @@ function SignUp() {
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
                 />
               </div>
             )}
@@ -441,19 +441,19 @@ function SignUp() {
 
           <div className="my-5">
             {createAccountButtonState ? (
-              <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md">
+              <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl">
                 Create account
               </button>
             ) : (
               <button
                 disabled
-                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md"
+                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md md:text-xl"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Create account
               </button>
             )}
-            <p className="text-black text-sm text-center my-5">
+            <p className="text-black text-sm text-center my-5 md:text-xl">
               Have an account?{" "}
               <button
                 className="text-orange-500 active:text-green-500"

@@ -69,11 +69,11 @@ function Login() {
     setLogInButtonState(true);
   }
   return (
-    <div className="relative">
+    <div className="relative ">
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
-      <div className="fixed -z-10 bg-orange-500 h-40 w-full">
+      <div className="fixed -z-10 bg-orange-500 h-40 w-full lg:w-2/3">
         <div className="absolute left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
       </div>
       <div className="px-5 py-9 bg-red-40">
@@ -88,12 +88,12 @@ function Login() {
 
         <form
           onSubmit={handleLogInFormSubmit}
-          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3"
+          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3  md:w-2/3 md:mx-auto"
         >
-          <p className="font-semibold text-sm">Welcome back !</p>
+          <p className="font-semibold text-sm md:text-xl">Welcome back !</p>
 
           <div>
-            <label htmlFor="email" className="text-xs font-semibold">
+            <label htmlFor="email" className="text-xs md:text-base font-semibold">
               Email
             </label>
             <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
@@ -105,20 +105,20 @@ function Login() {
                 type="email"
                 value={logInDetails.email}
                 onChange={handleLogInFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
               />
             </div>
           </div>
 
           <div>
             <div className="flex justify-between">
-              <label htmlFor="password" className="text-xs font-semibold">
+              <label htmlFor="password" className="text-xs font-semibold md:text-base">
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => navigate("/forgot-password")}
-                className="text-xs text-orange-500"
+                className="text-xs md:text-base text-orange-500"
               >
                 Forgot your password?
               </button>
@@ -147,7 +147,7 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
                 />
               </div>
             ) : (
@@ -156,7 +156,7 @@ function Login() {
                   disabled={!logInButtonState}
                   type="button"
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0 md:text-base"
                 >
                   {!logInButtonState ? (
                     <RemoveRedEyeOutlined
@@ -175,7 +175,7 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
                 />
               </div>
             )}
@@ -185,7 +185,7 @@ function Login() {
             {logInButtonState ? (
               <button
                 type="submit"
-                className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md"
+                className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl"
               >
                 Login
               </button>
@@ -193,13 +193,13 @@ function Login() {
               <button
                 type="submit"
                 disabled
-                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md h-"
+                className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md h- md:text-xl"
               >
                 <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
                 Login
               </button>
             )}
-            <p className="text-black text-sm text-center my-5">
+            <p className="text-black text-sm text-center my-5 md:text-xl">
               Don't have an account?{" "}
               <button
                 type="button"

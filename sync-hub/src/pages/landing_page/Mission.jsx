@@ -7,7 +7,7 @@ function Mission() {
 
   }, [])
   return (
-    <div className="mt-5 bg-red-40 py-5">
+    <div className="mt-5 bg-red-40 py-5 lg:w-2/3">
       <p
         id="top"
         className="text-lg font-bold varela p-2 border-b border-slate-300"
@@ -27,7 +27,7 @@ function Mission() {
           :: using an errand/delivery scenario
         </p>
         <div>
-          <div className="text-sm space-y-3 mt-2">
+          <div className="text-sm lg:text-xl space-y-3 mt-2">
             <p>
               You are at point A and{" "}
               <span className="bg-blue-400">need to get an item</span> from

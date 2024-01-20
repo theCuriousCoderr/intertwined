@@ -86,11 +86,11 @@ function ForgotPassword() {
     setLogInButtonState(true);
   }
   return (
-    <div className="relative">
+    <div className="relative ">
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
-      <div className="fixed -z-10 bg-red-600 h-40 w-full">
+      <div className="fixed -z-10 bg-red-600 h-40 w-full lg:w-2/3">
         <div className="absolute left-0 w-full h-20 -bottom-10 rounded-full bg-red-600"></div>
       </div>
       <div className="px-5 py-9 bg-red-40">
@@ -105,12 +105,12 @@ function ForgotPassword() {
 
         <form
           onSubmit={handlePasswordFormSubmit}
-          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3"
+          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 md:mx-auto"
         >
-          <p className="font-semibold text-sm">Change your password</p>
+          <p className="font-semibold text-sm md:text-xl">Change your password</p>
 
           <div>
-            <label htmlFor="email" className="text-xs font-semibold">
+            <label htmlFor="email" className="text-xs font-semibold md:text-base">
               Email
             </label>
             <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -120,14 +120,14 @@ function ForgotPassword() {
                 type="email"
                 value={changePasswordDetails.email}
                 onChange={handlePasswordFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm h-10"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm h-10 md:text-base"
               />
             </div>
           </div>
 
           <div>
             <div className="flex justify-between">
-              <label htmlFor="newPassword" className="text-xs font-semibold">
+              <label htmlFor="newPassword" className="text-xs font-semibold md:text-base">
                 New Password
               </label>
             </div>
@@ -146,7 +146,7 @@ function ForgotPassword() {
                   name="newPassword"
                   value={changePasswordDetails.newPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base "
                 />
               </div>
             ) : (
@@ -165,7 +165,7 @@ function ForgotPassword() {
                   name="newPassword"
                   value={changePasswordDetails.newPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base "
                 />
               </div>
             )}
@@ -175,7 +175,7 @@ function ForgotPassword() {
             <div className="flex justify-between">
               <label
                 htmlFor="confirmPassword"
-                className="text-xs font-semibold"
+                className="text-xs md:text-base font-semibold"
               >
                 Confirm Password
               </label>
@@ -195,7 +195,7 @@ function ForgotPassword() {
                   name="confirmPassword"
                   value={changePasswordDetails.confirmPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
                 />
               </div>
             ) : (
@@ -214,7 +214,7 @@ function ForgotPassword() {
                   name="confirmPassword"
                   value={changePasswordDetails.confirmPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base "
                 />
               </div>
             )}
@@ -241,7 +241,7 @@ function ForgotPassword() {
               </button>
             )}
 
-            <p className="text-black text-xs text-center my-5">
+            <p className="text-black text-xs text-center md:text-xl my-5">
               Go back to{" "}
               <span
                 className="text-orange-500 active:text-green-500"
