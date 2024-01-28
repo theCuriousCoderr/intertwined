@@ -316,8 +316,8 @@ function Messages({
                       {item.id === client.email && (
                         <div className="flex justify-start px-5">
                           <div className="relative z-10 max-w-[80%]">
-                            <div className="absolute size-5 bottom-0 -left-2 bg-slate-200 -z-10 triangle-left"></div>
-                            <p className="p-2 rounded bg-slate-200 text-sm">
+                            <div className="absolute size-5 bottom-0 -left-2 bg-slate-500 -z-10 triangle-left"></div>
+                            <p className="p-2 rounded bg-slate-500 text-sm text-white">
                               {item.text.split("|")[0] || item.text}
                             </p>
                           </div>

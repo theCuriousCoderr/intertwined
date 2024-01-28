@@ -22,6 +22,7 @@ import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
 import request from '../images/request.png'
+import vector from '../images/vector_cube.avif'
 let dotEnv = import.meta.env;
 
 function LandingPage() {
@@ -177,8 +178,8 @@ function LandingPage() {
               </div>
             </div>
 
-            <div className="w-60 mx-auto">
-          <img src={request} className="w-full" />
+            <div className="w-72 aspect-video rounded-md overflow-hidden bg-red-500 mx-auto">
+          <img src={vector} className="w-full" />
         </div>
 
             <h1 className="text-base md:text-lg leading-6 text-slate-600 font-[Rubik]">
