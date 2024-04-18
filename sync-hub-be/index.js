@@ -394,8 +394,6 @@ app.delete("/user/delete-account", async (req, res) => {
   }
 });
 
-
-
 app.delete("/delete-user-request", async (req, res) => {
   console.log(req.body);
   try {
@@ -410,6 +408,8 @@ app.delete("/delete-user-request", async (req, res) => {
     res.status(502).send({ message: "Request Delete Failed" });
   }
 });
+
+
 
 
 
