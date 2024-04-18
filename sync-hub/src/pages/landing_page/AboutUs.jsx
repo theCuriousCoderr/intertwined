@@ -8,21 +8,26 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 function AboutUs() {
-
-  useEffect(()=>{
+  useEffect(() => {
     let title = document.querySelector("title");
     title.innerHTML = "intertwined | About Us";
-  }, [])
+  }, []);
   const socialMediaLinks = [
     {
       link: "https://www.facebook.com/profile.php?id=100060733820016",
       title: <FacebookOutlined />,
+      id: "Facebook",
     },
-    { link: "https://twitter.com/elijahdimeji549", title: <Twitter /> },
-    { link: "https://wa.link/zyjbt6", title: <WhatsApp /> },
+    {
+      link: "https://twitter.com/elijahdimeji549",
+      title: <Twitter />,
+      id: "Twitter",
+    },
+    { link: "https://wa.link/zyjbt6", title: <WhatsApp />, id: "Whatsapp" },
     {
       link: "https://www.linkedin.com/in/oladimeji-olalekan-a24a58250",
       title: <LinkedIn />,
+      id: "LinkedIn",
     },
   ];
   return (
@@ -78,7 +83,7 @@ function AboutUs() {
         {socialMediaLinks.map((items) => {
           return (
             <div
-              key={items.title}
+              key={items.id}
               className="group w-8 h-8 rounded-full relative bg-red-30 flex items-center justify-center"
             >
               <NavLink to={items.link}>{items.title}</NavLink>

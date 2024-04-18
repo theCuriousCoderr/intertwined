@@ -182,12 +182,15 @@ function SignUp() {
           </p>
         </div>
 
-        <div className="w-full hidden lg:flex">
+        <div className="w-full hidden lg:flex lg:flex-wrap">
           <NavLink to="/" className="w-20 mx-auto">
             <div className="w-20 aspect-video">
               <img src={logo} className=" object-cover" />
             </div>
           </NavLink>
+          <div className="w-full">
+            <p className="varela text-2xl tracking-widest font-semibold text-center">Sign Up</p>
+          </div>
         </div>
 
         <form
@@ -378,7 +381,7 @@ function SignUp() {
                 className="text-orange-500 active:text-green-500"
                 onClick={() => navigate("/login")}
               >
-                Sign in
+                Log in
               </button>
             </p>
           </div>

@@ -166,6 +166,8 @@ function LandingPage() {
           <Header
             menuBarState={menuBarState}
             setMenuBarState={setMenuBarState}
+            setMenuBarExtend={setMenuBarExtend}
+            setMenuBarExtendOption={setMenuBarExtendOption}
           />
           <div className="space-y-5 lg:hidden">
             <div>
