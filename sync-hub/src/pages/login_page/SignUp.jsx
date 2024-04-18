@@ -152,26 +152,51 @@ function SignUp() {
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
 
-      <div className="fixed -z-10 bg-orange-500 h-40 w-full lg:w-2/3">
-        <div className="absolute left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
+      <div className="fixed -z-10 bg-orange-500 h-40 lg:h-screen w-full lg:px-10">
+        <div className="absolute lg:hidden left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
       </div>
-      <div className="px-5 py-9 bg-red-40">
-        <NavLink to="/" className="flex items-center gap-1 w-40">
-          <div className="w-6 md:w-8">
+
+      <div className="px-5 py-9 bg-red-40 lg:px-10 lg:w-full lg:h-screen lg:flex lg:flex-wrap lg:items-center lg:justify-center">
+        <NavLink
+          to="/"
+          className="lg:hidden flex items-center gap-1 bg-red-30 w-40 lg:absolute lg:z-10 lg:w-full lg:justify-center"
+        >
+          <div className="w-6 lg:hidden">
             <img src={logo} />
           </div>
-          <p className={`text-lg text-slate-100 varela font-bold md:text-xl`}>
+          <p
+            className={`text-lg text-slate-100 varela font-bold text-center lg:text-5xl lg:tracking-[5rem]`}
+          >
             intertwined
           </p>
         </NavLink>
+
+        <div className="hidden lg:flex items-center gap-1 bg-red-30 w-40 lg:absolute lg:z-10 lg:w-full lg:justify-center">
+          <div className="w-6 lg:hidden">
+            <img src={logo} />
+          </div>
+          <p
+            className={`text-lg text-slate-100 varela font-bold text-center lg:text-5xl lg:tracking-[5rem]`}
+          >
+            intertwined
+          </p>
+        </div>
+
+        <div className="w-full hidden lg:flex">
+          <NavLink to="/" className="w-20 mx-auto">
+            <div className="w-20 aspect-video">
+              <img src={logo} className=" object-cover" />
+            </div>
+          </NavLink>
+        </div>
 
         <form
           name="signUpForm"
           id="signUpForm"
           onSubmit={(e) => handleSignUpFormSubmit(e)}
-          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 md:mx-auto"
+          className="bg-slate-50 lg:relative lg:z-20 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 lg:space-y-1 md:w-2/3 lg:max-w-96 lg:h-auto md:mx-auto"
         >
-          <div className="relative p-[1px] rounded flex justify-center bg-red-40">
+          <div className="relative p-[1px] rounded flex justify-center lg:items-center bg-red-40">
             <div className="absolute left-2 top-2 size-6 md:top-3">
               <img src={google_logo} />
             </div>
@@ -184,7 +209,7 @@ function SignUp() {
                   );
                   login();
                 }}
-                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm md:text-lg"
+                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm md:text-lg lg:text-sm"
               >
                 Sign in with Google
               </button>
@@ -198,7 +223,7 @@ function SignUp() {
             </p>
           </div>
 
-          <p className="font-semibold text-sm md:text-base">
+          <p className="font-semibold text-sm md:text-base lg:text-sm">
             Create your{" "}
             <span className="varela font-bold underline underline-offset-2 italic text-orange-400">
               intertwined
@@ -207,7 +232,7 @@ function SignUp() {
           </p>
 
           <div className="flex gap-3 items-center">
-            <div className="relative size-12 rounded-full flex items-center justify-center overflow-hidden bg-orange-400 md:size-16">
+            <div className="relative size-12 lg:size-10 rounded-full flex items-center justify-center overflow-hidden bg-orange-400 md:size-16">
               {uploadState && (
                 <div className="absolute z-10 w-full h-full bg-gray-950 bg-opacity-100 flex items-center justify-center">
                   <div className="border-2 border-t-white border-b-gray-950 border-l-gray-950 border-r-gray-950 size-5 rounded-full animate-spin"></div>
@@ -223,13 +248,16 @@ function SignUp() {
                 />
               )}
             </div>
-            <div>
-              <label htmlFor="photo" className="text-sm md:text-lg font-semibold">
+            <div className="">
+              <label
+                htmlFor="photo"
+                className="text-sm md:text-lg font-semibold lg:text-xs"
+              >
                 Upload a picture
               </label>
               <button
                 type="button"
-                className="block relative w-16 bg-orange-500 rounded text-white h-6 text-center text-sm md:text-base md:h-8"
+                className="block relative w-16  bg-orange-500 rounded text-white h-6 text-center text-sm md:text-base lg:text-xs md:h-8 lg:h-5"
               >
                 Upload
                 <input
@@ -243,7 +271,10 @@ function SignUp() {
             </div>
           </div>
           <div>
-            <label htmlFor="fullName" className="text-xs md:text-base font-semibold">
+            <label
+              htmlFor="fullName"
+              className="text-xs md:text-base font-semibold lg:text-sm"
+            >
               Full name<span className="text-red-500 ml-1">*</span>{" "}
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -258,7 +289,10 @@ function SignUp() {
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="text-xs md:text-base font-semibold">
+            <label
+              htmlFor="email"
+              className="text-xs md:text-base lg:text-sm font-semibold"
+            >
               Email<span className="text-red-500 ml-1">*</span>
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
@@ -273,127 +307,11 @@ function SignUp() {
               />
             </div>
           </div>
-          {/* <div>
-            <label htmlFor="address" className="text-xs font-semibold">
-              Location/Address<span className="text-red-500 ml-1">*</span>
-            </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-              <input
-                
-                id="address"
-                name="address"
-                value={signUpDetails.address}
-                onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-              />
-            </div>
-          </div> */}
-          {/* <div>
-            <label htmlFor="phone" className="text-xs font-semibold">
-              Phone number<span className="text-red-500 ml-1">*</span>
-            </label>
-            <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-              <input
-                
-                minLength={11}
-                maxLength={11}
-                id="phone"
-                name="phone"
-                value={signUpDetails.phone}
-                onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-              />
-            </div>
-          </div> */}
-
-          {/* <div>
-            <p className="text-xs font-semibold">
-              Are you a student of the University of Ibadan ?
-            </p>
-            <div className="flex gap-10">
-              <div>
-                <input
-                  name="school"
-                  type="radio"
-                  checked={uite}
-                  onChange={() => setUite(!uite)}
-                  className="accent-orange-400"
-                />
-                <span className="ml-2">Yes</span>
-              </div>
-              <div>
-                <input
-                  name="school"
-                  type="radio"
-                  checked={!uite}
-                  onChange={() => setUite(!uite)}
-                  className="accent-orange-400"
-                />
-                <span className="ml-2">No</span>
-              </div>
-            </div>
-          </div> */}
-          {/* {uite && (
-            <div className="ml-5">
-              <div>
-                <label htmlFor="dept" className="text-xs font-semibold">
-                  Your Department / Faculty{" "}
-                  <span className="text-red-500 ml-1">*</span>
-                </label>
-                <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                  <input
-                    
-                    id="dept"
-                    name="dept"
-                    value={signUpDetails.dept}
-                    onChange={handleSignUpFormChange}
-                    placeholder="Department / Faculty"
-                    className="placeholder:text-xs group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                  />
-                </div>
-              </div>
-              <div className="flex">
-                <div>
-                  <label htmlFor="level" className="text-xs font-semibold">
-                    Your Level<span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                    <input
-                      minLength={3}
-                      maxLength={3}
-                    
-                      id="level"
-                      name="level"
-                      value={signUpDetails.level}
-                      onChange={handleSignUpFormChange}
-                      placeholder="300"
-                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="matricNo" className="text-xs font-semibold">
-                    Your Matric No<span className="text-red-500 ml-1">*</span>
-                  </label>
-                  <div className="group p-1 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
-                    <input
-                      minLength={6}
-                      maxLength={6}
-                      
-                      id="matricNo"
-                      name="matricNo"
-                      value={signUpDetails.matricNo}
-                      onChange={handleSignUpFormChange}
-                      placeholder="123456"
-                      className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )} */}
           <div>
-            <label htmlFor="password" className="text-xs font-semibold md:text-base">
+            <label
+              htmlFor="password"
+              className="text-xs font-semibold md:text-base lg:text-sm"
+            >
               Password<span className="text-red-500 ml-1">*</span>
             </label>
             {showPassword ? (
@@ -401,7 +319,7 @@ function SignUp() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(false)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute rounded-md text-xs font-semibold w-10 top-1 bottom-1 right-1 -pt-2 "
                 >
                   {/* <RemoveRedEyeOutlined sx={{ fontSize: 20 }} /> */}
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
@@ -421,7 +339,7 @@ function SignUp() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 w-10 right-0 top-2"
+                  className="absolute text-xs font-semibold bg-red-20 w-10 top-1 bottom-1 right-1"
                 >
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </button>
@@ -441,7 +359,7 @@ function SignUp() {
 
           <div className="my-5">
             {createAccountButtonState ? (
-              <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl">
+              <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl lg:text-sm">
                 Create account
               </button>
             ) : (
@@ -453,9 +371,10 @@ function SignUp() {
                 Create account
               </button>
             )}
-            <p className="text-black text-sm text-center my-5 md:text-xl">
+            <p className="text-black text-sm text-center my-5 md:text-xl lg:text-sm">
               Have an account?{" "}
               <button
+               type="button"
                 className="text-orange-500 active:text-green-500"
                 onClick={() => navigate("/login")}
               >

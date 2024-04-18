@@ -21,8 +21,8 @@ import {
 import { orange } from "@mui/material/colors";
 import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
-import request from '../images/request.png'
-import vector from '../images/vector_cube.avif'
+import request from "../images/request.png";
+import vector from "../images/vector_cube.avif";
 let dotEnv = import.meta.env;
 
 function LandingPage() {
@@ -155,7 +155,11 @@ function LandingPage() {
       <div className="bg-red-40">
         <div
           id="trapezium"
-          className={`absolute top-0 w-full h-48 bg-gray-700 ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors `}
+          className={`lg:hidden absolute top-0 w-full h-48 lg:h-80 bg-gray-700 ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors `}
+        ></div>
+        <div
+          id="trapezium"
+          className={`hidden lg:block absolute top-0 w-full h-48 lg:h-80 bg-gray-800 bg-opacity-90`}
         ></div>
 
         <div className="relative w-full top-0 p-5 bg-red-40">
@@ -163,7 +167,7 @@ function LandingPage() {
             menuBarState={menuBarState}
             setMenuBarState={setMenuBarState}
           />
-          <div className="space-y-5">
+          <div className="space-y-5 lg:hidden">
             <div>
               <h1 className="mt-16 text-2xl font-bold font-serif text-gray-950">
                 Empowering Connections. <br />
@@ -179,8 +183,8 @@ function LandingPage() {
             </div>
 
             <div className="w-72 aspect-video rounded-md overflow-hidden bg-red-500 mx-auto">
-          <img src={vector} className="w-full" />
-        </div>
+              <img src={vector} className="w-full" />
+            </div>
 
             <h1 className="text-base md:text-lg leading-6 text-slate-600 font-[Rubik]">
               Revolutionizing the way your common needs and tasks are handled
@@ -204,9 +208,53 @@ function LandingPage() {
               </button>
             </div>
           </div>
-        </div>
 
-       
+          <div className="hidden lg:flex items-center gap-10 px-10">
+            <div className="w-1/2">
+            <div>
+              <h1 className="mt-16 text-3xl font-bold font-serif text-gray-950">
+                Empowering Connections. <br />
+                Where Requests Meet Responses.
+              </h1>
+              <div className="flex items-center gap-2 justify-start text-xs md:text-base text-slate-300 mt-2">
+                <div className="size-1 bg-slate-300 rounded-full"></div>
+                <p>Send a request</p>
+                <div className="size-1 bg-slate-300 rounded-full"></div>
+                <p>Get a response</p>
+                <div className="size-1 bg-slate-300 rounded-full"></div>
+              </div>
+            </div>
+            <h1 className="text-base md:text-lg mt-16 leading-6 text-slate-800 font-[Rubik]">
+              Revolutionizing the way your common needs and tasks are handled
+              and addressed, our innovative project seamlessly bridges the gap
+              between client needs and soluton offerings. By providing a
+              user-friendly platform, we empower the common individuals and
+              persons to effortlessly discover, engage and interact with service
+              providers for any task or need at hand, thereby fostering a
+              dynamic marketplace where every interaction leads to mutual
+              satisfaction and success.
+            </h1>
+            <div className="flex items-center my-5 ">
+              <button
+                onClick={() => navigate("/signup")}
+                className="flex items-center gap-2 bg-gray-950 px-3 py-2 rounded-lg text-slate-50 text-base active:bg-green-500"
+              >
+                <p>Join us now</p>
+                <div>
+                  <ArrowForwardIos sx={{ fontSize: 20 }} />
+                </div>
+              </button>
+            </div>
+
+            </div>
+            <div className="w-1/2">
+            <div className={` overflow-hidden mx-auto rounded-md ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors p-1`}>
+              <img src={vector} className="w-full aspect-video mx-auto rounded-md" />
+            </div>
+            </div>
+
+          </div>
+        </div>
 
         <div className="bg-gray-950 relative overflow-hidden my-10 py-3">
           <div className="absolute size-40 rounded-full -top-10 -right-10 bg-orange-500">
@@ -269,7 +317,9 @@ function LandingPage() {
                       {items.title}
                     </p>
                   </div>
-                  <p className="text-slate-300 text-sm md:text-lg">{items.text}</p>
+                  <p className="text-slate-300 text-sm md:text-lg">
+                    {items.text}
+                  </p>
                 </div>
               );
             })}
@@ -284,7 +334,9 @@ function LandingPage() {
             <StarBorderOutlined sx={{ fontSize: 400 }} />
           </div>
 
-          <p className="varela text-xl md:text-2xl font-bold">The next big thing</p>
+          <p className="varela text-xl md:text-2xl font-bold">
+            The next big thing
+          </p>
           <div className="text-sm md:text-xl text-balanc leading-6 text-slate-500 space-y-2">
             <p>
               By starting small and focusing on answering and solving the

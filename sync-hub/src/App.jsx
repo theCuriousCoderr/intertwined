@@ -73,7 +73,7 @@ function App() {
   }
 
   return (
-    <div className="bg-red-30 h-scree lg:w-2/3 lg:mx-auto">
+    <div className="bg-red-30">
       {user.email && (
         <div className="bg-red-40 absolute z-20">
           {sideNavBarExtend !== "" && (

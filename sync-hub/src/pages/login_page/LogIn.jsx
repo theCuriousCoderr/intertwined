@@ -23,11 +23,10 @@ function Login() {
   });
   const navigate = useNavigate();
 
-  useEffect(()=> {
+  useEffect(() => {
     let title = document.querySelector("title");
     title.innerHTML = "intertwined | Log In";
-
-  }, [])
+  }, []);
 
   function handleLogInFormChange(e) {
     let name = e.target.name;
@@ -73,27 +72,56 @@ function Login() {
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
-      <div className="fixed -z-10 bg-orange-500 h-40 w-full lg:w-2/3">
-        <div className="absolute left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
+      <div className="fixed -z-10 bg-orange-500 h-40 lg:h-screen w-full lg:px-10">
+        <div className="absolute lg:hidden left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
       </div>
-      <div className="px-5 py-9 bg-red-40">
-        <NavLink to="/" className="flex items-center gap-1 bg-red-30 w-40">
-          <div className="w-6">
+      <div className="px-5 py-9 bg-red-40 lg:px-10 lg:w-full lg:h-screen lg:flex lg:flex-wrap lg:items-center lg:justify-center">
+        <NavLink
+          to="/"
+          className="lg:hidden flex items-center gap-1 bg-red-30 w-40 lg:absolute lg:z-10 lg:w-full lg:justify-center"
+        >
+          <div className="w-6 lg:hidden">
             <img src={logo} />
           </div>
-          <p className={`text-lg text-slate-100 varela font-bold`}>
+          <p
+            className={`text-lg text-slate-100 varela font-bold text-center lg:text-5xl lg:tracking-[5rem]`}
+          >
             intertwined
           </p>
         </NavLink>
 
+        <div className="hidden lg:flex items-center gap-1 bg-red-30 w-40 lg:absolute lg:z-10 lg:w-full lg:justify-center">
+          <div className="w-6 lg:hidden">
+            <img src={logo} />
+          </div>
+          <p
+            className={`text-lg text-slate-100 varela font-bold text-center lg:text-5xl lg:tracking-[5rem]`}
+          >
+            intertwined
+          </p>
+        </div>
+
+        <div className="w-full hidden lg:flex">
+          <NavLink to="/" className="w-20 mx-auto">
+            <div className="w-20 aspect-video">
+              <img src={logo} className=" object-cover" />
+            </div>
+          </NavLink>
+        </div>
+
         <form
           onSubmit={handleLogInFormSubmit}
-          className="bg-slate-50 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3  md:w-2/3 md:mx-auto"
+          className="bg-slate-50 lg:relative lg:hidde lg:z-20 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 lg:max-w-96 lg:h-auto md:mx-auto"
         >
-          <p className="font-semibold text-sm md:text-xl">Welcome back !</p>
+          <p className="font-semibold text-sm md:text-xl lg:text-base">
+            Welcome back !
+          </p>
 
           <div>
-            <label htmlFor="email" className="text-xs md:text-base font-semibold">
+            <label
+              htmlFor="email"
+              className="text-xs md:text-base lg:text-sm font-semibold"
+            >
               Email
             </label>
             <div className="relative group p-1 box-content focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg h-10">
@@ -112,13 +140,16 @@ function Login() {
 
           <div>
             <div className="flex justify-between">
-              <label htmlFor="password" className="text-xs font-semibold md:text-base">
+              <label
+                htmlFor="password"
+                className="text-xs font-semibold md:text-base lg:text-sm"
+              >
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => navigate("/forgot-password")}
-                className="text-xs md:text-base text-orange-500"
+                className="text-xs md:text-base lg:text-xs text-orange-500"
               >
                 Forgot your password?
               </button>
@@ -129,7 +160,7 @@ function Login() {
                   disabled={!logInButtonState}
                   type="button"
                   onClick={() => setShowPassword(false)}
-                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1"
                 >
                   {!logInButtonState ? (
                     <VisibilityOffOutlined
@@ -156,7 +187,7 @@ function Login() {
                   disabled={!logInButtonState}
                   type="button"
                   onClick={() => setShowPassword(true)}
-                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 h-full top-0 right-0 md:text-base"
+                  className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1 md:text-base"
                 >
                   {!logInButtonState ? (
                     <RemoveRedEyeOutlined
@@ -185,7 +216,7 @@ function Login() {
             {logInButtonState ? (
               <button
                 type="submit"
-                className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl"
+                className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl lg:text-sm"
               >
                 Login
               </button>
@@ -199,7 +230,7 @@ function Login() {
                 Login
               </button>
             )}
-            <p className="text-black text-sm text-center my-5 md:text-xl">
+            <p className="text-black text-sm text-center my-5 md:text-xl lg:text-sm">
               Don't have an account?{" "}
               <button
                 type="button"
