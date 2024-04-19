@@ -82,12 +82,13 @@ function AllRequests({
         <p className={`font-light text-xs text-slate-300`}>( All requests made will appear here, including yours ) </p>
       </div>
       {showRequestInfo.state && (
+        <div className="lg:absolute lg:size-full z-20 lg:top-0 bg-black bg-opacity-60">
         <div
           onClick={() =>
             setShowRequestInfo({ ...showRequestInfo, state: false })
           }
-          className={`fixed z-20 h-full w-full lg:w-1/3 overflow-auto lg:left-1/3 top-14 rounded-t-xl fadeInDown ${
-            theme === "lightMode" ? "bg-slate-800" : "bg-white"
+          className={`fixed z-20 h-full w-full lg:w-1/3 bg-red-40 overflow-auto lg:left-1/3 top-14 rounded-t-xl fadeInDown ${
+            theme === "lightMode" ? "bg-slate-80" : "bg-white"
           }`}
         >
           <div
@@ -103,7 +104,7 @@ function AllRequests({
             setNavItem={setNavItem}
             theme={theme}
           />
-        </div>
+        </div></div>
       )}
 
       <div className="flex justify-between border-b border-slate-400 my-1 px-5 py-3">
@@ -141,7 +142,7 @@ function AllRequests({
         </div>
       )}
 
-<div className="">
+<div className="lg:h-80 lg:overflow-scroll">
       {allRequests &&
         allRequests.map((items) => {
           return (

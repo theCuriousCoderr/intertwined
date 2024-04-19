@@ -128,7 +128,7 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
               {confirmRequestDelete && (
                 <div
                   onClick={() => setConfirmRequestDelete(false)}
-                  className="fixed top-0 z-50 bg-black bg-opacity-50 lg:bg-opacity-90 left-0 h-full w-full flex pt-[50%] lg:pt-[10%] justify-center"
+                  className="fixed top-0 z-50 bg-black bg-opacity-50 left-0 h-full w-full flex pt-[50%] lg:pt-[10%] justify-center"
                 >
                   <div className="w-[80%] lg:w-1/3 lg:ml-40 rounded-md bg-slate-100 h-52 p-5">
                     <div className="w-20 mx-auto flex items-center justify-center text-red-500 bg-red-40">
