@@ -142,9 +142,9 @@ function ProfilePage({ user, setUser, theme }) {
       {confirmDeleteAccount && (
         <div
           onClick={() => setConfirmDeleteAccount(false)}
-          className="absolute z-10 w-full h-full bg-gray-900 bg-opacity-80 flex pt-[50%] justify-center"
+          className="absolute z-10 w-full h-full bg-gray-900 bg-opacity-80 flex pt-[50%] lg:pt-[10%] justify-center"
         >
-          <div className="w-[80%] rounded-md bg-slate-100 h-52 p-5">
+          <div className="w-[80%] lg:w-1/3 rounded-md bg-slate-100 h-52 p-5">
             <div className="w-20 mx-auto flex items-center justify-center text-red-500 bg-red-40">
               <CancelOutlined sx={{ fontSize: 60 }} />
             </div>
@@ -160,7 +160,7 @@ function ProfilePage({ user, setUser, theme }) {
                 onClick={() => setConfirmDeleteAccount(false)}
                 className="w-[30%]"
               >
-                <button className="text-center w-full p-1 bg-slate-400 active:bg-slate-700 rounded-sm text-white">
+                <button className="text-center w-full p-1 bg-slate-400 hover:bg-slate-700 active:bg-slate-700 rounded-sm text-white">
                   No
                 </button>
               </div>
@@ -170,7 +170,7 @@ function ProfilePage({ user, setUser, theme }) {
                     e.stopPropagation();
                     deleteAccount();
                   }}
-                  className="text-center w-full p-1 bg-red-500 active:bg-red-700 rounded-sm text-white"
+                  className="text-center w-full p-1 bg-red-500 hover:bg-red-700 rounded-sm text-white"
                 >
                   Delete
                 </button>
@@ -207,7 +207,7 @@ function ProfilePage({ user, setUser, theme }) {
             e.stopPropagation();
             setChangeDetails("");
           }}
-          className="absolute bg-slate-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown"
+          className="absolute bg-slate-50 w-full bottom-0 z-20 rounded-t-3xl fadeInDown lg:left-1/3 lg:w-1/3"
         >
           {changeDetails === "photo" && (
             <EditUserPhoto
@@ -241,7 +241,7 @@ function ProfilePage({ user, setUser, theme }) {
       </div>
 
       <div
-        className={`p-2 border-y ${
+        className={`p-2 border-y lg:w-1/3 ${
           theme === "lightMode" ? " border-slate-30" : "border-slate-500"
         } border-slate-30 flex justify-start`}
       >
@@ -419,7 +419,7 @@ function ProfilePage({ user, setUser, theme }) {
         </div>
       )}
 
-      <div className="m-2">
+      <div className="m-2 lg:w-1/3">
         <button
           onClick={() => setConfirmDeleteAccount(true)}
           className={`p-1 w-full rounded-md border h-10 ${

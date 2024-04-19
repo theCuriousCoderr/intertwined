@@ -5,6 +5,7 @@ import putHook from "../../../apiHooks/putHook";
 import ToastAlert from "../../../components/ToastAlert";
 import { CancelOutlined } from "@mui/icons-material";
 import deleteHook from "../../../apiHooks/deleteHook";
+import ConcentricCircles from "../../../components/ConcentricCircles";
 let dotEnv = import.meta.env;
 
 function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
@@ -75,38 +76,17 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
 
   return (
     <div
-      className={`relative z-10 isolation-auto pt-14 pb-20 ${
+      className={`relative z-10 isolation-auto pt-14 pb-20 lg:pl-40 ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen"
           : "bg-gray-900 h-screen"
       } `}
     >
-      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
-        <div
-          className={`absolute size-[50rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[40rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[30rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[20rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-      </div>
+     <ConcentricCircles theme={theme} />
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
-      <p
+      <div
         id="top"
         className={`text-lg font-bold varela p-2 border-b border-slate-300 ${
           !(theme === "lightMode") ? "text-white" : "text-slate-100"
@@ -114,17 +94,18 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
       >
         Your Requests{" "}
         {yourRequests.length && <span>({yourRequests.length || ""})</span>}
-      </p>
+        <p className={`font-light text-xs text-slate-300`}>( Any request you post will appear here ) </p>
+      </div>
 
       {yourRequests === false && (
         <div className="p-5 text-xl font-bold text-slate-200">
-          <p>No requests yet</p>
+          <p>You haven't posted any request yet.</p>
         </div>
       )}
 
       {yourRequests === "" && (
         <div className="mt-10 p-5">
-          <p className="text-lg text-blue-700 font-bold mb-5">
+          <p className="text-lg text-slate-200 font-bold mb-5">
             ... Fetching Your Requests
           </p>
           <div className="relative h-1 w-full rounded-full bg-slate-300 overflow-hidden">
@@ -138,7 +119,7 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
           return (
             <div
               key={items._id}
-              className={`relative m-2 rounded-lg p-3 ${
+              className={`relative m-2 rounded-lg p-3 lg:w-1/2 ${
                 theme === "lightMode"
                   ? "bg-white border border-slate-100 shadow"
                   : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"
@@ -147,9 +128,9 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
               {confirmRequestDelete && (
                 <div
                   onClick={() => setConfirmRequestDelete(false)}
-                  className="fixed top-0 z-50 bg-black bg-opacity-50 left-0 h-full w-full flex pt-[50%] justify-center"
+                  className="fixed top-0 z-50 bg-black bg-opacity-50 lg:bg-opacity-90 left-0 h-full w-full flex pt-[50%] lg:pt-[10%] justify-center"
                 >
-                  <div className="w-[80%] rounded-md bg-slate-100 h-52 p-5">
+                  <div className="w-[80%] lg:w-1/3 lg:ml-40 rounded-md bg-slate-100 h-52 p-5">
                     <div className="w-20 mx-auto flex items-center justify-center text-red-500 bg-red-40">
                       <CancelOutlined sx={{ fontSize: 60 }} />
                     </div>
@@ -165,7 +146,7 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
                         onClick={() => setConfirmRequestDelete(false)}
                         className="w-[30%]"
                       >
-                        <button className="text-center w-full p-1 bg-slate-400 active:bg-slate-700 rounded-sm text-white">
+                        <button className="text-center w-full p-1 bg-slate-400 hover:bg-slate-600 active:bg-slate-700 rounded-sm text-white">
                           No
                         </button>
                       </div>
@@ -175,7 +156,7 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
                             e.stopPropagation();
                             deleteRequest();
                           }}
-                          className="text-center w-full p-1 bg-red-500 active:bg-red-700 rounded-sm text-white"
+                          className="text-center w-full p-1 bg-red-500 hover:bg-red-700 rounded-sm text-white"
                         >
                           Delete
                         </button>

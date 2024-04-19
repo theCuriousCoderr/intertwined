@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import postHook from "../../../apiHooks/postHook.js";
 import ToastAlert from "../../../components/ToastAlert.jsx";
 import { useNavigate } from "react-router-dom";
+import ConcentricCircles from "../../../components/ConcentricCircles.jsx";
 let dotEnv = import.meta.env;
 
 function AddRequest({ user, theme, setAllRequestsCache }) {
@@ -87,38 +88,17 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
   }
   return (
     <div
-      className={`relative z-10 isolation-auto pt-14 pb-20 ${
+      className={`relative z-10 isolation-auto pt-14 pb-20 lg:pl-40 ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full"
           : "bg-gray-900 h-full"
       } `}
     >
-      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
-        <div
-          className={`absolute size-[50rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[40rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[30rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[20rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-      </div>
+     <ConcentricCircles theme={theme} />
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
-      <div>
+      <div className="lg:w-2/3">
         <p
           id="top"
           className={`text-lg font-bold varela p-2 border-b  ${
@@ -147,11 +127,12 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
             <div
               className={`group p-1 focus-within:bg-opacity-20 rounded-lg ${
                 theme === "lightMode"
-                  ? "focus-within:bg-orange-100"
+                  ? "focus-within:bg-orange-900"
                   : "focus-within:bg-slate-100"
               }`}
             >
               <input
+              spellCheck={false}
                 maxLength={30}
                 required
                 value={requestDetails.requestTitle}
@@ -159,9 +140,9 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 id="requestTitle"
                 name="requestTitle"
                 placeholder="I want to collect movies"
-                className={`placeholder:text-xs h-10  outline-none ring-1 w-full rounded-md p-1 text-sm ${
+                className={`placeholder:text-xs h-10 outline-none ring-1 w-full rounded-md px-2 text-sm ${
                   theme === "lightMode"
-                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-white"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-slate-200"
                     : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
                 }`}
               />
@@ -180,20 +161,21 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
             <div
               className={`group p-1 h-20 focus-within:bg-opacity-20 rounded-lg ${
                 theme === "lightMode"
-                  ? "focus-within:bg-orange-100 text-slate-100"
+                  ? "focus-within:bg-orange-900"
                   : "focus-within:bg-slate-100"
               }`}
             >
               <textarea
                 required
+                spellCheck={false}
                 value={requestDetails.requestDescription}
                 onChange={handleRequestDetailsFormChange}
                 id="requestDescription"
                 name="requestDescription"
                 placeholder="I need the complete seasons of Game of Thrones. Anyone who has should please reach out to me "
-                className={`placeholder:text-xs h-full outline-none ring-1 w-full rounded-md p-1 resize-none text-sm ${
+                className={`placeholder:text-xs h-full outline-none ring-1 w-full rounded-md p-2 resize-none text-sm ${
                   theme === "lightMode"
-                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20"
+                    ? "group-focus:ring-orange-500 bg-slate-200 bg-opacity-20 text-slate-200"
                     : "group-focus:ring-slate-100 bg-slate-800 text-white placeholder:text-slate-600"
                 }`}
               />
@@ -213,7 +195,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   theme === "lightMode" ? "text-slate-300" : "text-teal-400"
                 } ml-1 text-[10px] block leading-3 mb-2`}
               >
-                # A paid service can attract more people than a free service
+                # A paid service can attract more response than a free service
               </span>
             </label>
             <div
@@ -310,6 +292,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                   <br /> (A location that almost/precisely describes your area)
                 </label>
                 <input
+                spellCheck={false}
                   required
                   value={requestDetails.landmark}
                   onChange={handleRequestDetailsFormChange}

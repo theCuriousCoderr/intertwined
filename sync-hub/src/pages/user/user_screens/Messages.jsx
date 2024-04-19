@@ -4,6 +4,7 @@ import postHook from "../../../apiHooks/postHook";
 import { Avatar } from "@mui/material";
 import bg_whatsapp_image from "../../images/bg_whatsapp.jpg";
 import { orange } from "@mui/material/colors";
+import ConcentricCircles from "../../../components/ConcentricCircles";
 let dotEnv = import.meta.env;
 
 function Messages({
@@ -188,34 +189,13 @@ function Messages({
 
   return (
     <div
-      className={`relative z-10 isolation-auto pt-14 pb-20 overflow-scroll ${
+      className={`relative z-10 isolation-auto pt-14 pb-20 lg:pl-40 overflow-scrol ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen"
           : "bg-gray-900 h-screen"
       } `}
     >
-      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
-        <div
-          className={`absolute size-[50rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[40rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[30rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[20rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-      </div>
+     <ConcentricCircles theme={theme} />
       {chats === "" && (
         <div className="mt-10 p-5">
           <p className="text-lg text-slate-200 font-bold mb-5">
@@ -234,12 +214,14 @@ function Messages({
             <br />
             <br />
             Message a client to start a chat history with them.
+            <br />
+            <br />
           </p>
         </div>
       )}
 
       {chats === "Direct Message" && (
-        <div className="fixed w-full bg-blue-40 h-screen">
+        <div className="fixed w-full lg:w-auto lg:right-0 lg:left-40 bg-blue-40 h-screen">
           <div
             onClick={() => {
               chatBack.current
@@ -277,17 +259,18 @@ function Messages({
               </div>
             </div>
           </div>
+          {/* scroll */}
 
           <div
             className={`absolute z-10 top-14 bottom-28 w-full ${
-              theme === "lightMode" ? "bg-slate-500 " : "bg-gray-900"
+              theme === "lightMode" ? "bg-transparent " : "bg-gray-900"
             } flex flex-col items-end p- justify-between px- overflow-scrol`}
           >
             <img
               src={user.chatWallPaper || bg_whatsapp_image}
-              className="absolute -z-10 w-full h-full object-cover opacity-80"
+              className="absolute -z-10 size-full object-cover opacity-80 lg:hidden"
             />
-            <div className=" w-full bg-lime-30 absolut bottom- overflow-scroll">
+            <div className=" w-full bg-lime-30 absolut bottom- overflow-scrol">
               {/* {clientContent.requestTitle && <p className=" p-1 bg-green-100 rounded font-semibold">Message Topic: <span className="text-green-700">{clientContent.requestTitle} </span></p> } */}
               {chatsArray &&
                 chatsArray.chats.map((item) => {
@@ -338,15 +321,15 @@ function Messages({
               </div>
             )}
 
-            <div className="flex justify-evenly items-end w-full bg-white">
-              <div className="w-[80%] bg-red-30">
+            <div className="flex justify-evenly items-end w-full bg-transparent lg:pl-40">
+              <div className="w-[80%]">
                 <textarea
                   rows={textArea.rows}
                   name="message"
                   value={textArea.message}
                   onChange={handleMessageChange}
                   type="text"
-                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-base bg-slate-20 border border-white text-black outline-none resize-none"
+                  className="w-full rounded-lg py-1 pb-3 px-2 text-pretty text-base bg-slate-20 border border-white text-black outline-none resize-none bg-red-30"
                   placeholder="Message"
                 />
               </div>
@@ -385,7 +368,7 @@ function Messages({
             >
               Chats History
             </p>
-            <div className="overflow-scroll">
+            <div className="overflow-scrol max-w-[30rem]">
               {chats.map((item) => {
                 return (
                   <div

@@ -142,13 +142,14 @@ function ForgotPassword() {
             </label>
             <div className="group p-1 focus-within:bg-emerald-400 focus-within:bg-opacity-80 rounded-lg">
               <input
+              disabled={!logInButtonState}
               required
                 id="email"
                 name="email"
                 type="email"
                 value={changePasswordDetails.email}
                 onChange={handlePasswordFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm h-10 md:text-base"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full rounded-md p-1 text-sm h-10 md:text-base disabled:text-red-400"
               />
             </div>
           </div>
@@ -162,6 +163,7 @@ function ForgotPassword() {
             {showPassword ? (
               <div className="relative group p-1 box-content focus-within:bg-emerald-400 focus-within:bg-opacity-80 rounded-lg h-10">
                 <button
+                disabled={!logInButtonState}
                  type="button"
                   onClick={() => setShowPassword(false)}
                   className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1"
@@ -169,18 +171,20 @@ function ForgotPassword() {
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                disabled={!logInButtonState}
                   minLength={5}
                   required
                   id="newPassword"
                   name="newPassword"
                   value={changePasswordDetails.newPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base "
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-red-400"
                 />
               </div>
             ) : (
               <div className="relative group p-1 box-content focus-within:bg-emerald-400 focus-within:bg-opacity-80 rounded-lg h-10">
                 <button
+                disabled={!logInButtonState}
                  type="button"
                   onClick={() => setShowPassword(true)}
                   className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1"
@@ -188,6 +192,7 @@ function ForgotPassword() {
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                disabled={!logInButtonState}
                   type="password"
                   minLength={5}
                   required
@@ -213,6 +218,7 @@ function ForgotPassword() {
             {showPassword ? (
               <div className="relative group p-1 box-content focus-within:bg-emerald-400 focus-within:bg-opacity-80 rounded-lg h-10">
                 <button
+                disabled={!logInButtonState}
                  type="button"
                   onClick={() => setShowPassword(false)}
                   className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1"
@@ -220,18 +226,20 @@ function ForgotPassword() {
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                disabled={!logInButtonState}
                   minLength={5}
                   required
                   id="confirmPassword"
                   name="confirmPassword"
                   value={changePasswordDetails.confirmPassword}
                   onChange={handlePasswordFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-red-400"
                 />
               </div>
             ) : (
               <div className="relative group p-1 box-content focus-within:bg-emerald-400 focus-within:bg-opacity-80 rounded-lg h-10">
                 <button
+                disabled={!logInButtonState}
                 type="button"
                   onClick={() => setShowPassword(true)}
                   className="absolute text-xs font-semibold bg-red-20 flex items-center justify-center w-10 top-1 bottom-1 right-1"
@@ -239,6 +247,7 @@ function ForgotPassword() {
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                  disabled={!logInButtonState}
                   type="password"
                   minLength={5}
                   required
@@ -268,21 +277,22 @@ function ForgotPassword() {
                 disabled
                 className="bg-gray-300 relative p-2 w-full text-center text-gray-300 varela rounded-md h-10"
               >
-                <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin lg:text-sm"></div>
+                <div className="absolute left-[47.5%] w-[5%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
                 Change Password
               </button>
             )}
 
-            <p className="text-red-200 text-xs text-center md:text-xl lg:text-sm my-5">
+            <div className="text-red-200 text-xs text-center md:text-xl lg:text-sm my-5">
               Go back to{" "}
               <button
+              disabled={!logInButtonState}
                type="button"
-                className="text-green-500 active:text-green-500"
+                className="text-green-500 active:text-green-500 disabled:text-red-500"
                 onClick={() => navigate("/login")}
               >
                 Log in
               </button>
-            </p>
+            </div>
           </div>
         </form>
       </div>

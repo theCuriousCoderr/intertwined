@@ -40,7 +40,7 @@ function RequestInfo({
   return (
     <div
     onScroll={(e)=> e.stopPropagation()}
-      className={`relative rounded-t-xl h-full overflow-scroll  ${
+      className={`relative rounded-t-xl h-[80%]  ${
         theme === "lightMode" ? "bg-white" : "bg-gray-900"
       }`}
     >
@@ -75,7 +75,7 @@ function RequestInfo({
           </div>
         </>
       )}
-      <div className="p-5 bg-red-30">
+      <div className="p-5 h-full bg-red-40 overflow-scroll">
         <div className="py-5">
           <p
             className={`varela text-sm ${
@@ -148,7 +148,7 @@ function RequestInfo({
           </div>
         </div>
 
-        <div className="my-3">
+        <div className="my-10">
           {user.email === content.reqShaker && (
             <p className="text-red-600 font-bold text-center">
               You made this request

@@ -3,6 +3,7 @@ import RequestInfo from "./RequestInfo";
 import getHook from "../../../apiHooks/getHook";
 import calculateDuration from "../helper_functions/calculateDuration";
 import { LocationOnOutlined, Tune } from "@mui/icons-material";
+import ConcentricCircles from "../../../components/ConcentricCircles";
 let dotEnv = import.meta.env;
 
 function AllRequests({
@@ -63,35 +64,14 @@ function AllRequests({
   }
   return (
     <div
-      className={`relative z-10 pt-14 pb-20 overflow-scroll ${
+      className={`relative h-screen z-10 pt-14 pb-20 lg:pl-40 overflow-scroll ${
         theme === "lightMode"
-          ? "bg-gradient-to-br from-purple-800 to-blue-600 h-full"
-          : "bg-gray-900 h-full"
+          ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen"
+          : "bg-gray-900 h-screen"
       } `}
     >
-      <div className={`fixed -z-10 -right-5 flex items-center justify-center`}>
-        <div
-          className={`absolute size-[50rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[40rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[30rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-        <div
-          className={`absolute size-[20rem] border ${
-            theme === "lightMode" ? "border-slate-500" : "border-slate-700"
-          } border-slate-500 rounded-full`}
-        ></div>
-      </div>
-      <p
+     <ConcentricCircles theme={theme} />
+      <div
         id="top"
         className={`text-lg font-bold varela p-2 border-slate-300 ${
           theme === "lightMode" ? "text-slate-100" : "text-white"
@@ -99,13 +79,14 @@ function AllRequests({
       >
         All Requests{" "}
         {allRequests.length >= 1 && <span>({allRequests.length})</span>}
-      </p>
+        <p className={`font-light text-xs text-slate-300`}>( All requests made will appear here, including yours ) </p>
+      </div>
       {showRequestInfo.state && (
         <div
           onClick={() =>
             setShowRequestInfo({ ...showRequestInfo, state: false })
           }
-          className={`fixed z-20 h-full w-full top-14 rounded-t-xl fadeInDown ${
+          className={`fixed z-20 h-full w-full lg:w-1/3 overflow-auto lg:left-1/3 top-14 rounded-t-xl fadeInDown ${
             theme === "lightMode" ? "bg-slate-800" : "bg-white"
           }`}
         >
@@ -125,14 +106,15 @@ function AllRequests({
         </div>
       )}
 
-      <div className="flex justify-between border-b border-slate-400 my-1 p-5 ">
+      <div className="flex justify-between border-b border-slate-400 my-1 px-5 py-3">
         <div className="w-[80%]  ">
           <input
+          disabled={!allRequests}
           name="search"
           onChange={handleRequestSearch}
             placeholder="Search Requests"
-            className={`w-full bg-slate-200 bg-opacity-20 ring-slate-600 h-10 outline-slate-700 border-slate-400 border rounded-md px-3 py-1 ${
-              theme === "lightMode" ? "text-white" : "text-slate-50"
+            className={`w-full bg-slate-200 bg-opacity-20  disabled:bg-opacity-50  ring-slate-600 h-10 outline-slate-700 border-slate-400 border rounded-md px-3 py-1 ${
+              theme === "lightMode" ? "text-white disabled:text-slate-900" : "text-slate-50"
             }`}
           />
         </div>
@@ -145,7 +127,7 @@ function AllRequests({
 
       <p className="text-sm text-slate-300 px-5 py-2 varela">
         Browse through here to see if there are any requests you could help with
-        or requests that match your preference
+        or requests that match your preference to assist with.
       </p>
 
       {allRequests === "" && allRequestsCache === "" && (
@@ -159,17 +141,18 @@ function AllRequests({
         </div>
       )}
 
+<div className="">
       {allRequests &&
         allRequests.map((items) => {
           return (
-            <div key={items.requestTitle} className="relative">
+            <div key={items.requestTitle} className="relative lg:w-1/2">
               {calculateDuration(items.expiresOn, false) === "active" ? (
-                <div
+                <button
                   key={items}
                   onClick={() => {
                     setShowRequestInfo({ content: items, state: true });
                   }}
-                  className={` mx-2 my-5 rounded-lg p-3 ${
+                  className={` mx-2 my-5 rounded-lg p-3 text-left ${
                     theme === "lightMode"
                       ? "bg-purple-50 border border-slate-100 shadow"
                       : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"
@@ -197,7 +180,7 @@ function AllRequests({
                   >
                     {items.requestTitle}{" "}
                   </p>
-                  <div className="text-slate-50 text-[10px] my-2 absolute top-2 right-4">
+                  <div className="text-slate-50 text-[10px] my-2 absolute top-6 right-4">
                     {items.charges === "" ? (
                       <span className="px-1 py-1 text-ce bg-blue-400 rounded">
                         Free Service
@@ -249,9 +232,9 @@ function AllRequests({
                       </div>
                     </div>
                   </div>
-                </div>
+                </button>
               ) : (
-                <div
+                <button
                   key={items}
                   className="relative bg-slate-50 border border-red-40 bg-opacity- mx-2 my-5 rounded-lg p-3 space-y-"
                 >
@@ -302,15 +285,17 @@ function AllRequests({
                       </div>
                     </div>
                   </div>
-                </div>
+                </button>
               )}
             </div>
           );
         })}
 
+</div>
+
       {allRequests === false && (
-        <div className="p-5 text-xl font-bold text-red-700">
-          <p>No requests yet</p>
+        <div className={`p-5 text-xl font-bold ${theme === "lightMode" ? "text-purple-300" : "text-slate-300" }`}>
+          <p>NO REQUESTS YET</p>
         </div>
       )}
     </div>

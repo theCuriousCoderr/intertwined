@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 
 function Mission() {
-  useEffect(()=>{
+  useEffect(() => {
     let title = document.querySelector("title");
     title.innerHTML = "intertwined | Mission & Vision";
-
-  }, [])
+  }, []);
   return (
-    <div className="mt-5 bg-red-40 py-5 lg:w-2/3">
+    <div className="mt-5 bg-red-40 py-5 lg:w-full">
       <p
         id="top"
         className="text-lg font-bold varela p-2 border-b border-slate-300"
@@ -20,9 +19,9 @@ function Mission() {
         and labour easier
       </p>
       <div>
-        <p className="text-xl font-medium bg-green-400">
+        <span className="text-xl font-medium bg-green-400">
           A simple illustration
-        </p>
+        </span>
         <p className="px-5 font-medium text-green-600">
           :: using an errand/delivery scenario
         </p>

@@ -22,9 +22,9 @@ function SideNavBar({
     }, 200);
   }
   return (
-    <div className="fixed z-50 top-0 bottom-0 w-full bg-red-20 flex slideInLeft ">
+    <div className="fixed z-50 top-0 bottom-0 w-full bg-green-60 flex slideInLeft ">
       <div
-        className={`p-2 w-[80%] ${
+        className={`relative p-2 w-[80%] lg:w-1/3 ${
           theme === "lightMode" ? "bg-white" : "bg-gray-900"
         }`}
       >

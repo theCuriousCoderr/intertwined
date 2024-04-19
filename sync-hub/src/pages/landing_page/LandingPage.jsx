@@ -23,6 +23,7 @@ import MenuBarExtend from "./MenuBarExtend";
 import getHook from "../../apiHooks/getHook";
 import request from "../images/request.png";
 import vector from "../images/vector_cube.avif";
+import universe from "../../assets/video/universe.mp4";
 let dotEnv = import.meta.env;
 
 function LandingPage() {
@@ -213,61 +214,71 @@ function LandingPage() {
 
           <div className="hidden lg:flex items-center gap-10 px-10">
             <div className="w-1/2">
-            <div>
-              <h1 className="mt-16 text-3xl font-bold font-serif text-gray-950">
-                Empowering Connections. <br />
-                Where Requests Meet Responses.
+              <div>
+                <h1 className="mt-16 text-3xl font-bold font-serif text-purple-400">
+                  Empowering Connections. <br />
+                  Where Requests Meet Responses.
+                </h1>
+                <div className="flex items-center gap-2 justify-start text-xs md:text-base text-slate-300 mt-2">
+                  <div className="size-1 bg-slate-300 rounded-full"></div>
+                  <p>Send a request</p>
+                  <div className="size-1 bg-slate-300 rounded-full"></div>
+                  <p>Get a response</p>
+                  <div className="size-1 bg-slate-300 rounded-full"></div>
+                </div>
+              </div>
+              <h1 className="text-base md:text-lg mt-16 leading-6 text-slate-800 varela">
+                Revolutionizing the way your common needs and tasks are handled
+                and addressed, our innovative project seamlessly bridges the gap
+                between client needs and soluton offerings. By providing a
+                user-friendly platform, we empower the common individuals and
+                persons to effortlessly discover, engage and interact with
+                service providers for any task or need at hand, thereby
+                fostering a dynamic marketplace where every interaction leads to
+                mutual satisfaction and success.
               </h1>
-              <div className="flex items-center gap-2 justify-start text-xs md:text-base text-slate-300 mt-2">
-                <div className="size-1 bg-slate-300 rounded-full"></div>
-                <p>Send a request</p>
-                <div className="size-1 bg-slate-300 rounded-full"></div>
-                <p>Get a response</p>
-                <div className="size-1 bg-slate-300 rounded-full"></div>
+              <div className="flex items-center my-5 ">
+                <button
+                  onClick={() => navigate("/signup")}
+                  className="flex items-center gap-2 bg-gray-950 px-3 py-2 rounded-lg text-slate-50 text-base active:bg-green-500"
+                >
+                  <p>Join us now</p>
+                  <div>
+                    <ArrowForwardIos sx={{ fontSize: 20 }} />
+                  </div>
+                </button>
               </div>
             </div>
-            <h1 className="text-base md:text-lg mt-16 leading-6 text-slate-800 font-[Rubik]">
-              Revolutionizing the way your common needs and tasks are handled
-              and addressed, our innovative project seamlessly bridges the gap
-              between client needs and soluton offerings. By providing a
-              user-friendly platform, we empower the common individuals and
-              persons to effortlessly discover, engage and interact with service
-              providers for any task or need at hand, thereby fostering a
-              dynamic marketplace where every interaction leads to mutual
-              satisfaction and success.
-            </h1>
-            <div className="flex items-center my-5 ">
-              <button
-                onClick={() => navigate("/signup")}
-                className="flex items-center gap-2 bg-gray-950 px-3 py-2 rounded-lg text-slate-50 text-base active:bg-green-500"
-              >
-                <p>Join us now</p>
-                <div>
-                  <ArrowForwardIos sx={{ fontSize: 20 }} />
-                </div>
-              </button>
-            </div>
-
-            </div>
             <div className="w-1/2">
-            <div className={` overflow-hidden mx-auto rounded-md ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors p-1`}>
-              <img src={vector} className="w-full aspect-video mx-auto rounded-md" />
+              <div
+                className={` overflow-hidden mx-auto rounded-md ${trapeziumState.color} ${trapeziumState.gradientDirection} ${trapeziumState.gradientColor} bg-opacity-90 changeColors p-1`}
+              >
+                <img
+                  src={vector}
+                  className="w-full aspect-video mx-auto rounded-md"
+                />
+              </div>
             </div>
-            </div>
-
           </div>
         </div>
 
-        <div className="bg-gray-950 relative overflow-hidden my-10 py-3">
+        <div className="bg-gray-950 relative z-20 overflow-hidden my-10 py-3">
+          <div className="absolute -z-10 h-full w-full bg-red-40 hidden lg:block">
+            <video autoPlay loop height="100%" width="100%">
+              <source src={universe}type="video/mp4" />
+            </video>
+          </div>
           <div className="absolute size-40 rounded-full -top-10 -right-10 bg-orange-500">
             <div className="absolute size-20 rounded-full bg-gray-950 bottom-0 -right-0"></div>
           </div>
-          <p className="relative w-[90%] font-light p-5 mx-auto text-xl font-serif text-orange-50 text-center text-balance">
+          <p className="relative w-[90%] font-light p-5 mx-auto text-xl font-serif text-orange-50 text-center text-balance lg:text-3xl">
             "Find and connect with people to help you do things"
           </p>
-          <p className="text-orange-500 p-5 varela">Our services</p>
+          <p className="text-orange-500 p-5 varela lg:text-center lg:text-2xl">
+            Our services
+          </p>
 
-          <div className="p-5 space-y-3">
+          <div className="p-5 space-y-3 lg:flex lg:space-y-0 lg:gap-5 lg:px-10">
             {[
               {
                 icon: (
@@ -312,14 +323,17 @@ function LandingPage() {
               },
             ].map((items) => {
               return (
-                <div key={items.title}>
-                  <div className="flex gap-2 items-center">
+                <div
+                  key={items.title}
+                  className="lg:w-[20%] lg:hover:scale-110 transition-all lg:hover:shadow lg:hover:shadow-slate-800 lg:hover:rounded-md"
+                >
+                  <div className="flex lg:flex-col gap-2 items-center lg:h-20 bg-red-40">
                     <div>{items.icon}</div>
-                    <p className="borde border-orange-500 text-orange-500 md:text-lg">
+                    <p className="text-orange-500 md:text-lg lg:text-center">
                       {items.title}
                     </p>
                   </div>
-                  <p className="text-slate-300 text-sm md:text-lg">
+                  <p className="text-slate-300 text-sm md:text-lg lg:text-lg lg:text-center lg:h-40 lg:flex lg:items-center lg:px-2">
                     {items.text}
                   </p>
                 </div>
@@ -328,7 +342,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="relative p-5 space-y-5 overflow-hidden bg-red-40">
+        <div className="relative p-5 space-y-5 overflow-hidden bg-red-40 lg:px-10">
           <div className="absolute -rotate-12 -top-32 -left-32 -z-10 text-slate-100 opacity-50">
             <StarBorderOutlined sx={{ fontSize: 400 }} />
           </div>
@@ -357,7 +371,7 @@ function LandingPage() {
 
           <div
             id="dashboard-anaytics"
-            className="relative h-56 w-full bg-red-40 border-l-4 border-slate-200 "
+            className="hidden relative h-56 w-full bg-red-40 border-l-4 border-slate-200 "
           >
             <div className=" absolute -left-1 bg-red-90 space-y-5 md:text-xl">
               <div className="h-10">
@@ -395,7 +409,7 @@ function LandingPage() {
         </div>
 
         <footer id="footer-cut" className="p-5 bg-slate-50 pt-20 pb-5">
-          <div className="space-y-2">
+          <div className="space-y-2 lg:flex lg:items-center lg:justify-between lg:px-10">
             <p className="text-xl varela font-bold text-slate-950">
               intertwined
             </p>

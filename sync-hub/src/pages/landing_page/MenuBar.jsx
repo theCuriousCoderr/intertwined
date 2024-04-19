@@ -46,7 +46,7 @@ function MenuBar({
             hidden={!ourServices}
             className="px-3 bg-red-40 -mt-4 pt-5 fadeIn"
           >
-            <div className="font-light space-y-2">
+            <div className="font-light space-y-2 text-slate-500">
               <p className="">Add sevices request</p>
               <p>View all services requests</p>
               <p>View your services requests </p>

@@ -49,25 +49,23 @@ function Header({ menuBarState, setMenuBarState, showMenu = true, setMenuBarExte
             e.stopPropagation();
             setOurServices(!ourServices);
           }}
-          className={`bg-red-20 p-1 rounded ${
-            ourServices ? "h-42 bg-slate-200" : "h-8"
-          } fadeI overflow-hidden`}
+          className="group relative"
         >
           <div className="flex items-center bg-red-20 justify-between">
             <p
               className={`${
-                ourServices ? "text-slate-700" : "text-slate-200"
-              } text-sm varela font-medium hover:text-purple-500`}
+                ourServices ? "text-slate-200" : "text-slate-200"
+              } text-sm varela font-medium group-hover:text-purple-500`}
             >
               Our services
             </p>
-            <div className="text-slate-200">{!ourServices ? <ExpandMore sx={{fontSize: 20}} /> : <ExpandLess />}</div>
+            <div className="text-slate-200">{!ourServices ? <ExpandMore sx={{fontSize: 20}} /> : <ExpandLess sx={{fontSize: 20}} />}</div>
           </div>
           <div
-            hidden={!ourServices}
-            className="px-3 bg-red-40 -mt-4 pt-5 fadeIn"
+           
+            className="hidden absolute group-hover:block w-80 bg-purple-400 bg-opacity-50 backdrop-blur-sm p-5 rounded-md"
           >
-            <div className="font-light space-y-2">
+            <div className="space-y-2 text-black ">
               <p className="">Add sevices request</p>
               <p>View all services requests</p>
               <p>View your services requests </p>

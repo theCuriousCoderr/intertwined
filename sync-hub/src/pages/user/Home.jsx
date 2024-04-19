@@ -90,37 +90,6 @@ function Home({user, setUser, theme, navItem, setNavItem, showSideNavBar, setSho
 
       { user.email && navigate("/user/all-requests")}
 
-
-
-      {/* {user.email && (
-        <div>
-          { sideNavBarExtend !== "" && 
-          <div onClick={()=> setSideNavBarExtend("")} className="absolute bg-white z-50 h-full w-full slideInLeft">
-            {sideNavBarExtend === "profile" && <ProfilePage user={user} setUser={setUser} setSideNavBarExtend={setSideNavBarExtend} />}
-            </div>}
-          <div className="relative h-screen w-full bg-red-20">
-            <div className="fixed top-0 w-full flex flex-wrap justify-between items-center p-2 bg-white">
-              <div
-                onClick={() => setShowSideNavBar(true)}
-                className="size-10 flex items-center justify-center rounded-full bg-red-200"
-              >
-                {user.photo ? <img
-                  src={user.photo}
-                  alt="User Photo"
-                  className="w-full h-full rounded-full object-cover"
-                /> : <Avatar /> }
-              </div>
-              <p className="text-lg varela font-semibold">intertwined</p>
-              <div className="size-5 bg-yellow-200"></div>
-            </div>
-
-            {showSideNavBar && (
-              <SideNavBar user={user} setShowSideNavBar={setShowSideNavBar} setSideNavBarExtend={setSideNavBarExtend} />
-            )}
-
-          </div>
-        </div>
-      )} */}
     </div>
   );
 }

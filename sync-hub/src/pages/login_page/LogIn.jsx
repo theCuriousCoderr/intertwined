@@ -75,7 +75,7 @@ function Login() {
       <div className="fixed -z-10 bg-orange-500 h-40 lg:h-screen w-full lg:px-10">
         <div className="absolute lg:hidden left-0 w-full h-20 -bottom-10 rounded-full bg-orange-500"></div>
       </div>
-      <div className="px-5 py-9 bg-red-40 lg:px-10 lg:w-full lg:h-screen lg:flex lg:flex-wrap lg:items-center lg:justify-center">
+      <div className="px-5 py-9 lg:px-10 lg:w-full lg:h-screen lg:flex lg:flex-wrap lg:items-center lg:justify-center">
         <NavLink
           to="/"
           className="lg:hidden flex items-center gap-1 bg-red-30 w-40 lg:absolute lg:z-10 lg:w-full lg:justify-center"
@@ -108,13 +108,15 @@ function Login() {
             </div>
           </NavLink>
           <div className="w-full">
-            <p className="varela text-2xl tracking-widest font-semibold text-center">Login</p>
+            <p className="varela text-2xl tracking-widest font-semibold text-center">
+              Login
+            </p>
           </div>
         </div>
 
         <form
           onSubmit={handleLogInFormSubmit}
-          className="bg-slate-50 lg:relative lg:hidde lg:z-20 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 lg:max-w-96 lg:h-auto md:mx-auto"
+          className="bg-slate-50 lg:relative lg:z-20 rounded-lg my-5 shadow shadow-slate-600 px-3 py-5 space-y-3 md:w-2/3 lg:max-w-96 lg:h-auto md:mx-auto"
         >
           <p className="font-semibold text-sm md:text-xl lg:text-base">
             Welcome back !
@@ -136,7 +138,7 @@ function Login() {
                 type="email"
                 value={logInDetails.email}
                 onChange={handleLogInFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
               />
             </div>
           </div>
@@ -150,9 +152,10 @@ function Login() {
                 Password
               </label>
               <button
+                disabled={!logInButtonState}
                 type="button"
                 onClick={() => navigate("/forgot-password")}
-                className="text-xs md:text-base lg:text-xs text-orange-500"
+                className="text-xs md:text-base lg:text-xs text-orange-500 disabled:text-slate-300"
               >
                 Forgot your password?
               </button>
@@ -181,7 +184,7 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
                 />
               </div>
             ) : (
@@ -209,7 +212,7 @@ function Login() {
                   name="password"
                   value={logInDetails.password}
                   onChange={handleLogInFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
                 />
               </div>
             )}
@@ -229,15 +232,16 @@ function Login() {
                 disabled
                 className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md h- md:text-xl"
               >
-                <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
+                <div className="absolute left-[47.5%] w-[5%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
                 Login
               </button>
             )}
             <p className="text-black text-sm text-center my-5 md:text-xl lg:text-sm">
               Don't have an account?{" "}
               <button
+                disabled={!logInButtonState}
                 type="button"
-                className="text-orange-500 active:text-green-500"
+                className="text-orange-500 active:text-green-500 disabled:text-slate-300"
                 onClick={() => navigate("/signup")}
               >
                 Sign Up

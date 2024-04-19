@@ -147,7 +147,7 @@ function SignUp() {
   });
 
   return (
-    <div className="relative bg-red-40">
+    <div className="relative bg-red-40 lg:pb-20">
       {toastInfo.text !== "" && (
         <ToastAlert color={toastInfo.color} text={toastInfo.text} />
       )}
@@ -189,7 +189,9 @@ function SignUp() {
             </div>
           </NavLink>
           <div className="w-full">
-            <p className="varela text-2xl tracking-widest font-semibold text-center">Sign Up</p>
+            <p className="varela text-2xl tracking-widest font-semibold text-center">
+              Sign Up
+            </p>
           </div>
         </div>
 
@@ -205,6 +207,7 @@ function SignUp() {
             </div>
             <div className="w-full h-full">
               <button
+                disabled={!createAccountButtonState}
                 type="button"
                 onClick={() => {
                   alert(
@@ -212,7 +215,7 @@ function SignUp() {
                   );
                   login();
                 }}
-                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm md:text-lg lg:text-sm"
+                className="p-2 bg-slate-50 border border-slate-400 w-full h-full text-slate-600 font-medium rounded-sm md:text-lg lg:text-sm disabled:text-slate-300"
               >
                 Sign in with Google
               </button>
@@ -259,11 +262,13 @@ function SignUp() {
                 Upload a picture
               </label>
               <button
+                disabled={!createAccountButtonState}
                 type="button"
-                className="block relative w-16  bg-orange-500 rounded text-white h-6 text-center text-sm md:text-base lg:text-xs md:h-8 lg:h-5"
+                className="block relative w-16  bg-orange-500 rounded text-white h-6 text-center text-sm md:text-base lg:text-xs md:h-8 lg:h-5 disabled:bg-orange-200"
               >
                 Upload
                 <input
+                  disabled={!createAccountButtonState}
                   id="photo"
                   name="photo"
                   onChange={handleSignUpFormChange}
@@ -282,12 +287,13 @@ function SignUp() {
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
               <input
+                disabled={!createAccountButtonState}
                 required
                 id="fullName"
                 name="fullName"
                 value={signUpDetails.fullName}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
               />
             </div>
           </div>
@@ -300,13 +306,14 @@ function SignUp() {
             </label>
             <div className="group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
               <input
+                disabled={!createAccountButtonState}
                 required
                 id="email"
                 name="email"
                 type="email"
                 value={signUpDetails.email}
                 onChange={handleSignUpFormChange}
-                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
               />
             </div>
           </div>
@@ -320,6 +327,7 @@ function SignUp() {
             {showPassword ? (
               <div className="relative group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
                 <button
+                  disabled={!createAccountButtonState}
                   type="button"
                   onClick={() => setShowPassword(false)}
                   className="absolute rounded-md text-xs font-semibold w-10 top-1 bottom-1 right-1 -pt-2 "
@@ -328,18 +336,20 @@ function SignUp() {
                   <VisibilityOffOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                  disabled={!createAccountButtonState}
                   minLength={5}
                   required
                   id="password"
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm  md:text-base"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm  md:text-base disabled:text-slate-300"
                 />
               </div>
             ) : (
               <div className="relative group p-1 h-10 focus-within:bg-orange-500 focus-within:bg-opacity-50 rounded-lg">
                 <button
+                  disabled={!createAccountButtonState}
                   type="button"
                   onClick={() => setShowPassword(true)}
                   className="absolute text-xs font-semibold bg-red-20 w-10 top-1 bottom-1 right-1"
@@ -347,6 +357,7 @@ function SignUp() {
                   <RemoveRedEyeOutlined sx={{ fontSize: 20 }} />
                 </button>
                 <input
+                  disabled={!createAccountButtonState}
                   type="password"
                   minLength={5}
                   required
@@ -354,13 +365,13 @@ function SignUp() {
                   name="password"
                   value={signUpDetails.password}
                   onChange={handleSignUpFormChange}
-                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base"
+                  className="group-focus:ring-orange-500 outline-none ring-1 w-full h-full rounded-md p-1 text-sm md:text-base disabled:text-slate-300"
                 />
               </div>
             )}
           </div>
 
-          <div className="my-5">
+          <div className="my-5 lg:my-0">
             {createAccountButtonState ? (
               <button className="bg-orange-500 active:bg-green-500 p-2 w-full h-10 text-center text-white varela rounded-md md:text-xl lg:text-sm">
                 Create account
@@ -370,15 +381,16 @@ function SignUp() {
                 disabled
                 className="bg-gray-300 text-gray-300 relative p-2 w-full h-10 text-center varela rounded-md md:text-xl"
               >
-                <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
+                <div className="absolute left-[47.5%] w-[5%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
                 Create account
               </button>
             )}
-            <p className="text-black text-sm text-center my-5 md:text-xl lg:text-sm">
+            <p className="text-black text-sm text-center my-5 lg:my-0 md:text-xl lg:text-sm">
               Have an account?{" "}
               <button
-               type="button"
-                className="text-orange-500 active:text-green-500"
+                disabled={!createAccountButtonState}
+                type="button"
+                className="text-orange-500 active:text-green-500 disabled:text-slate-300"
                 onClick={() => navigate("/login")}
               >
                 Log in
