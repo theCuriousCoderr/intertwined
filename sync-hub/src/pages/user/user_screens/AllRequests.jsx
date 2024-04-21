@@ -146,14 +146,14 @@ function AllRequests({
       {allRequests &&
         allRequests.map((items) => {
           return (
-            <div key={items.requestTitle} className="relative lg:w-1/2">
+            <div key={items.requestTitle} className="relative w-[95%] lg:w-[28rem]">
               {calculateDuration(items.expiresOn, false) === "active" ? (
                 <button
                   key={items}
                   onClick={() => {
                     setShowRequestInfo({ content: items, state: true });
                   }}
-                  className={` mx-2 my-5 rounded-lg p-3 text-left lg:h-36 ${
+                  className={` mx-2 my-5 rounded-lg p-3 text-left w-full lg:h-36 lg:w-[28rem] ${
                     theme === "lightMode"
                       ? "bg-purple-50 border border-slate-100 shadow"
                       : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"
