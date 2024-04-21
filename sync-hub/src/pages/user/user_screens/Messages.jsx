@@ -321,8 +321,8 @@ function Messages({
               </div>
             )}
 
-            <div className="flex justify-evenly items-end w-full bg-transparent lg:pl-40">
-              <div className="w-[80%]">
+            <div className="flex justify-evenly lg:justify-normal items-end w-full bg-transparent lg:pl-40">
+              <div className="w-[80%] lg:w-1/2">
                 <textarea
                   rows={textArea.rows}
                   name="message"
@@ -338,7 +338,7 @@ function Messages({
                 className={` w-[12%] h-ful ${
                   textArea.message
                     ? "bg-orange-40 active:bg-green-500"
-                    : "bg-orange-30 text-slate-300"
+                    : "bg-orange-30 text-slate-300 lg:text-transparent"
                 } rounded-full flex items-center justify-center mb-2`}
               >
                 <div className="-rotate-12">

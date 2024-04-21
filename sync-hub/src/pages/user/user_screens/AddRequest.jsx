@@ -370,7 +370,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
           </div>
 
           <div>
-            {postRequestButtonState ? (
+            {!postRequestButtonState ? (
               <button
                 className={` ${
                   theme === "lightMode" ? "bg-blue-950" : "bg-blue-500"
@@ -383,7 +383,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 disabled
                 className="bg-gray-300 relative p-2 w-full h-10 text-center text-gray-300 varela rounded-md"
               >
-                <div className="absolute left-[47.5%] w-[5%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
+                <div className="absolute left-[47.5%] w-[5%] lg:w-[3%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
                 Submit request
               </button>
             )}
