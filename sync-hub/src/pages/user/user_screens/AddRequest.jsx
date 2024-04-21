@@ -101,7 +101,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
       <div className="lg:w-2/3">
         <p
           id="top"
-          className={`text-lg font-bold varela p-2 border-b  ${
+          className={`text-lg font-bold varela p-2 border-b lg:fixed lg:w-full ${
             theme === "lightMode"
               ? "border-slate-300 text-white "
               : "border-slate-500 text-white"
@@ -113,7 +113,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
           id="addRequestForm"
           name="addRequestForm"
           onSubmit={handleRequestDetailsFormSubmit}
-          className="p-5 space-y-5"
+          className="p-5 space-y-5 lg:pt-14"
         >
           <div>
             <label
@@ -383,7 +383,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
                 disabled
                 className="bg-gray-300 relative p-2 w-full h-10 text-center text-gray-300 varela rounded-md"
               >
-                <div className="absolute left-[45%] border-2 border-t-black border-b-gray-950 border-l-gray-300 border-r-gray-300 size-5 rounded-full animate-spin"></div>
+                <div className="absolute left-[47.5%] w-[5%] aspect-square border-2 border-t-black border-b-gray-500 border-l-gray-500 border-r-gray-500 rounded-full animate-spin"></div>
                 Submit request
               </button>
             )}

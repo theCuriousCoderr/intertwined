@@ -64,7 +64,7 @@ function AllRequests({
   }
   return (
     <div
-      className={`relative h-screen z-10 pt-14 pb-20 lg:pl-40 overflow-scroll ${
+      className={`relative lg:fixed lg:pb-40 lg:w-full lg:overflow-clip h-screen z-10 pt-14 pb-20 lg:pl-40 overflow-scroll ${
         theme === "lightMode"
           ? "bg-gradient-to-br from-purple-800 to-blue-600 h-screen"
           : "bg-gray-900 h-screen"
@@ -107,8 +107,8 @@ function AllRequests({
         </div></div>
       )}
 
-      <div className="flex justify-between border-b border-slate-400 my-1 px-5 py-3">
-        <div className="w-[80%]  ">
+      <div className="flex justify-between lg:justify-normal lg:gap-10 border-b border-slate-400 my-1 px-5 py-3">
+        <div className="w-[80%] lg:w-[50%] ">
           <input
           disabled={!allRequests}
           name="search"
@@ -119,7 +119,7 @@ function AllRequests({
             }`}
           />
         </div>
-        <div className="w-[15%]">
+        <div className="w-[15%] max-w-20 ">
           <button className="h-10 bg-slate-200 bg-opacity-20 w-full text-slate-200 rounded-md">
             <Tune />
           </button>
@@ -142,7 +142,7 @@ function AllRequests({
         </div>
       )}
 
-<div className="lg:h-80 lg:overflow-scroll">
+<div className="lg:h-full lg:overflow-scroll lg:fle lg:flex-wrap lg:gap-y-5">
       {allRequests &&
         allRequests.map((items) => {
           return (
@@ -153,7 +153,7 @@ function AllRequests({
                   onClick={() => {
                     setShowRequestInfo({ content: items, state: true });
                   }}
-                  className={` mx-2 my-5 rounded-lg p-3 text-left ${
+                  className={` mx-2 my-5 rounded-lg p-3 text-left lg:h-36 ${
                     theme === "lightMode"
                       ? "bg-purple-50 border border-slate-100 shadow"
                       : "bg-gray-800 border border-gray-600 shadow-sm shadow-slate-600"
@@ -175,11 +175,11 @@ function AllRequests({
                     Posted {calculateDuration(items.createdAt)}
                   </p>
                   <p
-                    className={`text-sm  ${
+                    className={`text-sm font-medium  ${
                       theme === "lightMode" ? "text-black" : "text-slate-100"
                     }`}
                   >
-                    {items.requestTitle}{" "}
+                    {items.requestTitle.toUpperCase()}{" "}
                   </p>
                   <div className="text-slate-50 text-[10px] my-2 absolute top-6 right-4">
                     {items.charges === "" ? (
@@ -199,14 +199,8 @@ function AllRequests({
                         : "text-slate-300"
                     } `}
                   >
-                    <p
-                      className={`absolute bottom-0 right-0 px-1  ${
-                        theme === "lightMode" ? "bg-slate-50" : "bg-gray-800"
-                      }`}
-                    >
-                      ...
-                    </p>
-                    {items.requestDescription}
+                    <p className="line-clamp-2">{items.requestDescription} </p>
+                    
                   </div>
                   <div className="flex justify-between items-center flex-row-reverse">
                     <div
@@ -250,7 +244,7 @@ function AllRequests({
                     Posted {calculateDuration(items.createdAt)}
                   </p>
                   <p className="capitaliz text-sm text-slate-300">
-                    {items.requestTitle}{" "}
+                    {items.requestTitle.toUpperCase()}{" "}
                   </p>
                   <div className="text-slate-50 text-[10px] my-2 absolute top-2 right-4">
                     {items.charges === "" ? (
@@ -264,10 +258,7 @@ function AllRequests({
                     )}
                   </div>
                   <div className="relative text-sm text-slate-300 font-light bg-red-30 h-10 overflow-hidden ">
-                    <p className="absolute bg-red-100 bg-opacity-15 bottom-0 right-0 px-1">
-                      ...
-                    </p>
-                    {items.requestDescription}
+                  <p className="line-clamp-2">{items.requestDescription} </p>
                   </div>
                   <div className="flex justify-between items-center flex-row-reverse">
                     <div className="flex items-center text-sm -ml-1 my-1 text-slate-200">

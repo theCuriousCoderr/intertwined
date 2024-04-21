@@ -162,6 +162,7 @@ function App() {
           theme={theme}
         />
       )}
+      
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

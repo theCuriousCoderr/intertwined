@@ -85,7 +85,7 @@ function FootNavBar({ navItem, setNavItem, newMessage, sendersList, theme }) {
         ) : (
           <button
             onClick={() => navigate("/user/add-request")}
-            className="cursor-pointer -mt-10 w-[20%] lg:mt-0 lg:w-full h-12 p-1 rounded-full box-border flex justify-center items-center"
+            className="cursor-pointer -mt-10 w-[20%] lg:mt-0 lg:w-full h-12 hover:bg-purple-500 hover:bg-opacity-20 hover:rounded-md p-1 rounded-full box-border flex justify-center lg:justify-start items-center"
           >
             <div className={`p-2 flex flex-col bg-red-400 justify-center items-center w-full lg:w-auto aspect-square ${theme === "lightMode" ? "bg-slate-900" : "bg-slate-50"} rounded-full lg:rounded-none`}>
               <div className={`size-12 lg:size-5 rounded-full ${!(path === item.path) ? "bg-gradient-to-r from-yellow-300 to-pink-700" : "bg-purple-600" }  flex items-center justify-center`}>

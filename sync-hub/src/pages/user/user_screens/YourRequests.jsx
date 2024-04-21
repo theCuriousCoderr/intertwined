@@ -195,7 +195,7 @@ function YourRequests({ user, allRequestsCache, setAllRequestsCache, theme }) {
                   theme === "lightMode" ? "text-black" : "text-slate-100"
                 }`}
               >
-                {items.requestTitle}{" "}
+                {items.requestTitle.toUpperCase()}{" "}
               </p>
               <div className="text-slate-50 text-[10px] my-2">
                 {items.charges === "" ? (

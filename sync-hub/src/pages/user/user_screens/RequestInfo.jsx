@@ -78,11 +78,11 @@ function RequestInfo({
       <div className="p-5 h-full bg-red-40 overflow-scroll">
         <div className="py-5">
           <p
-            className={`varela text-sm ${
+            className={`varela text-sm font-bold ${
               theme === "lightMode" ? "text-black" : "text-white"
             }`}
           >
-            {content.requestTitle}
+            {content.requestTitle.toUpperCase()}
           </p>
           <p className="text-slate-400 text-xs">
             Posted {calculateDuration(content.createdAt)}
