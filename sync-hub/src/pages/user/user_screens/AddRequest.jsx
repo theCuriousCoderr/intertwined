@@ -370,7 +370,7 @@ function AddRequest({ user, theme, setAllRequestsCache }) {
           </div>
 
           <div>
-            {!postRequestButtonState ? (
+            {postRequestButtonState ? (
               <button
                 className={` ${
                   theme === "lightMode" ? "bg-blue-950" : "bg-blue-500"
